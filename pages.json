@@ -1,0 +1,37 @@
+{
+  "pages": [{
+    "path": "pages/login/login",
+    "style": {
+      "navigationBarTitleText": "登录"
+    }
+  }, {
+    "path": "pages/search/search",
+    "style": {
+      "navigationBarTitleText": "搜索"
+    }
+  }, {
+    "path": "pages/user/user",
+    "style": {
+      "navigationBarTitleText": "用户"
+    }
+  }],
+  "tabBar": {
+    "selectedColor": "#EA2000",
+    "list": [{
+      "pagePath": "pages/search/search",
+      "text": "搜索"
+    }, {
+      "pagePath": "pages/user/user",
+      "text": "用户"
+    }]
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "app-plus": {
+      "background": "#efeff4"
+    }
+  }
+}
