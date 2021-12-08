@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "歌单",
+  "usingComponents": {
+    "play-control": "/components/play-control/play-control"
+  }
+}

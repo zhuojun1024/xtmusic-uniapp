@@ -1,0 +1,25 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.login-wrapper.data-v-b237504c {
+  padding: 24px;
+}
+.login-wrapper .login-title.data-v-b237504c {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 48px;
+  text-align: center;
+}
+.login-wrapper .login-title image.data-v-b237504c {
+  width: 48px;
+  height: 48px;
+  margin-right: 12px;
+}
+.login-wrapper .login-title image.data-v-b237504c, .login-wrapper .login-title text.data-v-b237504c {
+  display: inline-block;
+  vertical-align: middle;
+}
+.login-wrapper .button-default.data-v-b237504c {
+  margin-top: 12px;
+}
+

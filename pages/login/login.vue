@@ -107,7 +107,7 @@
       height: 48px;
       margin-right: 12px;
     }
-    * {
+    image, text {
       display: inline-block;
       vertical-align: middle;
     }

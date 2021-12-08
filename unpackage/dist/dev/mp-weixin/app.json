@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/search/search",
+    "pages/user/user",
+    "pages/playlist/playlist",
+    "pages/playlist-track/playlist-track",
+    "pages/control/control"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "fontSize": "12px",
+    "height": "50px",
+    "selectedColor": "#EA2000",
+    "list": [
+      {
+        "pagePath": "pages/search/search",
+        "iconPath": "static/icon-search-gray.png",
+        "selectedIconPath": "static/icon-search-red.png",
+        "text": "搜索"
+      },
+      {
+        "pagePath": "pages/playlist/playlist",
+        "iconPath": "static/icon-playlist-gray.png",
+        "selectedIconPath": "static/icon-playlist-red.png",
+        "text": "歌单"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "iconPath": "static/icon-user-gray.png",
+        "selectedIconPath": "static/icon-user-red.png",
+        "text": "用户"
+      }
+    ]
+  },
+  "requiredBackgroundModes": [
+    "audio"
+  ],
+  "usingComponents": {}
+}

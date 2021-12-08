@@ -5,7 +5,7 @@
       <view>
         <image :src="coverImgUrl" />
       </view>
-      <view>
+      <view @click="toControlPage">
         <view>{{ currentTime || '00:00' }} / {{ duration || '00:00' }}</view>
         <view>{{ currentMusic.ar || '歌手' }} - {{ currentMusic.name || '歌曲标题' }}</view>
       </view>
@@ -22,25 +22,32 @@
           color="white"
           style="margin-left: 8px;"
           type="list"
+          @click="visible = true"
         />
       </view>
+      <view
+        class="progress-bar"
+        :style="{ width: precent + '%' }"
+      />
     </view>
+    <play-list
+      :visible="visible"
+      @change="v => visible = v"
+    />
   </view>
 </template>
 
 <script>
+  import { PLAY_PAUSE } from '@/store/mutations-types.js'
   import { formatTime } from '@/utils/util.js'
   export default {
     name:"play-control",
     data() {
       return {
-        
-      };
+        visible: false
+      }
     },
     computed: {
-      bam () {
-        return this.$store.getters.bam
-      },
       currentMusic () {
         return this.$store.getters.currentMusic
       },
@@ -50,6 +57,11 @@
       duration () {
         return formatTime(this.$store.getters.duration)
       },
+      precent () {
+        const currentTime = this.$store.getters.currentTime || 0
+        const duration = this.$store.getters.duration || 1
+        return currentTime / duration * 100
+      },
       paused () {
         return this.$store.getters.paused
       },
@@ -58,22 +70,14 @@
         return al.picUrl
       }
     },
-    onShow () {
-      console.log('play control show')
-    },
-    onHide () {
-      console.log('play control hide')
-    },
     methods: {
+      toControlPage () {
+        uni.navigateTo({
+          url: '/pages/control/control'
+        })
+      },
       playPause () {
-        // 如果没有歌曲正在播放，跳过操作
-        if (!this.currentMusic.id) return
-        // 播放/暂停切换
-        if (this.paused) {
-          this.bam.play()
-        } else {
-          this.bam.pause()
-        }
+        this.$store.commit(PLAY_PAUSE)
       }
     }
   }
@@ -81,14 +85,19 @@
 
 <style lang="scss" scoped>
 .play-control-placeholder, .play-control-wrapper {
-  width: 100%;
-  height: 44px;
-  padding: 4px 8px;
+  height: 40px;
+  padding: 6px 8px;
 }
 .play-control-wrapper {
+  width: 100%;
   position: fixed;
   left: 0;
+  // #ifndef MP-WEIXIN
   bottom: 50px;
+  // #endif
+  // #ifdef MP-WEIXIN
+  bottom: 0;
+  // #endif
   color: white;
   background-color: #666666;
   > view {
@@ -106,8 +115,12 @@
     }
     &:nth-child(2) {
       width: calc(100% - 136px);
+      height: 40px;
+      line-height: 20px;
       padding-left: 8px;
+      font-size: 14px;
       view {
+        height: 50%;
         overflow: hidden;
         text-overflow:ellipsis;
         white-space: nowrap;
@@ -120,6 +133,13 @@
         vertical-align: middle;
       }
     }
+  }
+  .progress-bar {
+    position: absolute;
+    top: -3px;
+    left: 0;
+    height: 3px;
+    background-color: #EA2000;
   }
 }
 </style>

@@ -1,0 +1,40 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.popup-wrapper.data-v-56ec38b4 {
+  z-index: 999;
+}
+.popup-wrapper .popup-content.data-v-56ec38b4 {
+  height: 60vh;
+}
+.popup-wrapper .popup-content .title-bar.data-v-56ec38b4 {
+  height: 48px;
+  line-height: 48px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+.popup-wrapper .popup-content scroll-view.data-v-56ec38b4 {
+  height: calc(100% - 40px);
+}
+.popup-wrapper .popup-content scroll-view .play-list-item.data-v-56ec38b4 {
+  font-size: 14px;
+  padding: 12px 12px;
+  border-bottom: 1px solid #efefef;
+}
+.popup-wrapper .popup-content scroll-view .play-list-item > view.data-v-56ec38b4:first-child {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: calc(100% - 32px);
+}
+.popup-wrapper .popup-content scroll-view .play-list-item > view:first-child text.data-v-56ec38b4:last-child {
+  color: #999999;
+  margin-left: 6px;
+  font-size: 12px;
+}
+.popup-wrapper .popup-content scroll-view .play-list-item .uni-icons.data-v-56ec38b4 {
+  float: right;
+}
+

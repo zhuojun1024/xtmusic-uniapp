@@ -1,0 +1,20 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.user-wrapper.data-v-80842834 {
+  text-align: center;
+}
+.user-wrapper image.data-v-80842834 {
+  width: 80px;
+  height: 80px;
+  margin-top: 32px;
+}
+.user-wrapper .nickname.data-v-80842834 {
+  font-size: 16px;
+  margin-top: 8px;
+}
+.user-wrapper button.data-v-80842834 {
+  width: 128px;
+  margin-top: 32px;
+}
+

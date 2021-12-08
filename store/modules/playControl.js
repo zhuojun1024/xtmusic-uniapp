@@ -1,5 +1,5 @@
+import api from '@/api/music.js'
 import {
-  SET_BAM,
   SET_CURRENT_MUSIC,
   SET_CURRENT_MUSIC_LIST,
   SET_CURRENT_TIME,
@@ -7,11 +7,17 @@ import {
   SET_PAUSED,
   PLAY_PAUSE,
   PLAY_NEXT,
-  PLAY_PREV
+  PLAY_PREV,
+  TIME_UPDATE
 } from '../mutations-types.js'
 const app = {
   state: {
-    bam: undefined,
+    // #ifdef H5
+    bam: uni.createInnerAudioContext(),
+    // #endif
+    // #ifndef H5
+    bam: uni.getBackgroundAudioManager(),
+    // #endif
     currentTime: 0,
     duration: 0,
     paused: true,
@@ -19,10 +25,6 @@ const app = {
     currentMusicList: []
   },
   mutations: {
-    // 设置背景音乐管理对象
-    [SET_BAM]: (state, value) => {
-      state.bam = value
-    },
     // 设置当前播放音乐
     [SET_CURRENT_MUSIC]: (state, value) => {
       state.currentMusic = value
@@ -32,7 +34,7 @@ const app = {
       state.currentMusicList = value
     },
     // 设置当前播放进度（秒）
-    [SET_CURRENT_TIME]: (state, value) => {
+    [TIME_UPDATE]: (state, value) => {
       state.currentTime = value
     },
     // 设置音乐时长（秒）
@@ -50,23 +52,71 @@ const app = {
         bam.paused ? bam.play() : bam.pause()
       }
     },
+    [SET_CURRENT_TIME]: (state, value) => {
+      state.bam.seek(value)
+    }
+  },
+  actions: {
+    [SET_CURRENT_MUSIC] ({ commit, state }, currentMusic) {
+      const id = currentMusic.id
+      if (id === state.currentMusic.id) return
+      const params = { id, timestamp: id }
+      uni.showLoading({ title: '获取播放地址' })
+      return api.getMusicUrl(params).then(res => {
+        if (res.data && res.data.length) {
+          const url = res.data[0].url
+          const bam = state.bam
+          // #ifndef H5
+          const { name, ar, al } = currentMusic
+          bam.title = name
+          bam.singer = ar
+          bam.coverImgUrl = al.picUrl
+          // #endif
+          bam.src = url
+          // #ifdef H5
+          bam.play()
+          // #endif
+          commit(SET_CURRENT_MUSIC, currentMusic)
+        }
+      }).catch(e => {
+        uni.showToast({
+          icon: 'error',
+          title: '播放失败：' + e
+        })
+        console.log('播放失败：', e)
+        return Promise.reject(e)
+      }).finally(() => {
+        uni.hideLoading()
+      })
+    },
     // 播放下一首
-    [PLAY_NEXT]: state => {
+    [PLAY_NEXT] ({ dispatch, state }) {
       const { currentMusic, currentMusicList } = state
       if (currentMusic.id) {
         const index = currentMusicList.findIndex(item => item.id === currentMusic.id)
         if (index < currentMusicList.length - 1) {
-          state.commit(SET_CURRENT_MUSIC, currentMusicList[index + 1])
+          const nextMusic = currentMusicList[index + 1]
+          // 如果有版权则播放否则继续跳到下一首
+          if (nextMusic.st !== -200) {
+            return dispatch(SET_CURRENT_MUSIC, nextMusic)
+          } else {
+            return dispatch(PLAY_NEXT, nextMusic)
+          }
         }
       }
     },
     // 播放上一首
-    [PLAY_PREV]: state => {
+    [PLAY_PREV] ({ dispatch, state }) {
       const { currentMusic, currentMusicList } = state
       if (currentMusic.id) {
         const index = currentMusicList.findIndex(item => item.id === currentMusic.id)
         if (index > 0) {
-          state.commit(SET_CURRENT_MUSIC, currentMusicList[index - 1])
+          const lastMusic = currentMusicList[index - 1]
+          if (lastMusic.st !== -200) {
+            return dispatch(SET_CURRENT_MUSIC, lastMusic)
+          } else {
+            return dispatch(PLAY_PREV, lastMusic)
+          }
         }
       }
     }

@@ -1,0 +1,62 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.control-wrapper.data-v-0ec1947c {
+  height: 100vh;
+  background-color: #666666;
+  position: relative;
+}
+.control-wrapper .pic.data-v-0ec1947c {
+  width: 100vw;
+  height: 100vw;
+  padding: 24px;
+  box-sizing: border-box;
+}
+.control-wrapper .pic image.data-v-0ec1947c {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background-color: #999999;
+}
+.control-wrapper .music-info.data-v-0ec1947c {
+  padding: 0 24px;
+  color: white;
+}
+.control-wrapper .music-info view.data-v-0ec1947c:first-child {
+  font-size: 24px;
+}
+.control-wrapper .music-info view.data-v-0ec1947c:last-child {
+  margin-top: 8px;
+  font-size: 14px;
+}
+.control-wrapper .progress-bar.data-v-0ec1947c {
+  color: white;
+  padding: 12px 24px;
+  box-sizing: border-box;
+}
+.control-wrapper .progress-bar > text.data-v-0ec1947c, .control-wrapper .progress-bar > .slider-bar-wrapper.data-v-0ec1947c {
+  display: inline-block;
+  vertical-align: middle;
+}
+.control-wrapper .progress-bar > text.data-v-0ec1947c {
+  font-size: 14px;
+  width: 48px;
+}
+.control-wrapper .progress-bar > text.data-v-0ec1947c:last-child {
+  text-align: right;
+}
+.control-wrapper .progress-bar > .slider-bar-wrapper.data-v-0ec1947c {
+  width: calc(100% - 96px);
+}
+.control-wrapper .play-control.data-v-0ec1947c {
+  width: 100%;
+  position: absolute;
+  bottom: 72px;
+  text-align: center;
+}
+.control-wrapper .play-control .uni-icons.data-v-0ec1947c {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 24px;
+}
+

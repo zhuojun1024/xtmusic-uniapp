@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "播放控制",
+  "usingComponents": {
+    "slider-bar": "/components/slider-bar/slider-bar",
+    "uni-icons": "/uni_modules/uni-icons/components/uni-icons/uni-icons"
+  }
+}

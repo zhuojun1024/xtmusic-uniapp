@@ -14,14 +14,41 @@
     "style": {
       "navigationBarTitleText": "用户"
     }
+  }, {
+    "path": "pages/playlist/playlist",
+    "style": {
+      "navigationBarTitleText": "歌单"
+    }
+  }, {
+    "path": "pages/playlist-track/playlist-track",
+    "style": {
+      "navigationBarTitleText": "歌单曲目"
+    }
+  }, {
+    "path": "pages/control/control",
+    "style": {
+      "navigationBarTitleText": "播放控制"
+    }
+
   }],
   "tabBar": {
+    "fontSize": "12px",
+    "height": "50px",
     "selectedColor": "#EA2000",
     "list": [{
       "pagePath": "pages/search/search",
+      "iconPath": "static/icon-search-gray.png",
+      "selectedIconPath": "static/icon-search-red.png",
       "text": "搜索"
     }, {
+      "pagePath": "pages/playlist/playlist",
+      "iconPath": "static/icon-playlist-gray.png",
+      "selectedIconPath": "static/icon-playlist-red.png",
+      "text": "歌单"
+    }, {
       "pagePath": "pages/user/user",
+      "iconPath": "static/icon-user-gray.png",
+      "selectedIconPath": "static/icon-user-red.png",
       "text": "用户"
     }]
   },

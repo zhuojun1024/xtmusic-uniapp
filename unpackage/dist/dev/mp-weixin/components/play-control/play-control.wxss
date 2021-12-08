@@ -1,0 +1,53 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.play-control-placeholder.data-v-2a4ecc04, .play-control-wrapper.data-v-2a4ecc04 {
+  height: 40px;
+  padding: 6px 8px;
+}
+.play-control-wrapper.data-v-2a4ecc04 {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  color: white;
+  background-color: #666666;
+}
+.play-control-wrapper > view.data-v-2a4ecc04 {
+  display: inline-block;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+.play-control-wrapper > view.data-v-2a4ecc04:nth-child(1) {
+  width: 40px;
+  height: 40px;
+}
+.play-control-wrapper > view:nth-child(1) image.data-v-2a4ecc04 {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+.play-control-wrapper > view.data-v-2a4ecc04:nth-child(2) {
+  width: calc(100% - 136px);
+  height: 40px;
+  line-height: 20px;
+  padding-left: 8px;
+  font-size: 14px;
+}
+.play-control-wrapper > view:nth-child(2) view.data-v-2a4ecc04 {
+  height: 50%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.play-control-wrapper > view.data-v-2a4ecc04:nth-child(3) {
+  width: 80px;
+}
+.play-control-wrapper .progress-bar.data-v-2a4ecc04 {
+  position: absolute;
+  top: -3px;
+  left: 0;
+  height: 3px;
+  background-color: #EA2000;
+}
+
