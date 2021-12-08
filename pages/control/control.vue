@@ -85,10 +85,10 @@
         this.$store.commit(PLAY_PAUSE)
       },
       playPrev () {
-        this.$store.commit(PLAY_PREV)
+        this.$store.dispatch(PLAY_PREV)
       },
       playNext () {
-        this.$store.commit(PLAY_NEXT)
+        this.$store.dispatch(PLAY_NEXT)
       }
     }
   }
