@@ -17,7 +17,7 @@
           <view
             v-for="(item, index) of data"
             :key="item.id"
-            class="play-list-item"
+            :class="{ 'play-list-item': true, disabled: item.st === -200 }"
             @click="playMusic(item)"
           >
             <view>
@@ -66,7 +66,14 @@
     },
     methods: {
       playMusic (music) {
-        this.$store.dispatch(SET_CURRENT_MUSIC, music)
+        if (music.st === -200) {
+          uni.showToast({
+            icon: 'error',
+            title: '该音乐无版权'
+          })
+        } else {
+          this.$store.dispatch(SET_CURRENT_MUSIC, music)
+        }
       }
     }
   }
@@ -107,6 +114,10 @@
         }
       }
     }
+  }
+  .play-list-item.disabled {
+    color: #999999;
+    opacity: 0.5;
   }
 }
 </style>

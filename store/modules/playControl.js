@@ -8,7 +8,8 @@ import {
   PLAY_PAUSE,
   PLAY_NEXT,
   PLAY_PREV,
-  TIME_UPDATE
+  TIME_UPDATE,
+  RESET_STATE
 } from '../mutations-types.js'
 const app = {
   state: {
@@ -25,6 +26,13 @@ const app = {
     currentMusicList: []
   },
   mutations: {
+    [RESET_STATE]: state => {
+      state.bam.stop()
+      state.duration = 0
+      state.currentTime = 0
+      state.currentMusic = {}
+      state.currentMusicList = []
+    },
     // 设置当前播放音乐
     [SET_CURRENT_MUSIC]: (state, value) => {
       state.currentMusic = value
@@ -73,9 +81,7 @@ const app = {
           bam.coverImgUrl = al.picUrl
           // #endif
           bam.src = url
-          // #ifdef H5
           bam.play()
-          // #endif
           commit(SET_CURRENT_MUSIC, currentMusic)
         }
       }).catch(e => {
@@ -90,7 +96,7 @@ const app = {
       })
     },
     // 播放下一首
-    [PLAY_NEXT] ({ dispatch, state }) {
+    [PLAY_NEXT] ({ dispatch, commit, state }) {
       const { currentMusic, currentMusicList } = state
       if (currentMusic.id) {
         const index = currentMusicList.findIndex(item => item.id === currentMusic.id)
@@ -100,21 +106,24 @@ const app = {
           if (nextMusic.st !== -200) {
             return dispatch(SET_CURRENT_MUSIC, nextMusic)
           } else {
+            commit(SET_CURRENT_MUSIC, nextMusic)
             return dispatch(PLAY_NEXT, nextMusic)
           }
         }
       }
     },
     // 播放上一首
-    [PLAY_PREV] ({ dispatch, state }) {
+    [PLAY_PREV] ({ dispatch, commit, state }) {
       const { currentMusic, currentMusicList } = state
       if (currentMusic.id) {
         const index = currentMusicList.findIndex(item => item.id === currentMusic.id)
         if (index > 0) {
           const lastMusic = currentMusicList[index - 1]
+          // 如果有版权则播放否则继续跳到上一首
           if (lastMusic.st !== -200) {
             return dispatch(SET_CURRENT_MUSIC, lastMusic)
           } else {
+            commit(SET_CURRENT_MUSIC, lastMusic)
             return dispatch(PLAY_PREV, lastMusic)
           }
         }

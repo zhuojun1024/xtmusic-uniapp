@@ -1,6 +1,9 @@
 @charset "UTF-8";
 /* 水平间距 */
 /* 水平间距 */
+scroll-view.data-v-8204ba74 {
+  height: calc(100vh - 108px);
+}
 .playlist-item.data-v-8204ba74 {
   padding: 8px;
   border-bottom: 1px solid #efefef;
@@ -10,8 +13,8 @@
   vertical-align: middle;
 }
 .playlist-item > view.data-v-8204ba74:first-child {
-  width: 64px;
-  height: 64px;
+  width: 40px;
+  height: 40px;
 }
 .playlist-item > view:first-child image.data-v-8204ba74 {
   width: 100%;

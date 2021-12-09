@@ -5,7 +5,8 @@
     "pages/user/user",
     "pages/playlist/playlist",
     "pages/playlist-track/playlist-track",
-    "pages/control/control"
+    "pages/control/control",
+    "pages/lyric/lyric"
   ],
   "subPackages": [],
   "window": {

@@ -22,9 +22,7 @@
       // 判断登录状态
       const cookie = uni.getStorageSync('cookie')
       if (!cookie) {
-        uni.reLaunch({
-          url: 'pages/login/login'
-        })
+        uni.reLaunch({ url: 'pages/login/login' })
       } else if (!this.userInfo.userId) {
         this.getUserInfo()
       }
@@ -82,6 +80,8 @@
       getUserInfo () {
         this.$store.dispatch(GET_USER_INFO).then(res => {
           uni.switchTab({ url: '/pages/search/search' })
+        }).catch(() => {
+          uni.reLaunch({ url: '/pages/login/login' })
         })
       }
     }

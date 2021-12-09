@@ -116,9 +116,7 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 11);
     // 判断登录状态
     var cookie = uni.getStorageSync('cookie');
     if (!cookie) {
-      uni.reLaunch({
-        url: 'pages/login/login' });
-
+      uni.reLaunch({ url: 'pages/login/login' });
     } else if (!this.userInfo.userId) {
       this.getUserInfo();
     }
@@ -176,6 +174,8 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 11);
     getUserInfo: function getUserInfo() {
       this.$store.dispatch(_mutationsTypes.GET_USER_INFO).then(function (res) {
         uni.switchTab({ url: '/pages/search/search' });
+      }).catch(function () {
+        uni.reLaunch({ url: '/pages/login/login' });
       });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

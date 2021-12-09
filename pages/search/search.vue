@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import api from './api'
+  import api from '@/api/music.js'
   export default {
     data () {
       return {
@@ -26,16 +26,16 @@
         data: [],
         offset: 0,
         limit: 30,
-        total: 0
+        total: 0,
+        loading: false
       }
     },
-    onShow () {
-      if (this.data.length === 0) {
-        this.cloudSearch()
-      }
+    onLoad () {
+      this.cloudSearch()
     },
     methods: {
       loadNext () {
+        if (this.loading || this.offset * this.limit >= this.total) return
         this.offset++
         this.cloudSearch()
       },
@@ -48,11 +48,12 @@
         const timestamp = new Date().getTime()
         const params = {
           keywords: this.keyword || '热门歌曲',
-          limit: 30,
-          offset: this.offset * 30,
+          limit: this.limit,
+          offset: this.offset * this.limit,
           timestamp
         }
         uni.showLoading({ title: '加载中' })
+        this.loading = true
         api.cloudSearch(params).then(res => {
           const songs = res.result.songs || []
           this.data = this.data.concat(songs.map(item => {
@@ -68,6 +69,7 @@
           console.error('搜索失败：', e)
         }).finally(() => {
           uni.hideLoading()
+          this.loading = false
         })
       }
     }
@@ -77,11 +79,11 @@
 <style lang="scss" scoped>
 .search-wrapper {
   scroll-view {
-    // #ifdef MP-WEIXIN
-    height: calc(100vh - 108px);
-    // #endif
-    // #ifndef MP-WEIXIN
+    // #ifdef H5
     height: calc(100vh - 202px);
+    // #endif
+    // #ifndef H5
+    height: calc(100vh - 108px);
     // #endif
   }
 }

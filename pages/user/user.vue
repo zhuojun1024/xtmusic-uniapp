@@ -11,7 +11,7 @@
 
 <script>
   import api from '@/api/login.js'
-  import { LOGIN_OUT } from '@/store/mutations-types.js'
+  import { LOGIN_OUT, RESET_STATE } from '@/store/mutations-types.js'
   export default {
     computed: {
       userInfo () {
@@ -22,9 +22,11 @@
       logout () {
         api.logout().finally(() => {
           // 移除用户信息
-          this.$store.commit('LOGIN_OUT')
+          this.$store.commit(LOGIN_OUT)
           // 移除cookie
           uni.removeStorageSync('cookie')
+          // 重置播放状态
+          this.$store.commit(RESET_STATE)
           // 前往登录页
           uni.reLaunch({
             url: '/pages/login/login',

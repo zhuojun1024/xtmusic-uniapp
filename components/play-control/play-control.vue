@@ -67,7 +67,7 @@
       },
       coverImgUrl () {
         const al = this.currentMusic.al || {}
-        return al.picUrl
+        return al.picUrl ? `${al.picUrl}?param=64y64` : ''
       }
     },
     methods: {
@@ -92,11 +92,11 @@
   width: 100%;
   position: fixed;
   left: 0;
-  // #ifndef MP-WEIXIN
-  bottom: 50px;
-  // #endif
-  // #ifdef MP-WEIXIN
+  // #ifndef H5
   bottom: 0;
+  // #endif
+  // #ifdef H5
+  bottom: 50px;
   // #endif
   color: white;
   background-color: #666666;

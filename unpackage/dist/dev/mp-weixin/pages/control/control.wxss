@@ -22,12 +22,20 @@
   padding: 0 24px;
   color: white;
 }
-.control-wrapper .music-info view.data-v-0ec1947c:first-child {
+.control-wrapper .music-info > view.data-v-0ec1947c:first-child {
   font-size: 24px;
 }
-.control-wrapper .music-info view.data-v-0ec1947c:last-child {
+.control-wrapper .music-info > view.data-v-0ec1947c:last-child {
   margin-top: 8px;
   font-size: 14px;
+}
+.control-wrapper .music-info > view:last-child .lrc-button.data-v-0ec1947c {
+  padding: 0 4px;
+  text-align: center;
+  float: right;
+  font-size: 16px;
+  border: 1px solid white;
+  margin-top: -4px;
 }
 .control-wrapper .progress-bar.data-v-0ec1947c {
   color: white;
@@ -55,8 +63,8 @@
   text-align: center;
 }
 .control-wrapper .play-control .uni-icons.data-v-0ec1947c {
+  width: 30%;
   display: inline-block;
   vertical-align: middle;
-  margin: 0 24px;
 }
 

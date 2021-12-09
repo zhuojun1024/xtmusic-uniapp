@@ -37,4 +37,8 @@
 .popup-wrapper .popup-content scroll-view .play-list-item .uni-icons.data-v-56ec38b4 {
   float: right;
 }
+.popup-wrapper .play-list-item.disabled.data-v-56ec38b4 {
+  color: #999999;
+  opacity: 0.5;
+}
 

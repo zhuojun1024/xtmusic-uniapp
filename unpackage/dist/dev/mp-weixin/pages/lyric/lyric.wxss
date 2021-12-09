@@ -1,0 +1,30 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.lyric.data-v-b11dc974 {
+  height: 100vh;
+  box-sizing: border-box;
+  color: #aaaaaa;
+  text-align: center;
+  background-color: #666666;
+}
+.lyric .lyric-item.data-v-b11dc974 {
+  height: 48px;
+  font-size: 16px;
+}
+.lyric .lyric-item.current.data-v-b11dc974 {
+  color: white;
+  font-size: 20px;
+}
+.lyric .lyric-placeholder.data-v-b11dc974 {
+  height: 40vh;
+}
+.lyric.data-v-b11dc974:after {
+  content: '';
+  width: inherit;
+  height: inherit;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+

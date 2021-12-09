@@ -5,7 +5,15 @@
     </view>
     <view class="music-info">
       <view>{{ currentMusic.name || '歌曲标题' }}</view>
-      <view>{{ currentMusic.ar || '歌手' }}</view>
+      <view>
+        <text>{{ currentMusic.ar || '歌手' }}</text>
+        <text
+          class="lrc-button"
+          @click="showLyric"
+        >
+          词
+        </text>
+      </view>
     </view>
     <view class="progress-bar">
       <text>{{ currentTime || '00:00' }}</text>
@@ -49,10 +57,6 @@
   import { SET_CURRENT_TIME, PLAY_PAUSE, PLAY_PREV, PLAY_NEXT } from '@/store/mutations-types.js'
   import { formatTime } from '@/utils/util.js'
   export default {
-    data() {
-      return {
-      }
-    },
     computed: {
       currentMusic () {
         return this.$store.getters.currentMusic
@@ -77,6 +81,9 @@
       }
     },
     methods: {
+      showLyric () {
+        uni.navigateTo({ url: '/pages/lyric/lyric' })
+      },
       handleChange (precent) {
         const duration = this.$store.getters.duration || 0
         this.$store.commit(SET_CURRENT_TIME, duration * precent / 100)
@@ -96,10 +103,10 @@
 
 <style lang="scss" scoped>
 .control-wrapper {
-  // #ifdef MP-WEIXIN
+  // #ifndef H5
   height: 100vh;
   // #endif
-  // #ifndef MP-WEIXIN
+  // #ifdef H5
   height: calc(100vh - 44px);
   // #endif
   background-color: #666666;
@@ -119,12 +126,20 @@
   .music-info {
     padding: 0 24px;
     color: white;
-    view:first-child {
+    > view:first-child {
       font-size: 24px;
     }
-    view:last-child {
+    > view:last-child {
       margin-top: 8px;
       font-size: 14px;
+      .lrc-button {
+        padding: 0 4px;
+        text-align: center;
+        float: right;
+        font-size: 16px;
+        border: 1px solid white;
+        margin-top: -4px;
+      }
     }
   }
   .progress-bar {
@@ -152,9 +167,9 @@
     bottom: 72px;
     text-align: center;
     .uni-icons {
+      width: 30%;
       display: inline-block;
       vertical-align: middle;
-      margin: 0 24px;
     }
   }
 }

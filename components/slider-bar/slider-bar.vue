@@ -4,7 +4,7 @@
       <movable-area class="sliderBar">
         <view
           class="gone"
-          :style="{ width: x +'px' }"
+          :style="{ width: tempX +'px' }"
         />
         <movable-view
           class="slider"
@@ -35,6 +35,7 @@
       return {
         slideBarWidth: 0,
         x: 0,
+        tempX: 0,
         dragging: false
       }
     },
@@ -43,6 +44,7 @@
         handler (newVal) {
           if (!this.dragging) {
             this.x = this.slideBarWidth * newVal / 100
+            this.tempX = this.x
           }
         },
         immediate: true
@@ -60,12 +62,12 @@
         this.dragging = true
       },
       handleTouchEnd () {
-        const precent = this.x / this.slideBarWidth * 100
+        const precent = this.tempX / this.slideBarWidth * 100
         this.$emit('change', precent)
         this.dragging = false
       },
       onChange (e) {
-        this.x = e.detail.x
+        this.tempX = e.detail.x
       }
     }
   }

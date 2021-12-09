@@ -29,7 +29,11 @@
     "style": {
       "navigationBarTitleText": "播放控制"
     }
-
+  }, {
+    "path": "pages/lyric/lyric",
+    "style": {
+      "navigationBarTitleText": "歌词"
+    }
   }],
   "tabBar": {
     "fontSize": "12px",
