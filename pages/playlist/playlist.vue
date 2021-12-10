@@ -8,13 +8,14 @@
       />
       <scroll-view
         scroll-y
+        :style="{ height: `calc(100vh - ${ 108 + excludeHeight }px)` }"
         @scrolltolower="loadNext"
       >
         <view
           v-for="item of data"
           :key="item.id"
           class="playlist-item"
-          @click="toTrack(item.id)"
+          @click="toTrack(item)"
         >
           <view>
             <image lazy-load :src="item.coverImgUrl ? item.coverImgUrl + '?param=128y128' : ''" />
@@ -31,11 +32,12 @@
 </template>
 
 <script>
-  import api from './api.js'
+  import api from '@/api/music.js'
   import globalApi from '@/api/music.js'
   export default {
     data() {
       return {
+        type: 'user',
         keyword: undefined,
         data: [],
         offset: 0,
@@ -47,6 +49,15 @@
     computed: {
       userInfo () {
         return this.$store.getters.userInfo
+      },
+      excludeHeight () {
+        const { windowTop, windowBottom } = uni.getSystemInfoSync()
+        return (windowTop || 0) + (windowBottom || 0)
+      }
+    },
+    watch: {
+      userInfo () {
+        this.getPlayList()
       }
     },
     onLoad () {
@@ -82,7 +93,7 @@
           const playlists = res.result.playlists || []
           this.data = this.data.concat(playlists)
           this.total = res.result.playlistCount || 0
-          console.log(res)
+          this.type = 'search'
         }).catch(e => {
           uni.showToast({
             icon: 'error',
@@ -94,12 +105,13 @@
           this.loading = false
         })
       },
-      toTrack (id) {
+      toTrack (item) {
         uni.navigateTo({
-          url: '/pages/playlist-track/playlist-track?id=' + id
+          url: `/pages/playlist-track/playlist-track?id=${item.id}&name=${item.name}&type=${this.type}`
         })
       },
       getPlayList () {
+        if (!this.userInfo.userId) return
         const timestamp = new Date().getTime()
         const params = {
           uid: this.userInfo.userId,
@@ -108,6 +120,7 @@
         uni.showLoading({ title: '加载中' })
         api.getPlayList(params).then(res => {
           this.data = res.playlist
+          this.type = 'user'
         }).catch(e => {
           uni.showToast({
             icon: 'error',
@@ -123,14 +136,6 @@
 </script>
 
 <style lang="scss" scoped>
-scroll-view {
-  // #ifdef H5
-  height: calc(100vh - 202px);
-  // #endif
-  // #ifndef H5
-  height: calc(100vh - 108px);
-  // #endif
-}
 .playlist-item {
   padding: 8px;
   border-bottom: 1px solid #efefef;

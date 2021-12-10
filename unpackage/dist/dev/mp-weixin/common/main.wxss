@@ -2364,6 +2364,7 @@ page {
 .button-default {
   color: white;
   background-color: #EA2000;
+  border: none;
 }
 .example-info {
   font-size: 14px;

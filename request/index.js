@@ -20,10 +20,11 @@ const request = (url, method, data) => {
         'Content-Type': 'application/json'
       },
       success (request) {
-        if (request.data.code === 200) {
+        const { code, status, msg, message } = request.data
+        if (code === 200 || status === 200) {
           resolve(request.data)
         } else {
-          reject(request.data.msg)
+          reject(msg || message)
         }
       },
       fail (error) {

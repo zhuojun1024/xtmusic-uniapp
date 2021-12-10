@@ -24,7 +24,7 @@
         "pagePath": "pages/search/search",
         "iconPath": "static/icon-search-gray.png",
         "selectedIconPath": "static/icon-search-red.png",
-        "text": "搜索"
+        "text": "歌曲"
       },
       {
         "pagePath": "pages/playlist/playlist",

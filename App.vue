@@ -102,6 +102,7 @@
   .button-default {
     color: white;
     background-color: $theme_color;
+    border: none;
   }
 
 	/* #endif */

@@ -2,7 +2,6 @@
 /* 水平间距 */
 /* 水平间距 */
 .control-wrapper.data-v-0ec1947c {
-  height: 100vh;
   background-color: #666666;
   position: relative;
 }
@@ -48,13 +47,14 @@
 }
 .control-wrapper .progress-bar > text.data-v-0ec1947c {
   font-size: 14px;
-  width: 48px;
+  width: 40px;
 }
 .control-wrapper .progress-bar > text.data-v-0ec1947c:last-child {
   text-align: right;
 }
 .control-wrapper .progress-bar > .slider-bar-wrapper.data-v-0ec1947c {
-  width: calc(100% - 96px);
+  width: calc(100% - 100px);
+  margin: 10px;
 }
 .control-wrapper .play-control.data-v-0ec1947c {
   width: 100%;

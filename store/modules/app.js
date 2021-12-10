@@ -1,12 +1,16 @@
 import api from '@/api/login.js'
-import { SET_USER_INFO, GET_USER_INFO, LOGIN_OUT } from '../mutations-types.js'
+import {
+  SET_USER_INFO,
+  GET_USER_INFO,
+  LOGIN_OUT
+} from '../mutations-types.js'
 const app = {
   state: {
     userInfo: {}
   },
   mutations: {
-    [SET_USER_INFO]: (state, userInfo) => {
-      state.userInfo = userInfo
+    [SET_USER_INFO]: (state, value) => {
+      state.userInfo = value
     },
     [LOGIN_OUT]: (state) => {
       state.userInfo = {}

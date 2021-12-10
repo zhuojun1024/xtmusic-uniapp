@@ -1,9 +1,6 @@
 @charset "UTF-8";
 /* 水平间距 */
 /* 水平间距 */
-scroll-view.data-v-8204ba74 {
-  height: calc(100vh - 108px);
-}
 .playlist-item.data-v-8204ba74 {
   padding: 8px;
   border-bottom: 1px solid #efefef;

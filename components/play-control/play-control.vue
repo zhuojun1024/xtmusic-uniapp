@@ -1,7 +1,10 @@
 <template>
   <view>
     <view class="play-control-placeholder" />
-    <view class="play-control-wrapper">
+    <view
+      class="play-control-wrapper"
+      :style="{ bottom: excludeHeight + 'px' }"
+    >
       <view>
         <image :src="coverImgUrl" />
       </view>
@@ -68,6 +71,19 @@
       coverImgUrl () {
         const al = this.currentMusic.al || {}
         return al.picUrl ? `${al.picUrl}?param=64y64` : ''
+      },
+      excludeHeight () {
+        const { windowBottom } = uni.getSystemInfoSync()
+        return windowBottom || 0
+      }
+    },
+    watch: {
+      visible (newVal) {
+        if (newVal) {
+          uni.hideTabBar({ animation: true })
+        } else {
+          uni.showTabBar({ animation: true })
+        }
       }
     },
     methods: {
@@ -92,12 +108,6 @@
   width: 100%;
   position: fixed;
   left: 0;
-  // #ifndef H5
-  bottom: 0;
-  // #endif
-  // #ifdef H5
-  bottom: 50px;
-  // #endif
   color: white;
   background-color: #666666;
   > view {
@@ -136,9 +146,9 @@
   }
   .progress-bar {
     position: absolute;
-    top: -3px;
+    top: -2px;
     left: 0;
-    height: 3px;
+    height: 2px;
     background-color: #EA2000;
   }
 }

@@ -2,7 +2,6 @@
 /* 水平间距 */
 /* 水平间距 */
 .lyric.data-v-b11dc974 {
-  height: 100vh;
   box-sizing: border-box;
   color: #aaaaaa;
   text-align: center;

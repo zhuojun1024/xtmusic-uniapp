@@ -1,5 +1,8 @@
 <template>
-  <view class="control-wrapper">
+  <view
+    class="control-wrapper"
+    :style="{ height: `calc(100vh - ${excludeHeight}px)` }"
+  >
     <view class="pic">
       <image :src="picUrl" />
     </view>
@@ -17,9 +20,19 @@
     </view>
     <view class="progress-bar">
       <text>{{ currentTime || '00:00' }}</text>
-      <slider-bar
+<!--      <slider-bar
         class="slider-bar-wrapper"
         :precent="precent"
+        @change="handleChange"
+      /> -->
+      <slider
+        class="slider-bar-wrapper"
+        block-size="16"
+        activeColor="#EA2000"
+        :value="precent"
+        @touchstart="handleTouchStart"
+        @touchend="handleTouchEnd"
+        @changing="handleChanging"
         @change="handleChange"
       />
       <text>{{ duration || '00:00' }}</text>
@@ -57,6 +70,12 @@
   import { SET_CURRENT_TIME, PLAY_PAUSE, PLAY_PREV, PLAY_NEXT } from '@/store/mutations-types.js'
   import { formatTime } from '@/utils/util.js'
   export default {
+    data () {
+      return {
+        changing: false,
+        changingValue: 0
+      }
+    },
     computed: {
       currentMusic () {
         return this.$store.getters.currentMusic
@@ -66,25 +85,47 @@
         return al.picUrl ? `${al.picUrl}?param=512y512` : ''
       },
       currentTime () {
+        if (this.changing) {
+          return formatTime(this.$store.getters.duration * this.changingValue / 100)
+        }
         return formatTime(this.$store.getters.currentTime)
       },
       duration () {
         return formatTime(this.$store.getters.duration)
       },
       precent () {
+        if (this.changing) {
+          return this.changingValue
+        }
         const currentTime = this.$store.getters.currentTime || 0
         const duration = this.$store.getters.duration || 1
         return currentTime / duration * 100
       },
       paused () {
         return this.$store.getters.paused
+      },
+      excludeHeight () {
+        const { windowTop, windowBottom } = uni.getSystemInfoSync()
+        return (windowTop || 0) + (windowBottom || 0)
       }
     },
     methods: {
+      handleTouchStart () {
+        this.changing = true
+      },
+      handleTouchEnd () {
+        setTimeout(() => {
+          this.changing = false
+        }, 200)
+      },
+      handleChanging (e) {
+        this.changingValue = e.detail.value
+      },
       showLyric () {
         uni.navigateTo({ url: '/pages/lyric/lyric' })
       },
-      handleChange (precent) {
+      handleChange (e) {
+        const precent = e.detail.value
         const duration = this.$store.getters.duration || 0
         this.$store.commit(SET_CURRENT_TIME, duration * precent / 100)
       },
@@ -103,12 +144,6 @@
 
 <style lang="scss" scoped>
 .control-wrapper {
-  // #ifndef H5
-  height: 100vh;
-  // #endif
-  // #ifdef H5
-  height: calc(100vh - 44px);
-  // #endif
   background-color: #666666;
   position: relative;
   .pic {
@@ -152,13 +187,14 @@
     }
     > text {
       font-size: 14px;
-      width: 48px;
+      width: 40px;
       &:last-child {
         text-align: right;
       }
     }
     > .slider-bar-wrapper {
-      width: calc(100% - 96px);
+      width: calc(100% - 100px);
+      margin: 10px;
     }
   }
   .play-control {

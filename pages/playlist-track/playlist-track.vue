@@ -1,6 +1,12 @@
 <template>
   <view>
-    <play-list-track :data="data" />
+    <play-list-track
+      :data="data"
+      :id="id"
+      :show-add="type === 'search'"
+      :show-del="type === 'user'"
+      @refresh="getPlayListTrack"
+    />
   </view>
 </template>
 
@@ -10,11 +16,14 @@
     data() {
       return {
         id: undefined,
-        data: []
+        data: [],
+        type: 'user'
       }
     },
     onLoad (option) {
       this.id = option.id
+      this.type = option.type
+      uni.setNavigationBarTitle({ title: option.name })
       this.getPlayListTrack()
     },
     methods: {

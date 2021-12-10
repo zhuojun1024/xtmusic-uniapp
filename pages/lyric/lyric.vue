@@ -4,6 +4,7 @@
       scroll-y
       scroll-with-animation
       class="lyric"
+      :style="{ height: `calc(100vh - ${excludeHeight}px)` }"
       :scroll-top="scrollTop"
     >
       <view class="lyric-placeholder" />
@@ -34,6 +35,10 @@
     computed: {
       currentMusic () {
         return this.$store.getters.currentMusic
+      },
+      excludeHeight () {
+        const { windowTop, windowBottom } = uni.getSystemInfoSync()
+        return (windowTop || 0) + (windowBottom || 0)
       }
     },
     watch: {
@@ -108,12 +113,6 @@
 
 <style lang="scss" scoped>
 .lyric {
-  // #ifndef H5
-  height: 100vh;
-  // #endif
-  // #ifdef H5
-  height: calc(100vh - 44px);
-  // #endif
   box-sizing: border-box;
   color: #aaaaaa;
   text-align: center;

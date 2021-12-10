@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "搜索",
+  "navigationBarTitleText": "歌曲",
   "usingComponents": {
     "uni-search-bar": "/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar",
     "play-list-track": "/components/play-list-track/play-list-track",

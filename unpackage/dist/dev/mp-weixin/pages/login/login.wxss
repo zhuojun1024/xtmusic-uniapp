@@ -7,7 +7,7 @@
 .login-wrapper .login-title.data-v-b237504c {
   font-size: 28px;
   font-weight: 600;
-  margin-bottom: 48px;
+  margin: 32px 0 48px 0;
   text-align: center;
 }
 .login-wrapper .login-title image.data-v-b237504c {
@@ -19,7 +19,24 @@
   display: inline-block;
   vertical-align: middle;
 }
-.login-wrapper .button-default.data-v-b237504c {
+.login-wrapper .captcha-form .captcha-input.data-v-b237504c, .login-wrapper .captcha-form .captcha-button.data-v-b237504c {
+  display: inline-block;
+  vertical-align: middle;
+}
+.login-wrapper .captcha-form .captcha-input.data-v-b237504c {
+  width: calc(100% - 144px);
+}
+.login-wrapper .captcha-form .captcha-button.data-v-b237504c {
+  width: 136px;
+  height: 36px;
+  line-height: 36px;
+  margin-left: 8px;
+}
+.login-wrapper .login-type-button.data-v-b237504c {
+  text-align: right;
+  color: #666666;
+}
+.login-wrapper .login-button.data-v-b237504c {
   margin-top: 12px;
 }
 

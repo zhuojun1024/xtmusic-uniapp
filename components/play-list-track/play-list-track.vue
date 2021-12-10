@@ -1,29 +1,71 @@
 <template>
   <view>
-    <view
-      v-for="(item, index) of data"
-      :key="item.id"
-      :class="{ 'music-list-item': true, disabled: item.st === -200 }"
-      @click="playMusic(item)"
+    <scroll-view
+      scroll-y
+      :style="{ height }"
+      @scrolltolower="$emit('scrolltolower')"
     >
-      <view>{{ index + 1 }}</view>
-      <view>
-        <view>{{ item.name }}</view>
-        <view>{{ item.ar }}</view>
+      <view
+        v-for="(item, index) of data"
+        :key="item.id"
+        :class="{ 'music-list-item': true, disabled: item.st === -200 }"
+        @click="playMusic(item)"
+      >
+        <view>{{ index + 1 }}</view>
+        <view>
+          <view>{{ item.name }}</view>
+          <view>{{ item.ar }}</view>
+        </view>
+        <view>
+          <uni-icons
+            v-if="currentMusic.id === item.id"
+            type="sound"
+            size="24"
+            color="#EA2000"
+            class="uni-icons"
+          />
+          <uni-icons
+            v-if="showAdd"
+            type="plusempty"
+            size="20"
+            color="#999999"
+            class="uni-icons"
+            @click.native.stop="showPlayList(item)"
+          />
+          <uni-icons
+            v-if="showDel"
+            type="closeempty"
+            size="20"
+            color="#999999"
+            class="uni-icons"
+            @click.native.stop="popupOpen(item)"
+          />
+        </view>
       </view>
-      <view>
-        <uni-icons
-          v-if="currentMusic.id === item.id"
-          type="sound"
-          size="24"
-          color="#EA2000"
-        />
-      </view>
-    </view>
+    </scroll-view>
+    <play-list-track-add
+      v-if="showAdd"
+      :visible="visible"
+      :id="selectedMusicId"
+      @change="v => visible = v"
+    />
+    <uni-popup
+      ref="popup"
+      type="dialog"
+    >
+      <uni-popup-dialog
+        content="确定要将该歌曲从歌单中删除吗？"
+        :duration="2000"
+        :before-close="true"
+        @close="popupClose"
+        @confirm="popupConfirm"
+      />
+    </uni-popup>
   </view>
 </template>
 
 <script>
+  import api from '@/api/music.js'
   import { SET_CURRENT_MUSIC, SET_CURRENT_MUSIC_LIST } from '@/store/mutations-types.js'
   export default {
     name:"play-list-track",
@@ -31,6 +73,34 @@
       data: {
         type: Array,
         default: () => ([])
+      },
+      id: {
+        type: String,
+        default: undefined
+      },
+      showAdd: {
+        type: Boolean,
+        default: false
+      },
+      showDel: {
+        type: Boolean,
+        default: false
+      },
+      height: {
+        type: String,
+        default: ''
+      }
+    },
+    data () {
+      return {
+        selectedMusicId: undefined,
+        visible: false,
+        options: [{
+          text: '加入歌单',
+          style: {
+            // backgroundColor: '#1890FF'
+          }
+        }]
       }
     },
     computed: {
@@ -38,19 +108,66 @@
         return this.$store.getters.currentMusic
       }
     },
+    watch: {
+      visible (newVal) {
+        if (newVal) {
+          uni.hideTabBar({ animation: true })
+        } else {
+          uni.showTabBar({ animation: true })
+        }
+      }
+    },
     methods: {
+      popupClose () {
+        this.$refs.popup.close()
+      },
+      popupConfirm () {
+        this.$refs.popup.close()
+        const timestamp = new Date().getTime()
+        const params = {
+          op: 'del',
+          pid: this.id,
+          tracks: String(this.selectedMusicId),
+          timestamp
+        }
+        uni.showLoading({ title: '删除中' })
+        api.updatePlayListTracks(params).then(res => {
+          uni.showToast({ icon: 'success', title: '操作成功' })
+          this.$emit('refresh')
+        }).catch(e => {
+          uni.showToast({ icon: 'error', title: '删除失败：' + e })
+          console.error('删除失败：', e)
+        }).finally(() => {
+          uni.hideLoading()
+        })
+      },
+      popupOpen (item) {
+        this.selectedMusicId = item.id
+        this.$refs.popup.open()
+      },
+      showPlayList (item) {
+        if (item.st === -200) {
+          uni.showToast({
+            icon: 'error',
+            title: '该音乐无版权'
+          })
+          return
+        }
+        this.selectedMusicId = item.id
+        this.visible = true
+      },
       playMusic (music) {
         if (music.st === -200) {
           uni.showToast({
             icon: 'error',
             title: '该音乐无版权'
           })
-        } else {
-          this.$store.dispatch(SET_CURRENT_MUSIC, music).then(() => {
-            this.$store.commit(SET_CURRENT_MUSIC_LIST, this.data)
-          })
+          return
         }
-      }
+        this.$store.dispatch(SET_CURRENT_MUSIC, music).then(() => {
+          this.$store.commit(SET_CURRENT_MUSIC_LIST, this.data)
+        })
+    }
     }
   }
 </script>
@@ -68,7 +185,7 @@
       text-align: center;
     }
     &:nth-child(2) {
-      width: calc(100% - 96px);
+      width: calc(100% - 128px);
       line-height: 1.5;
       font-size: 14px;
       view {
@@ -82,13 +199,23 @@
       }
     }
     &:nth-child(3) {
-      width: 48px;
-      text-align: center;
+      width: 60px;
+      padding-right: 20px;
+      text-align: right;
+      .uni-icons {
+        display: inline-block;
+        vertical-align: middle;
+        &:last-child {
+          margin-left: 12px;
+        }
+      }
     }
   }
 }
 .music-list-item.disabled {
   color: #999999;
-  opacity: 0.5;
+  > view:not(:last-child) {
+    opacity: 0.5;
+  }
 }
 </style>

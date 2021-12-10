@@ -6,11 +6,12 @@
         placeholder="搜索歌曲"
         @confirm="search"
       />
-      <scroll-view
-        scroll-y
+      <play-list-track
+        showAdd
+        :height="`calc(100vh - ${ 108 + excludeHeight }px)`"
+        :data="data"
         @scrolltolower="loadNext"
-      >
-        <play-list-track :data="data" />
+      />
       </scroll-view>
     </view>
     <play-control />
@@ -28,6 +29,12 @@
         limit: 30,
         total: 0,
         loading: false
+      }
+    },
+    computed: {
+      excludeHeight () {
+        const { windowTop, windowBottom } = uni.getSystemInfoSync()
+        return (windowTop || 0) + (windowBottom || 0)
       }
     },
     onLoad () {
@@ -75,16 +82,3 @@
     }
   }
 </script>
-
-<style lang="scss" scoped>
-.search-wrapper {
-  scroll-view {
-    // #ifdef H5
-    height: calc(100vh - 202px);
-    // #endif
-    // #ifndef H5
-    height: calc(100vh - 108px);
-    // #endif
-  }
-}
-</style>

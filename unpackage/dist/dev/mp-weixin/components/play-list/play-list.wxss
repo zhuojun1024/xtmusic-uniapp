@@ -1,9 +1,6 @@
 @charset "UTF-8";
 /* 水平间距 */
 /* 水平间距 */
-.popup-wrapper.data-v-56ec38b4 {
-  z-index: 999;
-}
 .popup-wrapper .popup-content.data-v-56ec38b4 {
   height: 60vh;
 }

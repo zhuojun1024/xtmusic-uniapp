@@ -13,10 +13,12 @@
         </view>
         <scroll-view
           scroll-y
+          :scroll-top="scrollTop"
         >
           <view
             v-for="(item, index) of data"
             :key="item.id"
+            :id="'l' + item.id"
             :class="{ 'play-list-item': true, disabled: item.st === -200 }"
             @click="playMusic(item)"
           >
@@ -47,18 +49,34 @@
         default: false
       }
     },
+    data () {
+      return {
+        scrollTop: 0
+      }
+    },
     computed: {
       data () {
         return this.$store.getters.currentMusicList
       },
       currentMusic () {
         return this.$store.getters.currentMusic
+      },
+      excludeHeight () {
+        const { windowTop, windowBottom } = uni.getSystemInfoSync()
+        return (windowTop || 0) + (windowBottom || 0)
       }
     },
     watch: {
       visible (newVal) {
         if (newVal) {
           this.$refs.popup.open()
+          // 跳到正在播放的歌曲的位置
+          this.$nextTick(() => {
+            if (this.currentMusic.id) {
+              const index = this.data.findIndex(item => item.id === this.currentMusic.id) - 2
+              this.scrollTop = index * 53 + Math.random()
+            }
+          })
         } else {
           this.$refs.popup.close()
         }
@@ -81,7 +99,6 @@
 
 <style lang="scss" scoped>
 .popup-wrapper {
-  z-index: 999;
   .popup-content {
     height: 60vh;
     .title-bar {

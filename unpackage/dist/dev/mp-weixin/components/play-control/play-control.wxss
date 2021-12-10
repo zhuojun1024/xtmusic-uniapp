@@ -9,7 +9,6 @@
   width: 100%;
   position: fixed;
   left: 0;
-  bottom: 0;
   color: white;
   background-color: #666666;
 }
@@ -45,9 +44,9 @@
 }
 .play-control-wrapper .progress-bar.data-v-2a4ecc04 {
   position: absolute;
-  top: -3px;
+  top: -2px;
   left: 0;
-  height: 3px;
+  height: 2px;
   background-color: #EA2000;
 }
 
