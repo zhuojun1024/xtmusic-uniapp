@@ -113,23 +113,35 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 11);
     } },
 
   onLaunch: function onLaunch() {
-    // 判断登录状态
-    var cookie = uni.getStorageSync('cookie');
-    if (!cookie) {
-      uni.reLaunch({ url: 'pages/login/login' });
-    } else if (!this.userInfo.userId) {
-      this.getUserInfo();
-    }
+    // this.hasPermission()
     // 添加背景音乐事件监听
     this.addBAMEventListener();
   },
   onShow: function onShow() {
+    this.hasPermission();
     console.log('App Show');
   },
   onHide: function onHide() {
     console.log('App Hide');
   },
   methods: {
+    hasPermission: function hasPermission() {
+      // 判断登录状态
+      var cookie = uni.getStorageSync('cookie');
+      if (!cookie) {
+        uni.reLaunch({ url: '/pages/login/login' });
+      } else if (!this.userInfo.userId) {
+        this.getUserInfo();
+      } else {
+        // 如果已经有登录信息和用户信息，但是在登录页，则跳到首页
+        var currentPages = getCurrentPages();
+        var currentPage = currentPages[currentPages.length] || {};
+        var currentRoute = currentPage.route;
+        if (!currentRoute || currentRoute === 'pages/login/login') {
+          uni.switchTab({ url: '/pages/search/search' });
+        }
+      }
+    },
     addBAMEventListener: function addBAMEventListener() {
       var events = [
       'onPlay',

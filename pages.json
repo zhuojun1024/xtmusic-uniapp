@@ -27,12 +27,14 @@
   }, {
     "path": "pages/control/control",
     "style": {
-      "navigationBarTitleText": "播放控制"
+      "navigationBarTitleText": "播放控制",
+      "disableScroll": true
     }
   }, {
     "path": "pages/lyric/lyric",
     "style": {
-      "navigationBarTitleText": "歌词"
+      "navigationBarTitleText": "歌词",
+      "disableScroll": true
     }
   }],
   "tabBar": {

@@ -1,5 +1,9 @@
 <template>
-  <view>
+  <view class="lyric-wrapper">
+    <view
+      class="lyric-bg"
+      :style="{ backgroundImage: `url(${picUrl})` }"
+    />
     <scroll-view
       scroll-y
       scroll-with-animation
@@ -36,6 +40,10 @@
       currentMusic () {
         return this.$store.getters.currentMusic
       },
+      picUrl () {
+        const al = this.currentMusic.al || {}
+        return al.picUrl ? `${al.picUrl}?param=512y512` : ''
+      },
       excludeHeight () {
         const { windowTop, windowBottom } = uni.getSystemInfoSync()
         return (windowTop || 0) + (windowBottom || 0)
@@ -56,7 +64,13 @@
       if (this.currentMusic.id) {
         this.getLyric()
         uni.setNavigationBarTitle({ title: this.currentMusic.name })
+        // 屏幕常亮
+        uni.setKeepScreenOn({ keepScreenOn: true })
       }
+    },
+    onUnload () {
+      // 取消屏幕常亮
+      uni.setKeepScreenOn({ keepScreenOn: false })
     },
     methods: {
       playLrc (time) {
@@ -112,31 +126,55 @@
 </script>
 
 <style lang="scss" scoped>
-.lyric {
-  box-sizing: border-box;
-  color: #aaaaaa;
-  text-align: center;
+.lyric-wrapper {
   background-color: #666666;
-  .lyric-item {
-    height: 48px;
-    // padding: 12px 0;
-    font-size: 16px;
-    &.current {
-      color: white;
-      font-size: 20px;
-      // transition: font-size .2s;
-    }
-  }
-  .lyric-placeholder {
-    height: 40vh;
-  }
-  &:after {
-    content: '';
-    width: inherit;
-    height: inherit;
+  position: relative;
+  .lyric-bg {
+    width: 100%;
+    height: 100%;
     position: absolute;
-    left: 0;
     top: 0;
+    left: 0;
+    z-index: 1;
+    opacity: 0.4;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: blur(25px);
+  }
+  .lyric {
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    box-sizing: border-box;
+    color: #aaaaaa;
+    text-align: center;
+    .lyric-item {
+      height: 48px;
+      // padding: 12px 0;
+      font-size: 16px;
+      &.current {
+        color: white;
+        font-size: 20px;
+        // transition: font-size .2s;
+      }
+    }
+    .lyric-placeholder {
+      height: 40vh;
+      &:last-child {
+        height: 50vh;
+      }
+    }
+    &:after {
+      content: '';
+      width: inherit;
+      height: inherit;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+    }
   }
 }
 </style>

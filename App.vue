@@ -19,23 +19,35 @@
       }
     },
 		onLaunch: function() {
-      // 判断登录状态
-      const cookie = uni.getStorageSync('cookie')
-      if (!cookie) {
-        uni.reLaunch({ url: 'pages/login/login' })
-      } else if (!this.userInfo.userId) {
-        this.getUserInfo()
-      }
+      // this.hasPermission()
       // 添加背景音乐事件监听
       this.addBAMEventListener()
 		},
 		onShow: function() {
+      this.hasPermission()
 			console.log('App Show')
 		},
 		onHide: function() {
 			console.log('App Hide')
 		},
     methods: {
+      hasPermission () {
+        // 判断登录状态
+        const cookie = uni.getStorageSync('cookie')
+        if (!cookie) {
+          uni.reLaunch({ url: '/pages/login/login' })
+        } else if (!this.userInfo.userId) {
+          this.getUserInfo()
+        } else {
+          // 如果已经有登录信息和用户信息，但是在登录页，则跳到首页
+          const currentPages = getCurrentPages()
+          const currentPage = currentPages[currentPages.length] || {}
+          const currentRoute = currentPage.route
+          if (!currentRoute || currentRoute === 'pages/login/login') {
+            uni.switchTab({ url: '/pages/search/search' })
+          }
+        }
+      },
       addBAMEventListener () {
         const events = [
           'onPlay',

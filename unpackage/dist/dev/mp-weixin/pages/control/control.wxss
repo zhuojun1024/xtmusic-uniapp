@@ -5,6 +5,28 @@
   background-color: #666666;
   position: relative;
 }
+.control-wrapper .control-wrapper-bg.data-v-0ec1947c {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  opacity: 0.4;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  -webkit-filter: blur(25px);
+          filter: blur(25px);
+}
+.control-wrapper .control-content.data-v-0ec1947c {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
 .control-wrapper .pic.data-v-0ec1947c {
   width: 100vw;
   height: 100vw;

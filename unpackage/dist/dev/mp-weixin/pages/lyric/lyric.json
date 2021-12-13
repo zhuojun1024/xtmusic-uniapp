@@ -1,4 +1,5 @@
 {
   "navigationBarTitleText": "歌词",
+  "disableScroll": true,
   "usingComponents": {}
 }

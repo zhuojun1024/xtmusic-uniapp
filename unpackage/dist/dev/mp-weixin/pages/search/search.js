@@ -94,13 +94,13 @@ var components
 try {
   components = {
     uniSearchBar: function() {
-      return Promise.all(/*! import() | uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar.vue */ 106))
+      return Promise.all(/*! import() | uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar.vue */ 103))
     },
     playListTrack: function() {
-      return Promise.all(/*! import() | components/play-list-track/play-list-track */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/play-list-track/play-list-track")]).then(__webpack_require__.bind(null, /*! @/components/play-list-track/play-list-track.vue */ 117))
+      return Promise.all(/*! import() | components/play-list-track/play-list-track */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/play-list-track/play-list-track")]).then(__webpack_require__.bind(null, /*! @/components/play-list-track/play-list-track.vue */ 114))
     },
     playControl: function() {
-      return Promise.all(/*! import() | components/play-control/play-control */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/play-control/play-control")]).then(__webpack_require__.bind(null, /*! @/components/play-control/play-control.vue */ 124))
+      return Promise.all(/*! import() | components/play-control/play-control */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/play-control/play-control")]).then(__webpack_require__.bind(null, /*! @/components/play-control/play-control.vue */ 121))
     }
   }
 } catch (e) {

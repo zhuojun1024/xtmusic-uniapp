@@ -3,65 +3,71 @@
     class="control-wrapper"
     :style="{ height: `calc(100vh - ${excludeHeight}px)` }"
   >
-    <view class="pic">
-      <image :src="picUrl" />
-    </view>
-    <view class="music-info">
-      <view>{{ currentMusic.name || '歌曲标题' }}</view>
-      <view>
-        <text>{{ currentMusic.ar || '歌手' }}</text>
-        <text
-          class="lrc-button"
-          @click="showLyric"
-        >
-          词
-        </text>
+    <view
+      class="control-wrapper-bg"
+      :style="{ backgroundImage: `url(${picUrl})` }"
+    />
+    <view class="control-content">
+      <view class="pic">
+        <image :src="picUrl" />
       </view>
-    </view>
-    <view class="progress-bar">
-      <text>{{ currentTime || '00:00' }}</text>
-<!--      <slider-bar
-        class="slider-bar-wrapper"
-        :precent="precent"
-        @change="handleChange"
-      /> -->
-      <slider
-        class="slider-bar-wrapper"
-        block-size="16"
-        activeColor="#EA2000"
-        :value="precent"
-        @touchstart="handleTouchStart"
-        @touchend="handleTouchEnd"
-        @changing="handleChanging"
-        @change="handleChange"
-      />
-      <text>{{ duration || '00:00' }}</text>
-    </view>
-    <view class="play-control">
-      <uni-icons
-        class="uni-icons"
-        size="48"
-        color="white"
-        custom-prefix="iconfont"
-        type="icon-left-circle"
-        @click="playPrev"
-      />
-      <uni-icons
-        class="uni-icons"
-        size="64"
-        color="white"
-        custom-prefix="iconfont"
-        :type="paused ? 'icon-play-circle' : 'icon-pause-circle'"
-        @click="playPause"
-      />
-      <uni-icons
-        class="uni-icons"
-        size="48"
-        color="white"
-        custom-prefix="iconfont"
-        type="icon-right-circle"
-        @click="playNext"
-      />
+      <view class="music-info">
+        <view>{{ currentMusic.name || '歌曲标题' }}</view>
+        <view>
+          <text>{{ currentMusic.ar || '歌手' }}</text>
+          <text
+            class="lrc-button"
+            @click="showLyric"
+          >
+            词
+          </text>
+        </view>
+      </view>
+      <view class="progress-bar">
+        <text>{{ currentTime || '00:00' }}</text>
+  <!--      <slider-bar
+          class="slider-bar-wrapper"
+          :precent="precent"
+          @change="handleChange"
+        /> -->
+        <slider
+          class="slider-bar-wrapper"
+          block-size="16"
+          activeColor="#EA2000"
+          :value="precent"
+          @touchstart="handleTouchStart"
+          @touchend="handleTouchEnd"
+          @changing="handleChanging"
+          @change="handleChange"
+        />
+        <text>{{ duration || '00:00' }}</text>
+      </view>
+      <view class="play-control">
+        <uni-icons
+          class="uni-icons"
+          size="48"
+          color="white"
+          custom-prefix="iconfont"
+          type="icon-left-circle"
+          @click="playPrev"
+        />
+        <uni-icons
+          class="uni-icons"
+          size="64"
+          color="white"
+          custom-prefix="iconfont"
+          :type="paused ? 'icon-play-circle' : 'icon-pause-circle'"
+          @click="playPause"
+        />
+        <uni-icons
+          class="uni-icons"
+          size="48"
+          color="white"
+          custom-prefix="iconfont"
+          type="icon-right-circle"
+          @click="playNext"
+        />
+      </view>
     </view>
   </view>
 </template>
@@ -146,6 +152,28 @@
 .control-wrapper {
   background-color: #666666;
   position: relative;
+  .control-wrapper-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    opacity: 0.4;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: blur(25px);
+    // border: 1px solid red;
+  }
+  .control-content {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+  }
   .pic {
     width: 100vw;
     height: 100vw;
