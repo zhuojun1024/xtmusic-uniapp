@@ -79,7 +79,8 @@
     data () {
       return {
         changing: false,
-        changingValue: 0
+        changingValue: 0,
+        timer: undefined
       }
     },
     computed: {
@@ -117,12 +118,13 @@
     },
     methods: {
       handleTouchStart () {
+        clearTimeout(this.timer)
         this.changing = true
       },
       handleTouchEnd () {
-        setTimeout(() => {
+        this.timer = setTimeout(() => {
           this.changing = false
-        }, 200)
+        }, 500)
       },
       handleChanging (e) {
         this.changingValue = e.detail.value

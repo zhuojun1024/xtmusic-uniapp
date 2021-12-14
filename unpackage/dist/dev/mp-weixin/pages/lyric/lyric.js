@@ -227,7 +227,12 @@ var _api = _interopRequireDefault(__webpack_require__(/*! ./api */ 75));function
       _api.default.getLyric(params).then(function (res) {
         _this.currentLrcIndex = 0;
         _this.scrollTop = 0;
-        _this.lyrics = _this.handleLyric(res.lrc.lyric);
+        _this.lyrics = _this.handleLyric((res.lrc || {}).lyric || '');
+        // 播放歌词
+        _this.$nextTick(function () {
+          var currentTime = _this.$store.getters.currentTime;
+          _this.playLrc(currentTime * 1000);
+        });
       }).catch(function (e) {
         uni.showToast({
           icon: 'error',
@@ -238,6 +243,7 @@ var _api = _interopRequireDefault(__webpack_require__(/*! ./api */ 75));function
     },
     // 处理歌词
     handleLyric: function handleLyric(lyric) {
+      if (!lyric) return [];
       var res = [];
       var arr = lyric.split('\n').filter(function (item) {return item;});var _iterator = _createForOfIteratorHelper(
       arr),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var str = _step.value;

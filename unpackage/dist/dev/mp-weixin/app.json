@@ -6,7 +6,10 @@
     "pages/playlist/playlist",
     "pages/playlist-track/playlist-track",
     "pages/control/control",
-    "pages/lyric/lyric"
+    "pages/lyric/lyric",
+    "pages/cloud/cloud",
+    "pages/radio/radio",
+    "pages/radio-program-list/radio-program-list"
   ],
   "subPackages": [],
   "window": {
@@ -33,6 +36,18 @@
         "text": "歌单"
       },
       {
+        "pagePath": "pages/radio/radio",
+        "iconPath": "static/icon-radio-gray.png",
+        "selectedIconPath": "static/icon-radio-red.png",
+        "text": "电台"
+      },
+      {
+        "pagePath": "pages/cloud/cloud",
+        "iconPath": "static/icon-cloud-gray.png",
+        "selectedIconPath": "static/icon-cloud-red.png",
+        "text": "云盘"
+      },
+      {
         "pagePath": "pages/user/user",
         "iconPath": "static/icon-user-gray.png",
         "selectedIconPath": "static/icon-user-red.png",
@@ -43,6 +58,5 @@
   "requiredBackgroundModes": [
     "audio"
   ],
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

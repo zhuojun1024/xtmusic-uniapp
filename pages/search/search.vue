@@ -12,7 +12,6 @@
         :data="data"
         @scrolltolower="loadNext"
       />
-      </scroll-view>
     </view>
     <play-control />
   </view>

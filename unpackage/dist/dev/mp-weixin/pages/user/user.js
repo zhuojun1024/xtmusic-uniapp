@@ -165,6 +165,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _login = _interopRequireDefault(__webpack_require__(/*! @/api/login.js */ 18));
 var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 11);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
@@ -177,16 +190,25 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 11);
 //
 //
 //
-var _default = { computed: { userInfo: function userInfo() {return this.$store.getters.userInfo;} }, methods: { logout: function logout() {var _this = this;_login.default.logout().finally(function () {// 移除用户信息
-        _this.$store.commit(_mutationsTypes.LOGIN_OUT); // 移除cookie
-        uni.removeStorageSync('cookie');
-        // 重置播放状态
-        _this.$store.commit(_mutationsTypes.RESET_STATE);
-        // 前往登录页
-        uni.reLaunch({
-          url: '/pages/login/login' });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { computed: { userInfo: function userInfo() {return this.$store.getters.userInfo;} }, methods: { logout: function logout() {var _this = this;uni.showModal({ title: '提示', content: '确定要退出登录吗？', confirmColor: '#EA2000', success: function success(res) {if (res.confirm) {_login.default.logout().finally(function () {// 移除用户信息
+              _this.$store.commit(_mutationsTypes.LOGIN_OUT); // 移除cookie
+              uni.removeStorageSync('cookie'); // 重置播放状态
+              _this.$store.commit(_mutationsTypes.RESET_STATE); // 前往登录页
+              uni.reLaunch({ url: '/pages/login/login' });});}} });
 
-      });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

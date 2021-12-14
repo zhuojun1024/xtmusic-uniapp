@@ -95,7 +95,12 @@
         api.getLyric(params).then(res => {
           this.currentLrcIndex = 0
           this.scrollTop = 0
-          this.lyrics = this.handleLyric(res.lrc.lyric)
+          this.lyrics = this.handleLyric((res.lrc || {}).lyric || '')
+          // 播放歌词
+          this.$nextTick(() => {
+            const currentTime = this.$store.getters.currentTime
+            this.playLrc(currentTime * 1000)
+          })
         }).catch(e => {
           uni.showToast({
             icon: 'error',
@@ -106,6 +111,7 @@
       },
       // 处理歌词
       handleLyric (lyric) {
+        if (!lyric) return []
         const res = []
         const arr = lyric.split('\n').filter(item => item)
         for (const str of arr) {
@@ -127,7 +133,7 @@
 
 <style lang="scss" scoped>
 .lyric-wrapper {
-  background-color: #666666;
+  background-color: #333333;
   position: relative;
   .lyric-bg {
     width: 100%;
@@ -143,12 +149,13 @@
     filter: blur(25px);
   }
   .lyric {
+    padding: 0 24px;
     position: relative;
     top: 0;
     left: 0;
     z-index: 2;
     box-sizing: border-box;
-    color: #aaaaaa;
+    color: rgba(255, 255, 255, 0.4);
     text-align: center;
     .lyric-item {
       height: 48px;

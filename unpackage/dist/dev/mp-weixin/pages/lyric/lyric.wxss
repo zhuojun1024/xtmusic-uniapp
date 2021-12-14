@@ -2,7 +2,7 @@
 /* 水平间距 */
 /* 水平间距 */
 .lyric-wrapper.data-v-b11dc974 {
-  background-color: #666666;
+  background-color: #333333;
   position: relative;
 }
 .lyric-wrapper .lyric-bg.data-v-b11dc974 {
@@ -20,12 +20,13 @@
           filter: blur(25px);
 }
 .lyric-wrapper .lyric.data-v-b11dc974 {
+  padding: 0 24px;
   position: relative;
   top: 0;
   left: 0;
   z-index: 2;
   box-sizing: border-box;
-  color: #aaaaaa;
+  color: rgba(255, 255, 255, 0.4);
   text-align: center;
 }
 .lyric-wrapper .lyric .lyric-item.data-v-b11dc974 {

@@ -5160,6 +5160,25 @@ app;exports.default = _default;
 
 /***/ }),
 
+/***/ 198:
+/*!****************************************************************************************!*\
+  !*** C:/Users/SYN-ZJ-021/Documents/HBuilderProjects/xtmusic-uniapp/pages/cloud/api.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! @/request */ 10));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var apis = {
+  // 获取云盘数据
+  getUserCloud: function getUserCloud(data) {return (0, _request.default)('/user/cloud', 'post', data);} };var _default =
+
+
+apis;exports.default = _default;
+
+/***/ }),
+
 /***/ 2:
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -5212,6 +5231,25 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 getters;exports.default = _default;
+
+/***/ }),
+
+/***/ 217:
+/*!*****************************************************************************************************!*\
+  !*** C:/Users/SYN-ZJ-021/Documents/HBuilderProjects/xtmusic-uniapp/pages/radio-program-list/api.js ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! @/request */ 10));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var apis = {
+  // 获取电台节目
+  getRadioProgram: function getRadioProgram(data) {return (0, _request.default)('/dj/program', 'post', data);} };var _default =
+
+
+apis;exports.default = _default;
 
 /***/ }),
 

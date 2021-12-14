@@ -36,6 +36,21 @@
       "navigationBarTitleText": "歌词",
       "disableScroll": true
     }
+  }, {
+    "path": "pages/cloud/cloud",
+    "style": {
+      "navigationBarTitleText": "云盘"
+    }
+  }, {
+    "path": "pages/radio/radio",
+    "style": {
+      "navigationBarTitleText": "电台"
+    }
+  }, {
+    "path": "pages/radio-program-list/radio-program-list",
+    "style": {
+      "navigationBarTitleText": "电台节目列表"
+    }
   }],
   "tabBar": {
     "fontSize": "12px",
@@ -51,6 +66,16 @@
       "iconPath": "static/icon-playlist-gray.png",
       "selectedIconPath": "static/icon-playlist-red.png",
       "text": "歌单"
+    }, {
+      "pagePath": "pages/radio/radio",
+      "iconPath": "static/icon-radio-gray.png",
+      "selectedIconPath": "static/icon-radio-red.png",
+      "text": "电台"
+    }, {
+      "pagePath": "pages/cloud/cloud",
+      "iconPath": "static/icon-cloud-gray.png",
+      "selectedIconPath": "static/icon-cloud-red.png",
+      "text": "云盘"
     }, {
       "pagePath": "pages/user/user",
       "iconPath": "static/icon-user-gray.png",

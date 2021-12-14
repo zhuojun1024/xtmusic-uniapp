@@ -177,7 +177,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var _music = _interopRequireDefault(__webpack_require__(/*! @/api/music.js */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
@@ -197,8 +196,8 @@ var _music = _interopRequireDefault(__webpack_require__(/*! @/api/music.js */ 9)
 //
 //
 //
-//
-var _default = { data: function data() {return { keyword: undefined, data: [], offset: 0, limit: 30, total: 0, loading: false };}, computed: { excludeHeight: function excludeHeight() {var _uni$getSystemInfoSyn = uni.getSystemInfoSync(),windowTop = _uni$getSystemInfoSyn.windowTop,windowBottom = _uni$getSystemInfoSyn.windowBottom;return (windowTop || 0) + (windowBottom || 0);} }, onLoad: function onLoad() {this.cloudSearch();},
+var _default = { data: function data() {return { keyword: undefined, data: [], offset: 0, limit: 30, total: 0, loading: false };}, computed: { excludeHeight: function excludeHeight() {var _uni$getSystemInfoSyn = uni.getSystemInfoSync(),windowTop = _uni$getSystemInfoSyn.windowTop,windowBottom = _uni$getSystemInfoSyn.windowBottom;return (windowTop || 0) + (windowBottom || 0);} }, onLoad: function onLoad() {this.cloudSearch();
+  },
   methods: {
     loadNext: function loadNext() {
       if (this.loading || this.offset * this.limit >= this.total) return;

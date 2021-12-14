@@ -1,0 +1,43 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.music-list-item.data-v-f6b70cb4 {
+  border-bottom: 1px solid #efefef;
+  padding: 4px 0;
+}
+.music-list-item > view.data-v-f6b70cb4 {
+  display: inline-block;
+  vertical-align: middle;
+}
+.music-list-item > view.data-v-f6b70cb4:first-child {
+  width: 48px;
+  color: #999999;
+  text-align: center;
+}
+.music-list-item > view.data-v-f6b70cb4:nth-child(2) {
+  width: calc(100% - 128px);
+  line-height: 1.5;
+  font-size: 14px;
+}
+.music-list-item > view:nth-child(2) view.data-v-f6b70cb4 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.music-list-item > view:nth-child(2) view.data-v-f6b70cb4:last-child {
+  color: #999999;
+  font-size: 12px;
+}
+.music-list-item > view.data-v-f6b70cb4:nth-child(3) {
+  width: 60px;
+  padding-right: 20px;
+  text-align: right;
+}
+.music-list-item > view:nth-child(3) .uni-icons.data-v-f6b70cb4 {
+  display: inline-block;
+  vertical-align: middle;
+}
+.music-list-item > view:nth-child(3) .uni-icons.data-v-f6b70cb4:last-child {
+  margin-left: 12px;
+}
+

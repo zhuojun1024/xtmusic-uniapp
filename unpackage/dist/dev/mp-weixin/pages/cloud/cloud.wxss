@@ -1,0 +1,29 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.cloud-size.data-v-2524e072 {
+  height: 32px;
+  line-height: 32px;
+  position: relative;
+  background-color: #aaaaaa;
+  margin: 12px;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.2);
+}
+.cloud-size .precent.data-v-2524e072 {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  background-color: #EA2000;
+}
+.cloud-size text.data-v-2524e072 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+}
+

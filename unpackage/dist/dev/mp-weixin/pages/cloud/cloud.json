@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "云盘",
+  "usingComponents": {
+    "play-list-track": "/components/play-list-track/play-list-track",
+    "play-control": "/components/play-control/play-control"
+  }
+}

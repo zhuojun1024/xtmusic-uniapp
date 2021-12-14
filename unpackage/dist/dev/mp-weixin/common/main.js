@@ -135,7 +135,7 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 11);
       } else {
         // 如果已经有登录信息和用户信息，但是在登录页，则跳到首页
         var currentPages = getCurrentPages();
-        var currentPage = currentPages[currentPages.length] || {};
+        var currentPage = currentPages[currentPages.length - 1] || {};
         var currentRoute = currentPage.route;
         if (!currentRoute || currentRoute === 'pages/login/login') {
           uni.switchTab({ url: '/pages/search/search' });

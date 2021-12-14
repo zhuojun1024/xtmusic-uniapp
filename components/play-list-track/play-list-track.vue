@@ -14,7 +14,7 @@
         <view>{{ index + 1 }}</view>
         <view>
           <view>{{ item.name }}</view>
-          <view>{{ item.ar }}</view>
+          <view>{{ item.ar || '未知歌手' }}</view>
         </view>
         <view>
           <uni-icons
@@ -167,7 +167,7 @@
         this.$store.dispatch(SET_CURRENT_MUSIC, music).then(() => {
           this.$store.commit(SET_CURRENT_MUSIC_LIST, this.data)
         })
-    }
+      }
     }
   }
 </script>
