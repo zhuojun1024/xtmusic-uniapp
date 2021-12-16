@@ -89,6 +89,7 @@
         if (this.lyrics.length === 0) return
         // 如果时长超过歌词时长，取最后一句歌词
         if (time > this.lyrics[this.lyrics.length - 1].time) {
+          this.currentLrcIndex = this.heights.length - 1
           this.scrollTop = this.heights[this.heights.length - 1]
           return
         }
