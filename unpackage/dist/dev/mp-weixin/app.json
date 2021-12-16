@@ -6,7 +6,6 @@
     "pages/playlist/playlist",
     "pages/playlist-track/playlist-track",
     "pages/control/control",
-    "pages/lyric/lyric",
     "pages/cloud/cloud",
     "pages/radio/radio",
     "pages/radio-program-list/radio-program-list"

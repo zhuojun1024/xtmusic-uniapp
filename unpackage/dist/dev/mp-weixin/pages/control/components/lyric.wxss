@@ -1,0 +1,33 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.lyric-wrapper .lyric.data-v-391a6611 {
+  padding: 0 24px;
+  box-sizing: border-box;
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+}
+.lyric-wrapper .lyric .lyric-item.data-v-391a6611 {
+  padding: 16px 0;
+  font-size: 16px;
+}
+.lyric-wrapper .lyric .lyric-item.current.data-v-391a6611 {
+  color: white;
+  font-size: 20px;
+}
+.lyric-wrapper .lyric .lyric-placeholder.data-v-391a6611 {
+  height: 40vh;
+}
+.lyric-wrapper .lyric .lyric-placeholder.data-v-391a6611:last-child {
+  height: 50vh;
+}
+.lyric-wrapper .lyric.data-v-391a6611:after {
+  content: '';
+  width: inherit;
+  height: inherit;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+

@@ -1,83 +1,103 @@
 <template>
   <view
     class="control-wrapper"
-    :style="{ height: `calc(100vh - ${excludeHeight}px)` }"
+    :style="{
+      minHeight: `calc(100vh - ${excludeHeight}px)`
+    }"
   >
     <view
       class="control-wrapper-bg"
       :style="{ backgroundImage: `url(${picUrl})` }"
     />
-    <view class="control-content">
-      <view class="pic">
-        <image :src="picUrl" />
-      </view>
-      <view class="music-info">
-        <view>{{ currentMusic.name || '歌曲标题' }}</view>
-        <view>
-          <text>{{ currentMusic.ar || '歌手' }}</text>
-          <text
-            class="lrc-button"
-            @click="showLyric"
-          >
-            词
-          </text>
-        </view>
-      </view>
-      <view class="progress-bar">
-        <text>{{ currentTime || '00:00' }}</text>
-  <!--      <slider-bar
-          class="slider-bar-wrapper"
-          :precent="precent"
-          @change="handleChange"
-        /> -->
-        <slider
-          class="slider-bar-wrapper"
-          block-size="16"
-          activeColor="#EA2000"
-          :value="precent"
-          @touchstart="handleTouchStart"
-          @touchend="handleTouchEnd"
-          @changing="handleChanging"
-          @change="handleChange"
-        />
-        <text>{{ duration || '00:00' }}</text>
-      </view>
-      <view class="play-control">
-        <uni-icons
-          class="uni-icons"
-          size="48"
-          color="white"
-          custom-prefix="iconfont"
-          type="icon-left-circle"
-          @click="playPrev"
-        />
-        <uni-icons
-          class="uni-icons"
-          size="64"
-          color="white"
-          custom-prefix="iconfont"
-          :type="paused ? 'icon-play-circle' : 'icon-pause-circle'"
-          @click="playPause"
-        />
-        <uni-icons
-          class="uni-icons"
-          size="48"
-          color="white"
-          custom-prefix="iconfont"
-          type="icon-right-circle"
-          @click="playNext"
-        />
-      </view>
+    <view class="tab">
+      <text
+        :class="{ current: current === 0 }"
+        @click="handleCurrentChange(0)"
+      >
+        歌曲
+      </text>
+      <text>|</text>
+      <text
+        :class="{ current: current === 1 }"
+        @click="handleCurrentChange(1)"
+      >
+        歌词
+      </text>
     </view>
+    <swiper
+      class="swiper-box"
+      duration="300"
+      :current="current"
+      :style="{ height: `calc(100vh - 48px - ${excludeHeight}px)` }"
+      @change="e => handleCurrentChange(e.detail.current)"
+    >
+      <swiper-item class="swiper-item">
+        <view class="control-content">
+          <view class="pic">
+            <image :src="picUrl" />
+          </view>
+          <view class="music-info">
+            <view>{{ currentMusic.name || '歌曲标题' }}</view>
+            <view>{{ currentMusic.ar || '歌手' }}</view>
+          </view>
+          <view class="progress-bar">
+            <text>{{ currentTime || '00:00' }}</text>
+            <slider
+              class="slider-bar-wrapper"
+              block-size="16"
+              activeColor="#EA2000"
+              :value="precent"
+              @touchstart="handleTouchStart"
+              @touchend="handleTouchEnd"
+              @changing="handleChanging"
+              @change="handleChange"
+            />
+            <text>{{ duration || '00:00' }}</text>
+          </view>
+          <view class="play-control">
+            <uni-icons
+              class="uni-icons"
+              size="48"
+              color="white"
+              custom-prefix="iconfont"
+              type="icon-left-circle"
+              @click="playPrev"
+            />
+            <uni-icons
+              class="uni-icons"
+              size="64"
+              color="white"
+              custom-prefix="iconfont"
+              :type="paused ? 'icon-play-circle' : 'icon-pause-circle'"
+              @click="playPause"
+            />
+            <uni-icons
+              class="uni-icons"
+              size="48"
+              color="white"
+              custom-prefix="iconfont"
+              type="icon-right-circle"
+              @click="playNext"
+            />
+          </view>
+        </view>
+      </swiper-item>
+      <swiper-item class="swiper-item">
+        <lyric :height="`calc(100vh - 48px - ${excludeHeight}px)`" />
+      </swiper-item>
+    </swiper>
   </view>
 </template>
 
 <script>
   import { SET_CURRENT_TIME, PLAY_PAUSE, PLAY_PREV, PLAY_NEXT } from '@/store/mutations-types.js'
   import { formatTime } from '@/utils/util.js'
+  import lyric from './components/lyric.vue'
   export default {
+    components: { lyric },
     data () {
       return {
+        current: 0,
         changing: false,
         changingValue: 0,
         timer: undefined
@@ -117,6 +137,9 @@
       }
     },
     methods: {
+      handleCurrentChange (current) {
+        this.current = current
+      },
       handleTouchStart () {
         clearTimeout(this.timer)
         this.changing = true
@@ -152,7 +175,8 @@
 
 <style lang="scss" scoped>
 .control-wrapper {
-  background-color: #666666;
+  overflow-y: auto;
+  background-color: #333333;
   position: relative;
   .control-wrapper-bg {
     width: 100%;
@@ -166,76 +190,85 @@
     background-size: cover;
     background-position: center;
     filter: blur(25px);
-    // border: 1px solid red;
+  }
+  .tab {
+    position: relative;
+    z-index: 2;
+    height: 48px;
+    line-height: 48px;
+    font-size: 16px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    text {
+      margin: 0 8px;
+    }
+    .current {
+      color: white;
+    }
+  }
+  .swiper-box {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+  }
+  .swiper-item {
+    overflow-y: auto;
   }
   .control-content {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-  }
-  .pic {
-    width: 100vw;
-    height: 100vw;
-    padding: 24px;
-    box-sizing: border-box;
-    image {
+    .pic {
+      width: 100vw;
+      height: calc(100vw - 24px);
+      padding: 24px;
+      padding-top: 0;
+      box-sizing: border-box;
+      image {
+        width: 100%;
+        height: 100%;
+        border-radius: 12px;
+        background-color: #666666;
+      }
+    }
+    .music-info {
+      padding: 0 24px;
+      color: white;
+      > view:first-child {
+        font-size: 24px;
+      }
+      > view:last-child {
+        margin-top: 8px;
+        font-size: 14px;
+      }
+    }
+    .progress-bar {
+      color: white;
+      padding: 12px 24px;
+      box-sizing: border-box;
+      > text, > .slider-bar-wrapper {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      > text {
+        font-size: 14px;
+        width: 40px;
+        &:last-child {
+          text-align: right;
+        }
+      }
+      > .slider-bar-wrapper {
+        width: calc(100% - 100px);
+        margin: 10px;
+      }
+    }
+    .play-control {
       width: 100%;
-      height: 100%;
-      border-radius: 8px;
-      background-color: #999999;
-    }
-  }
-  .music-info {
-    padding: 0 24px;
-    color: white;
-    > view:first-child {
-      font-size: 24px;
-    }
-    > view:last-child {
-      margin-top: 8px;
-      font-size: 14px;
-      .lrc-button {
-        padding: 0 4px;
-        text-align: center;
-        float: right;
-        font-size: 16px;
-        border: 1px solid white;
-        margin-top: -4px;
+      height: 72px;
+      text-align: center;
+      margin-top: 32px;
+      .uni-icons {
+        width: 30%;
+        display: inline-block;
+        vertical-align: middle;
       }
-    }
-  }
-  .progress-bar {
-    color: white;
-    padding: 12px 24px;
-    box-sizing: border-box;
-    > text, > .slider-bar-wrapper {
-      display: inline-block;
-      vertical-align: middle;
-    }
-    > text {
-      font-size: 14px;
-      width: 40px;
-      &:last-child {
-        text-align: right;
-      }
-    }
-    > .slider-bar-wrapper {
-      width: calc(100% - 100px);
-      margin: 10px;
-    }
-  }
-  .play-control {
-    width: 100%;
-    position: absolute;
-    bottom: 72px;
-    text-align: center;
-    .uni-icons {
-      width: 30%;
-      display: inline-block;
-      vertical-align: middle;
     }
   }
 }

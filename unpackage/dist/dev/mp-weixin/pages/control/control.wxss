@@ -2,7 +2,8 @@
 /* 水平间距 */
 /* 水平间距 */
 .control-wrapper.data-v-0ec1947c {
-  background-color: #666666;
+  overflow-y: auto;
+  background-color: #333333;
   position: relative;
 }
 .control-wrapper .control-wrapper-bg.data-v-0ec1947c {
@@ -19,72 +20,80 @@
   -webkit-filter: blur(25px);
           filter: blur(25px);
 }
-.control-wrapper .control-content.data-v-0ec1947c {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+.control-wrapper .tab.data-v-0ec1947c {
+  position: relative;
   z-index: 2;
+  height: 48px;
+  line-height: 48px;
+  font-size: 16px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
 }
-.control-wrapper .pic.data-v-0ec1947c {
+.control-wrapper .tab text.data-v-0ec1947c {
+  margin: 0 8px;
+}
+.control-wrapper .tab .current.data-v-0ec1947c {
+  color: white;
+}
+.control-wrapper .swiper-box.data-v-0ec1947c {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+}
+.control-wrapper .swiper-item.data-v-0ec1947c {
+  overflow-y: auto;
+}
+.control-wrapper .control-content .pic.data-v-0ec1947c {
   width: 100vw;
-  height: 100vw;
+  height: calc(100vw - 24px);
   padding: 24px;
+  padding-top: 0;
   box-sizing: border-box;
 }
-.control-wrapper .pic image.data-v-0ec1947c {
+.control-wrapper .control-content .pic image.data-v-0ec1947c {
   width: 100%;
   height: 100%;
-  border-radius: 8px;
-  background-color: #999999;
+  border-radius: 12px;
+  background-color: #666666;
 }
-.control-wrapper .music-info.data-v-0ec1947c {
+.control-wrapper .control-content .music-info.data-v-0ec1947c {
   padding: 0 24px;
   color: white;
 }
-.control-wrapper .music-info > view.data-v-0ec1947c:first-child {
+.control-wrapper .control-content .music-info > view.data-v-0ec1947c:first-child {
   font-size: 24px;
 }
-.control-wrapper .music-info > view.data-v-0ec1947c:last-child {
+.control-wrapper .control-content .music-info > view.data-v-0ec1947c:last-child {
   margin-top: 8px;
   font-size: 14px;
 }
-.control-wrapper .music-info > view:last-child .lrc-button.data-v-0ec1947c {
-  padding: 0 4px;
-  text-align: center;
-  float: right;
-  font-size: 16px;
-  border: 1px solid white;
-  margin-top: -4px;
-}
-.control-wrapper .progress-bar.data-v-0ec1947c {
+.control-wrapper .control-content .progress-bar.data-v-0ec1947c {
   color: white;
   padding: 12px 24px;
   box-sizing: border-box;
 }
-.control-wrapper .progress-bar > text.data-v-0ec1947c, .control-wrapper .progress-bar > .slider-bar-wrapper.data-v-0ec1947c {
+.control-wrapper .control-content .progress-bar > text.data-v-0ec1947c, .control-wrapper .control-content .progress-bar > .slider-bar-wrapper.data-v-0ec1947c {
   display: inline-block;
   vertical-align: middle;
 }
-.control-wrapper .progress-bar > text.data-v-0ec1947c {
+.control-wrapper .control-content .progress-bar > text.data-v-0ec1947c {
   font-size: 14px;
   width: 40px;
 }
-.control-wrapper .progress-bar > text.data-v-0ec1947c:last-child {
+.control-wrapper .control-content .progress-bar > text.data-v-0ec1947c:last-child {
   text-align: right;
 }
-.control-wrapper .progress-bar > .slider-bar-wrapper.data-v-0ec1947c {
+.control-wrapper .control-content .progress-bar > .slider-bar-wrapper.data-v-0ec1947c {
   width: calc(100% - 100px);
   margin: 10px;
 }
-.control-wrapper .play-control.data-v-0ec1947c {
+.control-wrapper .control-content .play-control.data-v-0ec1947c {
   width: 100%;
-  position: absolute;
-  bottom: 72px;
+  height: 72px;
   text-align: center;
+  margin-top: 32px;
 }
-.control-wrapper .play-control .uni-icons.data-v-0ec1947c {
+.control-wrapper .control-content .play-control .uni-icons.data-v-0ec1947c {
   width: 30%;
   display: inline-block;
   vertical-align: middle;

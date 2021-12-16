@@ -96,7 +96,7 @@ var components
 try {
   components = {
     playControl: function() {
-      return Promise.all(/*! import() | components/play-control/play-control */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/play-control/play-control")]).then(__webpack_require__.bind(null, /*! @/components/play-control/play-control.vue */ 121))
+      return Promise.all(/*! import() | components/play-control/play-control */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/play-control/play-control")]).then(__webpack_require__.bind(null, /*! @/components/play-control/play-control.vue */ 138))
     }
   }
 } catch (e) {

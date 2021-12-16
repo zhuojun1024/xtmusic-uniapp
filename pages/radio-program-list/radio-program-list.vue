@@ -59,9 +59,13 @@
     },
     methods: {
       playMusic (music) {
-        this.$store.dispatch(SET_CURRENT_MUSIC, music).then(() => {
-          this.$store.commit(SET_CURRENT_MUSIC_LIST, this.data)
-        })
+        if (music.id === this.currentMusic.id) {
+          uni.navigateTo({ url: '/pages/control/control' })
+        } else {
+          this.$store.dispatch(SET_CURRENT_MUSIC, music).then(() => {
+            this.$store.commit(SET_CURRENT_MUSIC_LIST, this.data)
+          })
+        }
       },
       loadNext () {
         if (this.loading || this.offset * this.limit >= this.total) return

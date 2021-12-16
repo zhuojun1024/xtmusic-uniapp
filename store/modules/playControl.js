@@ -73,6 +73,13 @@ const app = {
       return api.getMusicUrl(params).then(res => {
         if (res.data && res.data.length) {
           const url = res.data[0].url
+          if (!url) {
+            uni.showToast({
+              icon: 'error',
+              title: '该音乐无版权'
+            })
+            return
+          }
           const bam = state.bam
           // #ifndef H5
           const { name, ar, al } = currentMusic

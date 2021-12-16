@@ -66,6 +66,7 @@
           const data = res.data || []
           this.data = this.data.concat(data.map(item => item.simpleSong).map(item => {
             item.ar = item.ar.filter(item => item.name).map(item => item.name).join('、')
+            item.noCopyrightRcmd = null
             return item
           }))
           this.total = res.count || 0

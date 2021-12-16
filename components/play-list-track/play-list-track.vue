@@ -8,7 +8,7 @@
       <view
         v-for="(item, index) of data"
         :key="item.id"
-        :class="{ 'music-list-item': true, disabled: item.st === -200 }"
+        :class="{ 'music-list-item': true, disabled: item.st === -200 || item.noCopyrightRcmd }"
         @click="playMusic(item)"
       >
         <view>{{ index + 1 }}</view>
@@ -118,6 +118,16 @@
       }
     },
     methods: {
+      copyrighted (music) {
+        if (music.st === -200 || music.noCopyrightRcmd) {
+          uni.showToast({
+            icon: 'error',
+            title: '该音乐无版权'
+          })
+          return false
+        }
+        return true
+      },
       popupClose () {
         this.$refs.popup.close()
       },
@@ -141,32 +151,24 @@
           uni.hideLoading()
         })
       },
-      popupOpen (item) {
-        this.selectedMusicId = item.id
+      popupOpen (music) {
+        this.selectedMusicId = music.id
         this.$refs.popup.open()
       },
-      showPlayList (item) {
-        if (item.st === -200) {
-          uni.showToast({
-            icon: 'error',
-            title: '该音乐无版权'
-          })
-          return
-        }
-        this.selectedMusicId = item.id
+      showPlayList (music) {
+        if (!this.copyrighted(music)) return
+        this.selectedMusicId = music.id
         this.visible = true
       },
       playMusic (music) {
-        if (music.st === -200) {
-          uni.showToast({
-            icon: 'error',
-            title: '该音乐无版权'
+        if (!this.copyrighted(music)) return
+        if (music.id === this.currentMusic.id) {
+          uni.navigateTo({ url: '/pages/control/control' })
+        } else {
+          this.$store.dispatch(SET_CURRENT_MUSIC, music).then(() => {
+            this.$store.commit(SET_CURRENT_MUSIC_LIST, this.data)
           })
-          return
         }
-        this.$store.dispatch(SET_CURRENT_MUSIC, music).then(() => {
-          this.$store.commit(SET_CURRENT_MUSIC_LIST, this.data)
-        })
       }
     }
   }

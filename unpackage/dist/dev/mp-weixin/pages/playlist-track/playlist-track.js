@@ -94,7 +94,7 @@ var components
 try {
   components = {
     playListTrack: function() {
-      return Promise.all(/*! import() | components/play-list-track/play-list-track */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/play-list-track/play-list-track")]).then(__webpack_require__.bind(null, /*! @/components/play-list-track/play-list-track.vue */ 114))
+      return Promise.all(/*! import() | components/play-list-track/play-list-track */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/play-list-track/play-list-track")]).then(__webpack_require__.bind(null, /*! @/components/play-list-track/play-list-track.vue */ 131))
     }
   }
 } catch (e) {

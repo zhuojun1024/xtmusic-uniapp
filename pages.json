@@ -31,12 +31,6 @@
       "disableScroll": true
     }
   }, {
-    "path": "pages/lyric/lyric",
-    "style": {
-      "navigationBarTitleText": "歌词",
-      "disableScroll": true
-    }
-  }, {
     "path": "pages/cloud/cloud",
     "style": {
       "navigationBarTitleText": "云盘"
