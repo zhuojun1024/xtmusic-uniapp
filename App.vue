@@ -105,6 +105,7 @@
 	/*每个页面公共css */
 	@import '@/uni_modules/uni-scss';
 	/* #ifndef APP-NVUE */
+  // 自定义图标
 	@import '@/static/iconfont.css';
 	// 设置整个项目的背景色
 	page {

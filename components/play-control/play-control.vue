@@ -9,20 +9,28 @@
         <image :src="coverImgUrl" />
       </view>
       <view @click="toControlPage">
-        <view>{{ currentTime || '00:00' }} / {{ duration || '00:00' }}</view>
-        <view>{{ currentMusic.ar || '歌手' }} - {{ currentMusic.name || '歌曲标题' }}</view>
+        <view>
+          <text>{{ currentMusic.name || '歌曲标题' }}</text>
+          <text>-</text>
+          <text>{{ currentMusic.ar || '歌手' }}</text>
+        </view>
+        <view>
+          <text>{{ currentTime || '00:00' }}</text>
+          <text>/</text>
+          <text>{{ duration || '00:00' }}</text>
+        </view>
       </view>
       <view>
         <uni-icons
           size="32"
-          color="white"
+          color="#515151"
           custom-prefix="iconfont"
           :type="paused ? 'icon-play-circle' : 'icon-pause-circle'"
           @click="playPause"
         />
         <uni-icons
           size="32"
-          color="white"
+          color="#515151"
           style="margin-left: 8px;"
           type="list"
           @click="visible = true"
@@ -105,11 +113,10 @@
   padding: 6px 8px;
 }
 .play-control-wrapper {
-  width: 100%;
   position: fixed;
   left: 0;
-  color: white;
-  background-color: #666666;
+  right: 0;
+  background-color: #fefefe;
   > view {
     display: inline-block;
     box-sizing: border-box;
@@ -120,11 +127,11 @@
       image {
         width: 100%;
         height: 100%;
-        background-color: white;
+        background-color: #efefef;
       }
     }
     &:nth-child(2) {
-      width: calc(100% - 136px);
+      width: calc(100% - 120px);
       height: 40px;
       line-height: 20px;
       padding-left: 8px;
@@ -134,6 +141,30 @@
         overflow: hidden;
         text-overflow:ellipsis;
         white-space: nowrap;
+      }
+      > view:first-child {
+        > text {
+          &:nth-child(2), &:nth-child(3) {
+            font-size: 12px;
+            color: #515151;
+          }
+          &:nth-child(2) {
+            margin: 0 4px;
+          }
+        }
+      }
+      > view:last-child {
+        font-size: 12px;
+        color: #515151;
+        > text {
+          display: inline-block;
+          &:nth-child(1), &:nth-child(3) {
+            min-width: 36px;
+          }
+          &:nth-child(2) {
+            margin-right: 4px;
+          }
+        }
       }
     }
     &:nth-child(3) {

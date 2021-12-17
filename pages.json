@@ -50,6 +50,7 @@
     "fontSize": "12px",
     "height": "50px",
     "selectedColor": "#EA2000",
+    "borderStyle": "white",
     "list": [{
       "pagePath": "pages/search/search",
       "iconPath": "static/icon-search-gray.png",

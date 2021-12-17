@@ -2,32 +2,46 @@
 /* 水平间距 */
 /* 水平间距 */
 .lyric-wrapper .lyric.data-v-391a6611 {
-  padding: 0 24px;
+  position: relative;
   box-sizing: border-box;
   color: rgba(255, 255, 255, 0.4);
   text-align: center;
 }
 .lyric-wrapper .lyric .lyric-item.data-v-391a6611 {
-  padding: 16px 0;
+  min-height: 22px;
+  padding: 16px 24px;
   font-size: 16px;
 }
 .lyric-wrapper .lyric .lyric-item.current.data-v-391a6611 {
   color: white;
   font-size: 20px;
 }
-.lyric-wrapper .lyric .lyric-placeholder.data-v-391a6611 {
-  height: 40vh;
+.lyric-wrapper .lyric .lyric-placeholder-top.data-v-391a6611 {
+  height: 40%;
 }
-.lyric-wrapper .lyric .lyric-placeholder.data-v-391a6611:last-child {
-  height: 50vh;
+.lyric-wrapper .lyric .lyric-placeholder-bottom.data-v-391a6611 {
+  height: 60%;
 }
-.lyric-wrapper .lyric.data-v-391a6611:after {
-  content: '';
-  width: inherit;
-  height: inherit;
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
+.lyric-wrapper .lyric .scroll-time.data-v-391a6611 {
+  position: fixed;
+  top: 40%;
+  right: 12px;
+  color: white;
+}
+.lyric-wrapper .lyric .scroll-time > view.data-v-391a6611, .lyric-wrapper .lyric .scroll-time > text.data-v-391a6611 {
+  display: inline-block;
+  vertical-align: middle;
+}
+.lyric-wrapper .lyric .scroll-time > view.data-v-391a6611:first-child {
+  border-right: 9px solid rgba(255, 255, 255, 0.2);
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+}
+.lyric-wrapper .lyric .scroll-time > text.data-v-391a6611 {
+  width: 32px;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 0 6px 0 4px;
+  font-size: 12px;
+  line-height: 1.5;
 }
 

@@ -139,7 +139,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _api = _interopRequireDefault(__webpack_require__(/*! ../api */ 158));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _createForOfIteratorHelper(o, allowArrayLike) {var it;if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {if (it) o = it;var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var normalCompletion = true,didErr = false,err;return { s: function s() {it = o[Symbol.iterator]();}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}var _default =
+
+
+
+
+
+
+
+
+
+
+
+var _api = _interopRequireDefault(__webpack_require__(/*! ../api */ 158));
+var _util = __webpack_require__(/*! @/utils/util.js */ 66);
+var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 11);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _createForOfIteratorHelper(o, allowArrayLike) {var it;if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {if (it) o = it;var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var normalCompletion = true,didErr = false,err;return { s: function s() {it = o[Symbol.iterator]();}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}var _default =
 {
   props: {
     height: {
@@ -149,15 +162,23 @@ var _api = _interopRequireDefault(__webpack_require__(/*! ../api */ 158));functi
 
   data: function data() {
     return {
+      rolling: false,
       lyrics: [],
       heights: [],
       currentLrcIndex: 0,
-      scrollTop: 0 };
+      scrollLrcIndex: 0,
+      scrollTop: 0,
+      timer: undefined };
 
   },
   computed: {
     currentMusic: function currentMusic() {
       return this.$store.getters.currentMusic;
+    },
+    scrollTime: function scrollTime() {
+      var ms = (this.lyrics[this.scrollLrcIndex] || {}).time || 0;
+      var s = ms / 1000;
+      return (0, _util.formatTime)(s);
     },
     picUrl: function picUrl() {
       var al = this.currentMusic.al || {};
@@ -181,54 +202,102 @@ var _api = _interopRequireDefault(__webpack_require__(/*! ../api */ 158));functi
   mounted: function mounted() {
     if (this.currentMusic.id) {
       this.getLyric();
+
       // 屏幕常亮
       uni.setKeepScreenOn({ keepScreenOn: true });
+
     }
   },
   destroyed: function destroyed() {
+
     // 取消屏幕常亮
     uni.setKeepScreenOn({ keepScreenOn: false });
+
   },
   methods: {
-    getAllNodeHeight: function getAllNodeHeight() {var _this = this;
-      var query = uni.createSelectorQuery().in(this);
-      query.selectAll('.lyric-item').boundingClientRect(function (data) {
-        // 保存所有歌词scrollTop
-        var height = 0;
-        _this.heights = data.map(function (item) {
-          height += item.height;
-          return height;
-        });
-      }).exec();
+    setCurrentTime: function setCurrentTime(index) {
+      if (!this.rolling) return;
+      var selectedIndex = index || this.scrollLrcIndex;
+      var time = this.lyrics[selectedIndex].time / 1000 + 0.1;
+      this.$store.commit(_mutationsTypes.SET_CURRENT_TIME, time);
+      this.rolling = false;
+    },
+    handleScrollChange: function handleScrollChange(e) {
+      // 如果没有歌词, 不处理事件
+      if (this.lyrics.length === 0) return;
+      // 判断是手动滚动的还是代码滚动的
+      this.setRolling(e.detail.scrollTop);
+      // 如果不是滚动状态, 不处理事件
+      if (!this.rolling) return;
+      var scrollTop = e.detail.scrollTop;
+      if (scrollTop >= this.heights[this.heights.length - 1]) {
+        this.scrollLrcIndex = this.heights.length - 1;
+      } else {
+        var index = this.heights.findIndex(function (item) {return item > scrollTop;});
+        this.scrollLrcIndex = index === -1 ? 0 : index;
+      }
+    },
+    setRolling: function setRolling(scrollTop) {var _this = this;
+      if (scrollTop !== this.scrollTop) {
+        clearTimeout(this.timer);
+        this.rolling = true;
+        // 5秒后清除手动滚动状态
+        this.timer = setTimeout(function () {
+          _this.rolling = false;
+        }, 1000 * 5);
+      }
+    },
+    handleTouchEnd: function handleTouchEnd() {
+      if (this.lyrics.length === 0) return;
+    },
+    getAllNodeHeight: function getAllNodeHeight() {var _this2 = this;
+      return new Promise(function (resolve) {
+        var query = uni.createSelectorQuery().in(_this2);
+        query.selectAll('.lyric-item').boundingClientRect(function (data) {
+          // 保存所有歌词scrollTop
+          var height = 0;
+          _this2.heights = data.map(function (item) {
+            height += item.height;
+            return height;
+          });
+          resolve();
+        }).exec();
+      });
     },
     playLrc: function playLrc(time) {
       if (this.lyrics.length === 0) return;
       // 如果时长超过歌词时长，取最后一句歌词
       if (time > this.lyrics[this.lyrics.length - 1].time) {
-        this.scrollTop = this.heights[this.heights.length - 1];
+        this.currentLrcIndex = this.heights.length - 1;
+        if (!this.rolling) {
+          this.scrollTop = this.heights[this.heights.length - 1];
+        }
         return;
       }
       // 取当前歌词
       var index = this.lyrics.findIndex(function (item) {return item.time >= time;});
       if (index !== this.currentLrcIndex) {
         this.currentLrcIndex = index - 1;
-        this.scrollTop = this.heights[this.currentLrcIndex];
+        if (!this.rolling) {
+          this.scrollTop = this.heights[this.currentLrcIndex];
+        }
       }
     },
-    getLyric: function getLyric() {var _this2 = this;
+    getLyric: function getLyric() {var _this3 = this;
       this.lyrics = [];
       var timestamp = new Date().getTime();
       var params = { id: this.currentMusic.id, timestamp: timestamp };
       _api.default.getLyric(params).then(function (res) {
-        _this2.currentLrcIndex = 0;
-        _this2.scrollTop = 0;
-        _this2.lyrics = _this2.handleLyric((res.lrc || {}).lyric || '');
-        _this2.$nextTick(function () {
+        _this3.currentLrcIndex = 0;
+        _this3.scrollTop = 0;
+        _this3.lyrics = _this3.handleLyric((res.lrc || {}).lyric || '');
+        _this3.$nextTick(function () {
           // 获取所有歌词scrollTop
-          _this2.getAllNodeHeight();
-          // 播放歌词
-          var currentTime = _this2.$store.getters.currentTime;
-          _this2.playLrc(currentTime * 1000);
+          _this3.getAllNodeHeight().finally(function () {
+            // 播放歌词
+            var currentTime = _this3.$store.getters.currentTime;
+            _this3.playLrc(currentTime * 1000);
+          });
         });
       }).catch(function (e) {
         uni.showToast({
@@ -249,7 +318,8 @@ var _api = _interopRequireDefault(__webpack_require__(/*! ../api */ 158));functi
           // 匹配歌词时间
           var timeArr = arr.filter(function (item) {return reg.test(item);});
           // 取出歌词
-          var lrc = arr.find(function (item) {return !reg.test(item);});var _iterator2 = _createForOfIteratorHelper(
+          var lrc = arr.find(function (item) {return !reg.test(item);});
+          if (!lrc) return "continue";var _iterator2 = _createForOfIteratorHelper(
           timeArr),_step2;try {for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {var timeStr = _step2.value;
               var _arr = timeStr.split(/[\[:.]/);
               var m = parseInt(_arr[1]);
@@ -257,7 +327,7 @@ var _api = _interopRequireDefault(__webpack_require__(/*! ../api */ 158));functi
               var ms = parseInt(_arr[3]);
               var time = (m * 60 + s) * 1000 + ms;
               res.push({ time: time, text: lrc });
-            }} catch (err) {_iterator2.e(err);} finally {_iterator2.f();}};for (_iterator.s(); !(_step = _iterator.n()).done;) {_loop();
+            }} catch (err) {_iterator2.e(err);} finally {_iterator2.f();}};for (_iterator.s(); !(_step = _iterator.n()).done;) {var _ret = _loop();if (_ret === "continue") continue;
         }
         // 按时间排序并返回
       } catch (err) {_iterator.e(err);} finally {_iterator.f();}return res.sort(function (a, b) {return a.time - b.time;});
