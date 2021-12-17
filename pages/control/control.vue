@@ -2,7 +2,7 @@
   <view
     class="control-wrapper"
     :style="{
-      minHeight: `calc(100vh - ${excludeHeight}px)`
+      height: `calc(100vh - ${excludeHeight}px)`
     }"
   >
     <view
@@ -176,20 +176,21 @@
 <style lang="scss" scoped>
 .control-wrapper {
   overflow-y: auto;
-  background-color: #333333;
+  background-color: #666666;
   position: relative;
+  overflow: hidden;
   .control-wrapper-bg {
-    width: 100%;
-    height: 100%;
     position: absolute;
-    top: 0;
-    left: 0;
+    left: -80px;
+    right: -80px;
+    top: -80px;
+    bottom: -80px;
     z-index: 1;
-    opacity: 0.4;
+    opacity: 0.6;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    filter: blur(25px);
+    filter: blur(40px);
   }
   .tab {
     position: relative;
@@ -225,7 +226,7 @@
         width: 100%;
         height: 100%;
         border-radius: 12px;
-        background-color: #666666;
+        background-color: #999999;
       }
     }
     .music-info {
