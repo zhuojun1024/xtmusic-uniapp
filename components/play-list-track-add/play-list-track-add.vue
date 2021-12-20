@@ -37,7 +37,7 @@
         type: Boolean,
         default: false
       },
-      id: {
+      trackId: {
         type: Number,
         default: undefined
       }
@@ -55,6 +55,9 @@
     watch: {
       visible (newVal) {
         if (newVal) {
+          if (this.data.length === 0) {
+            this.getPlayList()
+          }
           this.$refs.popup.open()
         } else {
           this.$refs.popup.close()
@@ -64,16 +67,13 @@
         this.getPlayList()
       }
     },
-    created () {
-      this.getPlayList()
-    },
     methods: {
       addToPlayList (id) {
         const timestamp = new Date().getTime()
         const params = {
           op: 'add',
           pid: id,
-          tracks: String(this.id),
+          tracks: String(this.trackId),
           timestamp
         }
         uni.showLoading({ title: '加入歌单中' })

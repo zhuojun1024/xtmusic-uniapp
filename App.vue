@@ -7,7 +7,8 @@
     SET_DURATION,
     SET_PAUSED,
     PLAY_PREV,
-    PLAY_NEXT
+    PLAY_NEXT,
+    SET_TONE_QUALITY
   } from '@/store/mutations-types.js'
 	export default {
     computed: {
@@ -19,7 +20,8 @@
       }
     },
 		onLaunch: function() {
-      // this.hasPermission()
+      // 读取设置
+      this.getSettings()
       // 添加背景音乐事件监听
       this.addBAMEventListener()
 		},
@@ -31,6 +33,12 @@
 			console.log('App Hide')
 		},
     methods: {
+      getSettings () {
+        const toneQuality = uni.getStorageSync('toneQuality')
+        if (toneQuality) {
+          this.$store.commit(SET_TONE_QUALITY, toneQuality)
+        }
+      },
       hasPermission () {
         // 判断登录状态
         const cookie = uni.getStorageSync('cookie')

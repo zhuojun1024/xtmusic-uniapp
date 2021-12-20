@@ -9,7 +9,8 @@ import {
   PLAY_NEXT,
   PLAY_PREV,
   TIME_UPDATE,
-  RESET_STATE
+  RESET_STATE,
+  SET_TONE_QUALITY
 } from '../mutations-types.js'
 const app = {
   state: {
@@ -23,7 +24,8 @@ const app = {
     duration: 0,
     paused: true,
     currentMusic: {},
-    currentMusicList: []
+    currentMusicList: [],
+    toneQuality: 128000
   },
   mutations: {
     [RESET_STATE]: state => {
@@ -62,6 +64,11 @@ const app = {
     },
     [SET_CURRENT_TIME]: (state, value) => {
       state.bam.seek(value)
+      state.currentTime = value
+    },
+    [SET_TONE_QUALITY]: (state, value) => {
+      state.toneQuality = value
+      uni.setStorageSync('toneQuality', value)
     }
   },
   actions: {

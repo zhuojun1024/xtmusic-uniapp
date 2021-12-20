@@ -14,7 +14,9 @@
         <view>{{ index + 1 }}</view>
         <view>
           <view>{{ item.name }}</view>
-          <view>{{ item.ar || '未知歌手' }}</view>
+          <view>
+            <text>{{ item.ar || '未知歌手' }}</text>
+          </view>
         </view>
         <view>
           <uni-icons
@@ -46,7 +48,7 @@
     <play-list-track-add
       v-if="showAdd"
       :visible="visible"
-      :id="selectedMusicId"
+      :track-id="selectedMusicId"
       @change="v => visible = v"
     />
     <uni-popup
@@ -74,7 +76,7 @@
         type: Array,
         default: () => ([])
       },
-      id: {
+      pId: {
         type: String,
         default: undefined
       },
@@ -136,7 +138,7 @@
         const timestamp = new Date().getTime()
         const params = {
           op: 'del',
-          pid: this.id,
+          pid: this.pId,
           tracks: String(this.selectedMusicId),
           timestamp
         }

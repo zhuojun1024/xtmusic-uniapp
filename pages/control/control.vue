@@ -1,13 +1,22 @@
 <template>
   <view
     class="control-wrapper"
-    :style="{
-      height: `calc(100vh - ${excludeHeight}px)`
-    }"
+    :style="{ height: `calc(100vh - ${excludeHeight}px)` }"
   >
     <view
       class="control-wrapper-bg"
-      :style="{ backgroundImage: `url(${picUrl})` }"
+      :style="{ backgroundImage: `url(${picUrlBg})` }"
+    />
+    <uni-nav-bar
+      fixed
+      status-bar
+      class="uni-nav-bar"
+      left-icon="left"
+      color="white"
+      title="播放控制"
+      backgroundColor="transparent"
+      :border="false"
+      @clickLeft="back"
     />
     <view class="tab">
       <text
@@ -28,7 +37,7 @@
       class="swiper-box"
       duration="300"
       :current="current"
-      :style="{ height: `calc(100vh - 48px - ${excludeHeight}px)` }"
+      :style="{ height: `calc(100vh - 40px - ${excludeHeight}px)` }"
       @change="e => handleCurrentChange(e.detail.current)"
     >
       <swiper-item class="swiper-item">
@@ -47,8 +56,6 @@
               block-size="16"
               activeColor="#EA2000"
               :value="precent"
-              @touchstart="handleTouchStart"
-              @touchend="handleTouchEnd"
               @changing="handleChanging"
               @change="handleChange"
             />
@@ -83,7 +90,7 @@
         </view>
       </swiper-item>
       <swiper-item class="swiper-item">
-        <lyric :height="`calc(100vh - 48px - ${excludeHeight}px)`" />
+        <lyric :height="`calc(100vh - 40px - ${excludeHeight}px)`" />
       </swiper-item>
     </swiper>
   </view>
@@ -111,6 +118,10 @@
         const al = this.currentMusic.al || {}
         return al.picUrl ? `${al.picUrl}?param=512y512` : ''
       },
+      picUrlBg () {
+        const al = this.currentMusic.al || {}
+        return al.picUrl ? `${al.picUrl}?param=1y1` : ''
+      },
       currentTime () {
         if (this.changing) {
           return formatTime(this.$store.getters.duration * this.changingValue / 100)
@@ -137,20 +148,15 @@
       }
     },
     methods: {
+      back () {
+        uni.navigateBack({ delta: 1 })
+      },
       handleCurrentChange (current) {
         this.current = current
       },
-      handleTouchStart () {
-        clearTimeout(this.timer)
-        this.changing = true
-      },
-      handleTouchEnd () {
-        this.timer = setTimeout(() => {
-          this.changing = false
-        }, 500)
-      },
       handleChanging (e) {
         this.changingValue = e.detail.value
+        this.changing = true
       },
       showLyric () {
         uni.navigateTo({ url: '/pages/lyric/lyric' })
@@ -159,6 +165,7 @@
         const precent = e.detail.value
         const duration = this.$store.getters.duration || 0
         this.$store.commit(SET_CURRENT_TIME, duration * precent / 100)
+        this.changing = false
       },
       playPause () {
         this.$store.commit(PLAY_PAUSE)
@@ -180,23 +187,35 @@
   position: relative;
   overflow: hidden;
   .control-wrapper-bg {
+    width: 100%;
+    height: 100%;
     position: absolute;
-    left: -80px;
-    right: -80px;
-    top: -80px;
-    bottom: -80px;
+    left: 0;
+    top: 0;
     z-index: 1;
-    opacity: 0.6;
+    opacity: 0.8;
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
-    filter: blur(40px);
+  }
+  .uni-nav-bar {
+    color: white;
+    /deep/.uni-icons {
+      color: white !important;
+    }
+    /deep/.uni-nav-bar-text {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    /deep/.uni-navbar__header-btns-right {
+      width: 60px;
+      padding-right: 0;
+    }
   }
   .tab {
     position: relative;
     z-index: 2;
-    height: 48px;
-    line-height: 48px;
+    height: 40px;
+    // line-height: 48px;
     font-size: 16px;
     text-align: center;
     color: rgba(255, 255, 255, 0.6);

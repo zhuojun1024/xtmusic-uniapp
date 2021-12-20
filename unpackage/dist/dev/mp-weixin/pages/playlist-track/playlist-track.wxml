@@ -1,1 +1,1 @@
-<view><play-list-track vue-id="754d0a00-1" data="{{data}}" id="{{id}}" show-add="{{type==='search'}}" show-del="{{type==='user'}}" data-event-opts="{{[['^refresh',[['getPlayListTrack']]]]}}" bind:refresh="__e" bind:__l="__l"></play-list-track></view>
+<view><play-list-track vue-id="754d0a00-1" data="{{data}}" p-id="{{id}}" show-add="{{type==='search'}}" show-del="{{type==='user'}}" data-event-opts="{{[['^refresh',[['getPlayListTrack']]]]}}" bind:refresh="__e" bind:__l="__l"></play-list-track></view>

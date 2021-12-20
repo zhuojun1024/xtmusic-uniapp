@@ -28,7 +28,9 @@
     "path": "pages/control/control",
     "style": {
       "navigationBarTitleText": "播放控制",
-      "disableScroll": true
+      "disableScroll": true,
+      "navigationStyle": "custom",
+      "navigationBarTextStyle": "white"
     }
   }, {
     "path": "pages/cloud/cloud",
@@ -57,15 +59,15 @@
       "selectedIconPath": "static/icon-search-red.png",
       "text": "歌曲"
     }, {
-      "pagePath": "pages/playlist/playlist",
-      "iconPath": "static/icon-playlist-gray.png",
-      "selectedIconPath": "static/icon-playlist-red.png",
-      "text": "歌单"
-    }, {
       "pagePath": "pages/radio/radio",
       "iconPath": "static/icon-radio-gray.png",
       "selectedIconPath": "static/icon-radio-red.png",
       "text": "电台"
+    }, {
+      "pagePath": "pages/playlist/playlist",
+      "iconPath": "static/icon-playlist-gray.png",
+      "selectedIconPath": "static/icon-playlist-red.png",
+      "text": "歌单"
     }, {
       "pagePath": "pages/cloud/cloud",
       "iconPath": "static/icon-cloud-gray.png",

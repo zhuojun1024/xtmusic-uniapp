@@ -5,14 +5,25 @@
         mode="aspectFill"
         :src="userInfo.backgroundUrl"
       />
-      <view class="user-info">
+      <view class="user-info view-container">
         <image :src="userInfo.avatarUrl" />
         <view class="user-name">
           {{ userInfo.nickname }}
         </view>
       </view>
+      <view class="settings view-container">
+        <view>
+          <text>音质：</text>
+          <uni-data-checkbox
+            class="uni-data-checkbox"
+            :value="toneQuality"
+            :localdata="options.toneQuality"
+            @change="handleToneQualityChange"
+          />
+        </view>
+      </view>
       <view
-        class="logout-button"
+        class="logout-button view-container"
         @click="logout"
       >
         退出登录
@@ -24,14 +35,35 @@
 
 <script>
   import api from '@/api/login.js'
-  import { LOGIN_OUT, RESET_STATE } from '@/store/mutations-types.js'
+  import { LOGIN_OUT, RESET_STATE, SET_TONE_QUALITY } from '@/store/mutations-types.js'
   export default {
+    data () {
+      return {
+        options: {
+          toneQuality: [
+            { text: '流畅', value: 128000 },
+            { text: '标准', value: 192000 },
+            { text: '高清', value: 320000 }
+          ]
+        }
+      }
+    },
     computed: {
       userInfo () {
         return this.$store.getters.userInfo
+      },
+      toneQuality () {
+        return this.$store.getters.toneQuality
       }
     },
     methods: {
+      handleToneQualityChange (e) {
+        const value = e.detail.value
+        this.$store.commit(SET_TONE_QUALITY, value)
+        const option = this.options.toneQuality.find(item => item.value === value)
+        const title = `已切换${option.text}(${value / 1000}kbps)音质`
+        uni.showToast({ title })
+      },
       logout () {
         uni.showModal({
           title: '提示',
@@ -66,18 +98,20 @@
     width: 100%;
     height: 200px;
   }
-  .user-info {
+  .view-container {
     width: calc(100% - 48px);
+    margin: 0 auto;
+    background-color: white;
+    box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+  }
+  .user-info {
     height: 72px;
     padding-top: 48px;
     position: relative;
     top: -40px;
     left: 0;
     right: 0;
-    margin: 0 auto;
-    background-color: white;
-    box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.05);
-    border-radius: 12px;
     > image {
       width: 80px;
       height: 80px;
@@ -96,16 +130,26 @@
       color: black;
     }
   }
+  .settings {
+    margin-top: -16px;
+    > view {
+      padding: 12px 24px;
+      > text {
+        font-size: 14px;
+        margin-right: 8px;
+      }
+      > text, .uni-data-checkbox {
+        display: inline-block;
+        justify-content: center;
+      }
+    }
+  }
   .logout-button {
-    width: calc(100% - 48px);
     height: 40px;
     color: #EA2000;
     line-height: 40px;
     text-align: center;
-    margin: 0 auto;
-    background-color: white;
-    box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.05);
-    border-radius: 12px;
+    margin-top: 24px;
   }
 }
 </style>

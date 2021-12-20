@@ -7,7 +7,8 @@ const getters = {
   paused: state => state.playControl.paused,
   bam: state => state.playControl.bam,
   windowTop: state => state.app.windowTop,
-  windowBottom: state => state.app.windowBottom
+  windowBottom: state => state.app.windowBottom,
+  toneQuality: state => state.playControl.toneQuality
 }
 
 export default getters

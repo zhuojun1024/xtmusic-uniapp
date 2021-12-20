@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "用户",
   "usingComponents": {
+    "uni-data-checkbox": "/uni_modules/uni-data-checkbox/components/uni-data-checkbox/uni-data-checkbox",
     "play-control": "/components/play-control/play-control"
   }
 }

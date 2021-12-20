@@ -8,24 +8,34 @@
   overflow: hidden;
 }
 .control-wrapper .control-wrapper-bg.data-v-0ec1947c {
+  width: 100%;
+  height: 100%;
   position: absolute;
-  left: -80px;
-  right: -80px;
-  top: -80px;
-  bottom: -80px;
+  left: 0;
+  top: 0;
   z-index: 1;
-  opacity: 0.6;
+  opacity: 0.8;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
-  -webkit-filter: blur(40px);
-          filter: blur(40px);
+}
+.control-wrapper .uni-nav-bar.data-v-0ec1947c {
+  color: white;
+}
+.control-wrapper .uni-nav-bar.data-v-0ec1947c .uni-icons {
+  color: white !important;
+}
+.control-wrapper .uni-nav-bar.data-v-0ec1947c .uni-nav-bar-text {
+  font-size: 16px;
+  font-weight: 600;
+}
+.control-wrapper .uni-nav-bar.data-v-0ec1947c .uni-navbar__header-btns-right {
+  width: 60px;
+  padding-right: 0;
 }
 .control-wrapper .tab.data-v-0ec1947c {
   position: relative;
   z-index: 2;
-  height: 48px;
-  line-height: 48px;
+  height: 40px;
   font-size: 16px;
   text-align: center;
   color: rgba(255, 255, 255, 0.6);

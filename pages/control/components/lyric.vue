@@ -101,9 +101,14 @@
     methods: {
       setCurrentTime (index) {
         if (!this.rolling) return
+        // 计算要跳到的时间并通知状态管理
         const selectedIndex = index || this.scrollLrcIndex
         const time = this.lyrics[selectedIndex].time / 1000 + 0.1
         this.$store.commit(SET_CURRENT_TIME, time)
+        // 本地数据同步
+        this.currentLrcIndex = selectedIndex
+        this.scrollTop = this.heights[this.currentLrcIndex]
+        // 取消滚动状态
         this.rolling = false
       },
       handleScrollChange (e) {
@@ -122,7 +127,7 @@
         }
       },
       setRolling (scrollTop) {
-        if (scrollTop !== this.scrollTop) {
+        if (!(scrollTop < (this.scrollTop + 54 / 2) && scrollTop > (this.scrollTop - 54 / 2))) {
           clearTimeout(this.timer)
           this.rolling = true
           // 5秒后清除手动滚动状态
@@ -244,7 +249,6 @@
       height: 60%;
     }
     .scroll-time {
-      // border: 1px solid red;
       position: fixed;
       top: 40%;
       right: 12px;
@@ -254,7 +258,6 @@
         vertical-align: middle;
       }
       > view:first-child {
-        // margin-left: -20px;
         border-right: 9px solid rgba(255, 255, 255, 0.2);
         border-top: 9px solid transparent;
         border-bottom: 9px solid transparent;
@@ -267,15 +270,6 @@
         line-height: 1.5;
       }
     }
-    // &:after {
-    //   content: '';
-    //   width: inherit;
-    //   height: inherit;
-    //   position: absolute;
-    //   left: 0;
-    //   top: 0;
-    //   opacity: 0;
-    // }
   }
 }
 </style>

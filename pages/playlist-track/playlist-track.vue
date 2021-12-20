@@ -2,7 +2,7 @@
   <view>
     <play-list-track
       :data="data"
-      :id="id"
+      :p-id="id"
       :show-add="type === 'search'"
       :show-del="type === 'user'"
       @refresh="getPlayListTrack"

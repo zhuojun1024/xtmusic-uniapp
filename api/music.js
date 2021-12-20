@@ -1,8 +1,9 @@
+import store from '@/store/index.js'
 import request from '@/request'
 
 const music = {
   // 获取播放地址，限制192kbps码率
-  getMusicUrl: data => request('/song/url', 'post', { br: 192000, ...data }),
+  getMusicUrl: data => request('/song/url', 'post', { br: store.getters.toneQuality, ...data }),
   // 搜索歌曲列表
   cloudSearch: data => request('/cloudsearch', 'post', data),
   // 获取用户歌单
