@@ -109,6 +109,11 @@
       this.getCountdown()
       this.timer = setInterval(this.getCountdown, 500)
     },
+    onShow () {
+      // #ifdef MP-WEIXIN
+      uni.hideHomeButton()
+      // #endif
+    },
     onUnload () {
       clearInterval(this.timer)
     },

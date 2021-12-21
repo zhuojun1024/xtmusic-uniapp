@@ -1,5 +1,13 @@
 {
   "pages": [{
+    "path": "pages/welcome/welcome",
+    "style": {
+      "navigationBarTitleText": "启动页",
+      "disableScroll": true,
+      "navigationStyle": "custom",
+      "navigationBarTextStyle": "white"
+    }
+  }, {
     "path": "pages/login/login",
     "style": {
       "navigationBarTitleText": "登录"

@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/welcome/welcome",
     "pages/login/login",
     "pages/search/search",
     "pages/user/user",
@@ -58,5 +59,6 @@
   "requiredBackgroundModes": [
     "audio"
   ],
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
 }

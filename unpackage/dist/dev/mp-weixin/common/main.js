@@ -133,6 +133,11 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);
 
 
 {
+  data: function data() {
+    return {
+      timer: undefined };
+
+  },
   computed: {
     userInfo: function userInfo() {
       return this.$store.getters.userInfo;
@@ -147,8 +152,11 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);
     // 添加背景音乐事件监听
     this.addBAMEventListener();
   },
-  onShow: function onShow() {
-    this.hasPermission();
+  onShow: function onShow() {var _this = this;
+    clearTimeout(this.timer);
+    this.timer = setTimeout(function () {
+      _this.$nextTick(_this.hasPermission);
+    }, 1000 * 2);
     console.log('App Show');
   },
   onHide: function onHide() {
@@ -173,7 +181,7 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);
         var currentPages = getCurrentPages();
         var currentPage = currentPages[currentPages.length - 1] || {};
         var currentRoute = currentPage.route;
-        if (!currentRoute || currentRoute === 'pages/login/login') {
+        if ([undefined, 'pages/login/login', 'pages/welcome/welcome'].includes(currentRoute)) {
           uni.switchTab({ url: '/pages/search/search' });
         }
       }

@@ -11,6 +11,11 @@
     SET_TONE_QUALITY
   } from '@/store/mutations-types.js'
 	export default {
+    data () {
+      return {
+        timer: undefined
+      }
+    },
     computed: {
       userInfo () {
         return this.$store.getters.userInfo
@@ -26,7 +31,10 @@
       this.addBAMEventListener()
 		},
 		onShow: function() {
-      this.hasPermission()
+      clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
+        this.$nextTick(this.hasPermission)
+      }, 1000 * 2)
 			console.log('App Show')
 		},
 		onHide: function() {
@@ -51,7 +59,7 @@
           const currentPages = getCurrentPages()
           const currentPage = currentPages[currentPages.length - 1] || {}
           const currentRoute = currentPage.route
-          if (!currentRoute || currentRoute === 'pages/login/login') {
+          if ([undefined, 'pages/login/login', 'pages/welcome/welcome'].includes(currentRoute)) {
             uni.switchTab({ url: '/pages/search/search' })
           }
         }

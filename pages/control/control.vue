@@ -186,6 +186,12 @@
   background-color: #666666;
   position: relative;
   overflow: hidden;
+  .main-canvas {
+    width: 1px;
+    height: 1px;
+    position: fixed;
+    opacity: 0;
+  }
   .control-wrapper-bg {
     width: 100%;
     height: 100%;

@@ -6,7 +6,6 @@
         placeholder="搜索歌曲"
         @confirm="search"
         @focus="onFocus"
-        @blur="onBlur"
         @input="onKeywordChange"
       />
       <view v-if="!showPlayList">
