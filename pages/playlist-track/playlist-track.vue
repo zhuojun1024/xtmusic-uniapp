@@ -1,12 +1,16 @@
 <template>
   <view>
     <play-list-track
-      :data="data"
+      :height="`calc(100vh - ${ excludeHeight }px)`"
+      :data="loadedData"
       :p-id="id"
       :show-add="type === 'search'"
       :show-del="type === 'user'"
       @refresh="getPlayListTrack"
-    />
+      @scrolltolower="onScrollToLower"
+    >
+      <play-control :is-tab-bar="false" />
+    </play-list-track>
   </view>
 </template>
 
@@ -17,16 +21,34 @@
       return {
         id: undefined,
         data: [],
-        type: 'user'
+        type: 'user',
+        offset: 0,
+        limit: 30
+      }
+    },
+    computed: {
+      loadedData () {
+        return this.data.slice(0, (this.offset + 1) * this.limit)
+      },
+      excludeHeight () {
+        const { windowTop, windowBottom } = uni.getSystemInfoSync()
+        return (windowTop || 0) + (windowBottom || 0)
       }
     },
     onLoad (option) {
+      // 保存参数
       this.id = option.id
       this.type = option.type
       uni.setNavigationBarTitle({ title: option.name })
+      // 请求歌单数据
       this.getPlayListTrack()
     },
     methods: {
+      onScrollToLower () {
+        if ((this.offset + 1) * this.limit < this.data.length) {
+          this.offset++
+        }
+      },
       getPlayListTrack () {
         const timestamp = new Date().getTime()
         const params = { id: this.id, timestamp }

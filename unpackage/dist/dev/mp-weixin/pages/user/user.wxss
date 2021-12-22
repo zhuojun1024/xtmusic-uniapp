@@ -37,8 +37,18 @@
 .user-wrapper .user-info .user-name.data-v-80842834 {
   margin-top: 4px;
   text-align: center;
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: 600;
   color: black;
+}
+.user-wrapper .user-info .user-name > image.data-v-80842834, .user-wrapper .user-info .user-name > text.data-v-80842834 {
+  display: inline-block;
+  vertical-align: middle;
+}
+.user-wrapper .user-info .user-name > image.data-v-80842834 {
+  height: 16px;
+  width: 40px;
+  margin-left: 6px;
 }
 .user-wrapper .settings.data-v-80842834 {
   margin-top: -16px;

@@ -200,6 +200,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);
 var _util = __webpack_require__(/*! @/utils/util.js */ 77); //
 //
@@ -251,7 +253,13 @@ var _util = __webpack_require__(/*! @/utils/util.js */ 77); //
 //
 //
 //
-var _default = { name: "play-control", data: function data() {return { visible: false };}, computed: { currentMusic: function currentMusic() {return this.$store.getters.currentMusic;}, currentTime: function currentTime() {return (0, _util.formatTime)(this.$store.getters.currentTime);}, duration: function duration() {return (0, _util.formatTime)(this.$store.getters.duration);}, precent: function precent() {var currentTime = this.$store.getters.currentTime || 0;var duration = this.$store.getters.duration || 1;return currentTime / duration * 100;}, paused: function paused() {return this.$store.getters.paused;}, coverImgUrl: function coverImgUrl() {var al = this.currentMusic.al || {};return al.picUrl ? "".concat(al.picUrl, "?param=64y64") : '';}, excludeHeight: function excludeHeight() {var _uni$getSystemInfoSyn = uni.getSystemInfoSync(),windowBottom = _uni$getSystemInfoSyn.windowBottom;return windowBottom || 0;} }, watch: { visible: function visible(newVal) {if (newVal) {uni.hideTabBar({ animation: true });} else {uni.showTabBar({ animation: true });}} }, methods: { toControlPage: function toControlPage() {uni.navigateTo({ url: '/pages/control/control' });}, playPause: function playPause() {
+//
+//
+var _default = { name: "play-control", props: { isTabBar: { type: Boolean, default: true } }, data: function data() {return { visible: false };}, computed: { currentMusic: function currentMusic() {return this.$store.getters.currentMusic;}, currentTime: function currentTime() {return (0, _util.formatTime)(this.$store.getters.currentTime);}, duration: function duration() {return (0, _util.formatTime)(this.$store.getters.duration);}, precent: function precent() {var currentTime = this.$store.getters.currentTime || 0;var duration = this.$store.getters.duration || 1;return currentTime / duration * 100;}, paused: function paused() {return this.$store.getters.paused;}, coverImgUrl: function coverImgUrl() {var al = this.currentMusic.al || {};return al.picUrl ? "".concat(al.picUrl, "?param=64y64") : '';}, excludeHeight: function excludeHeight() {var _uni$getSystemInfoSyn = uni.getSystemInfoSync(),windowBottom = _uni$getSystemInfoSyn.windowBottom;return windowBottom || 0;} }, watch: { visible: function visible(newVal) {if (newVal) {uni.hideTabBar({ animation: true });} else {uni.showTabBar({ animation: true });}} }, methods: { toControlPage: function toControlPage() {uni.navigateTo({
+        url: '/pages/control/control' });
+
+    },
+    playPause: function playPause() {
       this.$store.commit(_mutationsTypes.PLAY_PAUSE);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

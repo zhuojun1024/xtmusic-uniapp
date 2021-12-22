@@ -44,7 +44,7 @@
     },
     methods: {
       loadNext () {
-        if (this.loading || this.offset * this.limit >= this.total) return
+        if (this.loading || (this.offset + 1) * this.limit >= this.total) return
         this.offset++
         this.getUserCloud()
       },

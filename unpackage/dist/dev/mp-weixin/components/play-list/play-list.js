@@ -187,6 +187,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
 var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15); //
 //
 //
@@ -228,14 +234,14 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 var _default = { name: "play-list", props: { visible: { type: Boolean, default: false } }, data: function data() {return { scrollTop: 0 };}, computed: { data: function data() {return this.$store.getters.currentMusicList;}, currentMusic: function currentMusic() {return this.$store.getters.currentMusic;}, excludeHeight: function excludeHeight() {var _uni$getSystemInfoSyn = uni.getSystemInfoSync(),windowTop = _uni$getSystemInfoSyn.windowTop,windowBottom = _uni$getSystemInfoSyn.windowBottom;return (windowTop || 0) + (windowBottom || 0);} }, watch: { visible: function visible(newVal) {var _this = this;if (newVal) {this.$refs.popup.open(); // 跳到正在播放的歌曲的位置
-        this.$nextTick(function () {if (_this.currentMusic.id) {var index = _this.data.findIndex(function (item) {return item.id === _this.currentMusic.id;}) - 2;_this.scrollTop = index * 53 + Math.random();}});} else {this.$refs.popup.close();}} }, methods: {
-    playMusic: function playMusic(music) {
-      if (music.st === -200) {
-        uni.showToast({
-          icon: 'error',
-          title: '该音乐无版权' });
-
+        this.$nextTick(function () {if (_this.currentMusic.id) {var index = _this.data.findIndex(function (item) {return item.id === _this.currentMusic.id;}) - 2;_this.scrollTop = index * 49 + Math.random();}});} else {this.$refs.popup.close();}} }, methods: { playMusic: function playMusic(music) {if (music.st === -200) {uni.showToast({ icon: 'error', title: '该音乐无版权' });
       } else {
         this.$store.dispatch(_mutationsTypes.SET_CURRENT_MUSIC, music);
       }

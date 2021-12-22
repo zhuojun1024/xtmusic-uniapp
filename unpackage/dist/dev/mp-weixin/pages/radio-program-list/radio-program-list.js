@@ -18,6 +18,9 @@ try {
   components = {
     uniIcons: function() {
       return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 193))
+    },
+    playControl: function() {
+      return Promise.all(/*! import() | components/play-control/play-control */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/play-control/play-control")]).then(__webpack_require__.bind(null, /*! @/components/play-control/play-control.vue */ 170))
     }
   }
 } catch (e) {
@@ -107,6 +110,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _api = _interopRequireDefault(__webpack_require__(/*! ./api.js */ 103));
 var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
@@ -140,8 +144,8 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);
 //
 //
 //
-var _default = { data: function data() {return { id: undefined, data: [], offset: 0, limit: 30, total: 0, loading: false };}, computed: { currentMusic: function currentMusic() {return this.$store.getters.currentMusic;}, excludeHeight: function excludeHeight() {var _uni$getSystemInfoSyn = uni.getSystemInfoSync(),windowTop = _uni$getSystemInfoSyn.windowTop,windowBottom = _uni$getSystemInfoSyn.windowBottom;return (windowTop || 0) + (windowBottom || 0);} }, onLoad: function onLoad(option) {this.id = option.id;this.getRadioProgram();}, methods: { playMusic: function playMusic(music) {var _this = this;if (music.id === this.currentMusic.id) {uni.navigateTo({ url: '/pages/control/control' });} else {this.$store.dispatch(_mutationsTypes.SET_CURRENT_MUSIC, music).then(function () {_this.$store.commit(_mutationsTypes.SET_CURRENT_MUSIC_LIST, _this.data);});
-      }
+//
+var _default = { data: function data() {return { id: undefined, data: [], offset: 0, limit: 30, total: 0, loading: false };}, computed: { currentMusic: function currentMusic() {return this.$store.getters.currentMusic;}, excludeHeight: function excludeHeight() {var _uni$getSystemInfoSyn = uni.getSystemInfoSync(),windowTop = _uni$getSystemInfoSyn.windowTop,windowBottom = _uni$getSystemInfoSyn.windowBottom;return (windowTop || 0) + (windowBottom || 0);} }, onLoad: function onLoad(option) {this.id = option.id;this.getRadioProgram();}, methods: { playMusic: function playMusic(music) {var _this = this;if (music.id === this.currentMusic.id) {uni.navigateTo({ url: '/pages/control/control' });} else {this.$store.dispatch(_mutationsTypes.SET_CURRENT_MUSIC, music).then(function () {_this.$store.commit(_mutationsTypes.SET_CURRENT_MUSIC_LIST, _this.data);});}
     },
     loadNext: function loadNext() {
       if (this.loading || this.offset * this.limit >= this.total) return;

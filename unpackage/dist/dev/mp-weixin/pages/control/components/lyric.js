@@ -202,17 +202,7 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);
   mounted: function mounted() {
     if (this.currentMusic.id) {
       this.getLyric();
-
-      // 屏幕常亮
-      uni.setKeepScreenOn({ keepScreenOn: true });
-
     }
-  },
-  destroyed: function destroyed() {
-
-    // 取消屏幕常亮
-    uni.setKeepScreenOn({ keepScreenOn: false });
-
   },
   methods: {
     setCurrentTime: function setCurrentTime(index) {
@@ -293,12 +283,13 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);
       var timestamp = new Date().getTime();
       var params = { id: this.currentMusic.id, timestamp: timestamp };
       _api.default.getLyric(params).then(function (res) {
-        _this3.currentLrcIndex = 0;
-        _this3.scrollTop = 0;
         _this3.lyrics = _this3.handleLyric((res.lrc || {}).lyric || '');
         _this3.$nextTick(function () {
           // 获取所有歌词scrollTop
           _this3.getAllNodeHeight().finally(function () {
+            // 初始化歌词位置
+            _this3.currentLrcIndex = 0;
+            _this3.scrollTop = 0;
             // 播放歌词
             var currentTime = _this3.$store.getters.currentTime;
             _this3.playLrc(currentTime * 1000);

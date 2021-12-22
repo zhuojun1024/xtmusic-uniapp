@@ -23,6 +23,12 @@
             </view>
           </view>
         </scroll-view>
+        <view
+          class="title-bar button-close"
+          @click="$emit('change', false)"
+        >
+          关闭
+        </view>
       </view>
     </uni-popup>
   </view>
@@ -112,7 +118,7 @@
 <style lang="scss" scoped>
 .popup-wrapper {
   .popup-content {
-    height: 60vh;
+    height: 70vh;
     .title-bar {
       height: 48px;
       line-height: 48px;
@@ -121,7 +127,8 @@
       text-align: center;
     }
     scroll-view {
-      height: calc(100% - 40px);
+      height: calc(100% - 96px - constant(safe-area-inset-bottom));
+      height: calc(100% - 96px - env(safe-area-inset-bottom));
       .play-list-item {
         font-size: 14px;
         padding: 12px 12px;
@@ -133,6 +140,13 @@
           white-space: nowrap;
         }
       }
+    }
+    .button-close {
+      color: #333333;
+      background-color: #efefef;
+      font-weight: 500;
+      padding-bottom: constant(safe-area-inset-bottom);
+      padding-bottom: env(safe-area-inset-bottom);
     }
   }
 }

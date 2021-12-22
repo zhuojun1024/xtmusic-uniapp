@@ -86,17 +86,7 @@
     mounted () {
       if (this.currentMusic.id) {
         this.getLyric()
-        // #ifndef H5
-        // 屏幕常亮
-        uni.setKeepScreenOn({ keepScreenOn: true })
-        // #endif
       }
-    },
-    destroyed () {
-      // #ifndef H5
-      // 取消屏幕常亮
-      uni.setKeepScreenOn({ keepScreenOn: false })
-      // #endif
     },
     methods: {
       setCurrentTime (index) {
@@ -177,12 +167,13 @@
         const timestamp = new Date().getTime()
         const params = { id: this.currentMusic.id, timestamp }
         api.getLyric(params).then(res => {
-          this.currentLrcIndex = 0
-          this.scrollTop = 0
           this.lyrics = this.handleLyric((res.lrc || {}).lyric || '')
           this.$nextTick(() => {
             // 获取所有歌词scrollTop
             this.getAllNodeHeight().finally(() => {
+              // 初始化歌词位置
+              this.currentLrcIndex = 0
+              this.scrollTop = 0
               // 播放歌词
               const currentTime = this.$store.getters.currentTime
               this.playLrc(currentTime * 1000)

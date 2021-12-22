@@ -15,6 +15,12 @@
         <view>
           <view>{{ item.name }}</view>
           <view>
+            <text
+              v-if="item.fee === 1"
+              class="tag-vip"
+            >
+              VIP
+            </text>
             <text>{{ item.ar || '未知歌手' }}</text>
           </view>
         </view>
@@ -44,6 +50,7 @@
           />
         </view>
       </view>
+      <slot />
     </scroll-view>
     <play-list-track-add
       v-if="showAdd"
@@ -96,13 +103,7 @@
     data () {
       return {
         selectedMusicId: undefined,
-        visible: false,
-        options: [{
-          text: '加入歌单',
-          style: {
-            // backgroundColor: '#1890FF'
-          }
-        }]
+        visible: false
       }
     },
     computed: {
@@ -200,6 +201,16 @@
       view:last-child {
         color: #999999;
         font-size: 12px;
+        .tag-vip {
+          line-height: 1;
+          display: inline-block;
+          padding: 0 4px;
+          color: #EA2000;
+          border: 1px solid #EA2000;
+          border-radius: 3px;
+          transform-origin: 0;
+          transform: scale(0.7);
+        }
       }
     }
     &:nth-child(3) {

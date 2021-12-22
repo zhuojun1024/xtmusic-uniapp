@@ -147,7 +147,32 @@
         return (windowTop || 0) + (windowBottom || 0)
       }
     },
+    watch: {
+      current (newVal) {
+        // 屏幕常亮判断
+        this.setKeepScreenOn(newVal === 1)
+      }
+    },
+    onShow () {
+      // 屏幕常亮
+      if (this.current === 1) {
+        this.setKeepScreenOn(true)
+      }
+    },
+    onHide () {
+      // 取消屏幕常亮
+      this.setKeepScreenOn(false)
+    },
+    onUnload () {
+      // 取消屏幕常亮
+      this.setKeepScreenOn(false)
+    },
     methods: {
+      setKeepScreenOn (keepScreenOn) {
+        // #ifndef H5
+        uni.setKeepScreenOn({ keepScreenOn })
+        // #endif
+      },
       back () {
         uni.navigateBack({ delta: 1 })
       },

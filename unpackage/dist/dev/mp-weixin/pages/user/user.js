@@ -192,6 +192,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+var _api = _interopRequireDefault(__webpack_require__(/*! ./api.js */ 303));
 var _login = _interopRequireDefault(__webpack_require__(/*! @/api/login.js */ 13));
 var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
@@ -228,14 +234,26 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);
 //
 //
 //
-var _default = { data: function data() {return { options: { toneQuality: [{ text: '流畅', value: 128000 }, { text: '标准', value: 192000 }, { text: '高清', value: 320000 }] } };}, computed: { userInfo: function userInfo() {return this.$store.getters.userInfo;}, toneQuality: function toneQuality() {return this.$store.getters.toneQuality;} }, methods: { handleToneQualityChange: function handleToneQualityChange(e) {var value = e.detail.value;this.$store.commit(_mutationsTypes.SET_TONE_QUALITY, value);var option = this.options.toneQuality.find(function (item) {return item.value === value;});var title = "\u5DF2\u5207\u6362".concat(option.text, "(").concat(value / 1000, "kbps)\u97F3\u8D28");uni.showToast({ title: title });}, logout: function logout() {var _this = this;uni.showModal({ title: '提示', content: '确定要退出登录吗？', confirmColor: '#EA2000', success: function success(res) {if (res.confirm) {
+//
+//
+//
+//
+//
+var _default = { data: function data() {return { vipImage: undefined, options: { toneQuality: [{ text: '流畅', value: 128000 }, { text: '标准', value: 192000 }, { text: '高清', value: 320000 }] } };}, computed: { userInfo: function userInfo() {return this.$store.getters.userInfo;}, toneQuality: function toneQuality() {return this.$store.getters.toneQuality;} }, onLoad: function onLoad() {this.getVipInfo();}, methods: { handleToneQualityChange: function handleToneQualityChange(e) {var value = e.detail.value;this.$store.commit(_mutationsTypes.SET_TONE_QUALITY, value);var option = this.options.toneQuality.find(function (item) {return item.value === value;});var title = "\u5DF2\u5207\u6362".concat(option.text, "(").concat(value / 1000, "kbps)\u97F3\u8D28");uni.showToast({ title: title });}, getVipInfo: function getVipInfo() {var _this = this;_api.default.getVipInfo().then(function (res) {var data = res.data || {};_this.vipImage = data.redVipDynamicIconUrl2;}).catch(function (e) {console.error('获取VIP信息失败：', e);});},
+    logout: function logout() {var _this2 = this;
+      uni.showModal({
+        title: '提示',
+        content: '确定要退出登录吗？',
+        confirmColor: '#EA2000',
+        success: function success(res) {
+          if (res.confirm) {
             _login.default.logout().finally(function () {
               // 移除用户信息
-              _this.$store.commit(_mutationsTypes.LOGIN_OUT);
+              _this2.$store.commit(_mutationsTypes.LOGIN_OUT);
               // 移除cookie
               uni.removeStorageSync('cookie');
               // 重置播放状态
-              _this.$store.commit(_mutationsTypes.RESET_STATE);
+              _this2.$store.commit(_mutationsTypes.RESET_STATE);
               // 前往登录页
               uni.reLaunch({
                 url: '/pages/login/login' });

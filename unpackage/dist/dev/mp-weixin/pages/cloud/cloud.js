@@ -202,7 +202,7 @@ var _api = _interopRequireDefault(__webpack_require__(/*! ./api.js */ 86));funct
 var _default = { data: function data() {return { data: [], offset: 0, limit: 30, total: 0, loading: false, size: 0, maxSize: 1 };}, computed: { excludeHeight: function excludeHeight() {var _uni$getSystemInfoSyn = uni.getSystemInfoSync(),windowTop = _uni$getSystemInfoSyn.windowTop,windowBottom = _uni$getSystemInfoSyn.windowBottom;return (windowTop || 0) + (windowBottom || 0);} }, onLoad: function onLoad() {this.getUserCloud();},
   methods: {
     loadNext: function loadNext() {
-      if (this.loading || this.offset * this.limit >= this.total) return;
+      if (this.loading || (this.offset + 1) * this.limit >= this.total) return;
       this.offset++;
       this.getUserCloud();
     },

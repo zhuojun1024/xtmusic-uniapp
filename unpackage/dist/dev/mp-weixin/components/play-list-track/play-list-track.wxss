@@ -28,6 +28,18 @@
   color: #999999;
   font-size: 12px;
 }
+.music-list-item > view:nth-child(2) view:last-child .tag-vip.data-v-7ecef530 {
+  line-height: 1;
+  display: inline-block;
+  padding: 0 4px;
+  color: #EA2000;
+  border: 1px solid #EA2000;
+  border-radius: 3px;
+  -webkit-transform-origin: 0;
+          transform-origin: 0;
+  -webkit-transform: scale(0.7);
+          transform: scale(0.7);
+}
 .music-list-item > view.data-v-7ecef530:nth-child(3) {
   width: 60px;
   padding-right: 20px;

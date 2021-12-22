@@ -26,6 +26,7 @@
           />
         </view>
       </view>
+      <play-control :is-tab-bar="false" />
     </scroll-view>
   </view>
 </template>

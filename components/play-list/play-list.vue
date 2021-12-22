@@ -34,6 +34,12 @@
             />
           </view>
         </scroll-view>
+        <view
+          class="title-bar button-close"
+          @click="$emit('change', false)"
+        >
+          关闭
+        </view>
       </view>
     </uni-popup>
   </view>
@@ -74,7 +80,7 @@
           this.$nextTick(() => {
             if (this.currentMusic.id) {
               const index = this.data.findIndex(item => item.id === this.currentMusic.id) - 2
-              this.scrollTop = index * 53 + Math.random()
+              this.scrollTop = index * 49 + Math.random()
             }
           })
         } else {
@@ -100,7 +106,7 @@
 <style lang="scss" scoped>
 .popup-wrapper {
   .popup-content {
-    height: 60vh;
+    height: 70vh;
     .title-bar {
       height: 48px;
       line-height: 48px;
@@ -109,10 +115,13 @@
       text-align: center;
     }
     scroll-view {
-      height: calc(100% - 40px);
+      height: calc(100% - 96px - constant(safe-area-inset-bottom));
+      height: calc(100% - 96px - env(safe-area-inset-bottom));
       .play-list-item {
+        height: 48px;
+        line-height: 48px;
         font-size: 14px;
-        padding: 12px 12px;
+        padding: 0 12px;
         border-bottom: 1px solid #efefef;
         > view:first-child {
           display: inline-block;
@@ -130,6 +139,13 @@
           float: right;
         }
       }
+    }
+    .button-close {
+      color: #333333;
+      background-color: #efefef;
+      font-weight: 500;
+      padding-bottom: constant(safe-area-inset-bottom);
+      padding-bottom: env(safe-area-inset-bottom);
     }
   }
   .play-list-item.disabled {

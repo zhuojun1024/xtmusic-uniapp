@@ -1,10 +1,16 @@
 <template>
   <view>
-    <view class="play-control-placeholder" />
     <view
-      class="play-control-wrapper"
+      :class="{ 'play-control-placeholder': true, 'safe-area': !isTabBar }"
+    />
+    <view
+      :class="{ 'play-control-wrapper': true, 'safe-area': !isTabBar }"
       :style="{ bottom: excludeHeight + 'px' }"
     >
+      <view
+        class="progress-bar"
+        :style="{ width: precent + '%' }"
+      />
       <view>
         <image :src="coverImgUrl" />
       </view>
@@ -36,10 +42,6 @@
           @click="visible = true"
         />
       </view>
-      <view
-        class="progress-bar"
-        :style="{ width: precent + '%' }"
-      />
     </view>
     <play-list
       :visible="visible"
@@ -53,6 +55,12 @@
   import { formatTime } from '@/utils/util.js'
   export default {
     name:"play-control",
+    props: {
+      isTabBar: {
+        type: Boolean,
+        default: true
+      }
+    },
     data() {
       return {
         visible: false
@@ -112,26 +120,44 @@
   height: 40px;
   padding: 6px 8px;
 }
+.safe-area {
+  padding-bottom: calc(6px + constant(safe-area-inset-bottom));
+  padding-bottom: calc(6px + env(safe-area-inset-bottom));
+}
 .play-control-wrapper {
   position: fixed;
   left: 0;
   right: 0;
   background-color: #fefefe;
+  .progress-bar {
+    height: 2px;
+    position: absolute;
+    top: -2px;
+    left: 0;
+    z-index: 1;
+    background-color: #EA2000;
+  }
   > view {
     display: inline-block;
     box-sizing: border-box;
     vertical-align: middle;
-    &:nth-child(1) {
-      width: 40px;
-      height: 40px;
+    position: relative;
+    z-index: 2;
+    &:nth-child(2) {
+      width: 56px;
+      height: 56px;
+      margin-top: -16px;
       image {
         width: 100%;
         height: 100%;
+        border-radius: 100%;
         background-color: #efefef;
+        border: 2px solid rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
       }
     }
-    &:nth-child(2) {
-      width: calc(100% - 120px);
+    &:nth-child(3) {
+      width: calc(100% - 136px);
       height: 40px;
       line-height: 20px;
       padding-left: 8px;
@@ -167,20 +193,13 @@
         }
       }
     }
-    &:nth-child(3) {
+    &:nth-child(4) {
       width: 80px;
       * {
         display: inline-block;
         vertical-align: middle;
       }
     }
-  }
-  .progress-bar {
-    position: absolute;
-    top: -2px;
-    left: 0;
-    height: 2px;
-    background-color: #EA2000;
   }
 }
 </style>

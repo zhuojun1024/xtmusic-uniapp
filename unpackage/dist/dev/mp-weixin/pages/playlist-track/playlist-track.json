@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "歌单曲目",
   "usingComponents": {
-    "play-list-track": "/components/play-list-track/play-list-track"
+    "play-list-track": "/components/play-list-track/play-list-track",
+    "play-control": "/components/play-control/play-control"
   }
 }

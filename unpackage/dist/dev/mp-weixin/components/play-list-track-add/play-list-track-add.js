@@ -173,6 +173,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
 var _music = _interopRequireDefault(__webpack_require__(/*! @/api/music.js */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
@@ -203,13 +209,13 @@ var _music = _interopRequireDefault(__webpack_require__(/*! @/api/music.js */ 9)
 //
 //
 //
-var _default = { name: "play-list", props: { visible: { type: Boolean, default: false }, trackId: { type: Number, default: undefined } }, data: function data() {return { data: [] };}, computed: { userInfo: function userInfo() {return this.$store.getters.userInfo;} }, watch: { visible: function visible(newVal) {if (newVal) {if (this.data.length === 0) {this.getPlayList();}this.$refs.popup.open();} else {
-        this.$refs.popup.close();
-      }
-    },
-    userInfo: function userInfo() {
-      this.getPlayList();
-    } },
+//
+//
+//
+//
+//
+//
+var _default = { name: "play-list", props: { visible: { type: Boolean, default: false }, trackId: { type: Number, default: undefined } }, data: function data() {return { data: [] };}, computed: { userInfo: function userInfo() {return this.$store.getters.userInfo;} }, watch: { visible: function visible(newVal) {if (newVal) {if (this.data.length === 0) {this.getPlayList();}this.$refs.popup.open();} else {this.$refs.popup.close();}}, userInfo: function userInfo() {this.getPlayList();} },
 
   methods: {
     addToPlayList: function addToPlayList(id) {var _this = this;

@@ -220,6 +220,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
 var _music = _interopRequireDefault(__webpack_require__(/*! @/api/music.js */ 9));
 var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
@@ -289,20 +296,14 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);
 //
 //
 //
-var _default2 = { name: "play-list-track", props: { data: { type: Array, default: function _default() {return [];} }, pId: { type: String, default: undefined }, showAdd: { type: Boolean, default: false }, showDel: { type: Boolean, default: false }, height: { type: String, default: '' } }, data: function data() {return { selectedMusicId: undefined, visible: false, options: [{ text: '加入歌单', style: {// backgroundColor: '#1890FF'
-        } }] };}, computed: { currentMusic: function currentMusic() {return this.$store.getters.currentMusic;} }, watch: { visible: function visible(newVal) {if (newVal) {uni.hideTabBar({ animation: true });} else {uni.showTabBar({ animation: true });}} }, methods: { copyrighted: function copyrighted(music) {if (music.st === -200 || music.noCopyrightRcmd) {uni.showToast({ icon: 'error', title: '该音乐无版权' });return false;}return true;}, popupClose: function popupClose() {this.$refs.popup.close();}, popupConfirm: function popupConfirm() {var _this = this;this.$refs.popup.close();var timestamp = new Date().getTime();var params = { op: 'del',
-        pid: this.pId,
-        tracks: String(this.selectedMusicId),
-        timestamp: timestamp };
-
-      uni.showLoading({ title: '删除中' });
-      _music.default.updatePlayListTracks(params).then(function (res) {
-        uni.showToast({ icon: 'success', title: '操作成功' });
-        _this.$emit('refresh');
-      }).catch(function (e) {
-        uni.showToast({ icon: 'error', title: '删除失败：' + e });
-        console.error('删除失败：', e);
-      }).finally(function () {
+//
+//
+//
+//
+//
+//
+//
+var _default2 = { name: "play-list-track", props: { data: { type: Array, default: function _default() {return [];} }, pId: { type: String, default: undefined }, showAdd: { type: Boolean, default: false }, showDel: { type: Boolean, default: false }, height: { type: String, default: '' } }, data: function data() {return { selectedMusicId: undefined, visible: false };}, computed: { currentMusic: function currentMusic() {return this.$store.getters.currentMusic;} }, watch: { visible: function visible(newVal) {if (newVal) {uni.hideTabBar({ animation: true });} else {uni.showTabBar({ animation: true });}} }, methods: { copyrighted: function copyrighted(music) {if (music.st === -200 || music.noCopyrightRcmd) {uni.showToast({ icon: 'error', title: '该音乐无版权' });return false;}return true;}, popupClose: function popupClose() {this.$refs.popup.close();}, popupConfirm: function popupConfirm() {var _this = this;this.$refs.popup.close();var timestamp = new Date().getTime();var params = { op: 'del', pid: this.pId, tracks: String(this.selectedMusicId), timestamp: timestamp };uni.showLoading({ title: '删除中' });_music.default.updatePlayListTracks(params).then(function (res) {uni.showToast({ icon: 'success', title: '操作成功' });_this.$emit('refresh');}).catch(function (e) {uni.showToast({ icon: 'error', title: '删除失败：' + e });console.error('删除失败：', e);}).finally(function () {
         uni.hideLoading();
       });
     },

@@ -2,7 +2,7 @@
 /* 水平间距 */
 /* 水平间距 */
 .popup-wrapper .popup-content.data-v-3fc064d8 {
-  height: 60vh;
+  height: 70vh;
 }
 .popup-wrapper .popup-content .title-bar.data-v-3fc064d8 {
   height: 48px;
@@ -12,7 +12,8 @@
   text-align: center;
 }
 .popup-wrapper .popup-content scroll-view.data-v-3fc064d8 {
-  height: calc(100% - 40px);
+  height: calc(100% - 96px - constant(safe-area-inset-bottom));
+  height: calc(100% - 96px - env(safe-area-inset-bottom));
 }
 .popup-wrapper .popup-content scroll-view .play-list-item.data-v-3fc064d8 {
   font-size: 14px;
@@ -24,5 +25,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.popup-wrapper .popup-content .button-close.data-v-3fc064d8 {
+  color: #333333;
+  background-color: #efefef;
+  font-weight: 500;
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 

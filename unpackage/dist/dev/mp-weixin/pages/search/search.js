@@ -253,6 +253,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _music = _interopRequireDefault(__webpack_require__(/*! @/api/music.js */ 9));
 var _api = _interopRequireDefault(__webpack_require__(/*! ./api.js */ 45));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
@@ -311,13 +312,13 @@ var _api = _interopRequireDefault(__webpack_require__(/*! ./api.js */ 45));funct
 //
 //
 //
-var _default = { data: function data() {return { showPlayList: false, keyword: '', data: [], hotWords: [], searchWords: [], offset: 0, limit: 30, total: 0, loading: false, debounce: undefined };}, computed: { excludeHeight: function excludeHeight() {var _uni$getSystemInfoSyn = uni.getSystemInfoSync(),windowTop = _uni$getSystemInfoSyn.windowTop,windowBottom = _uni$getSystemInfoSyn.windowBottom;return (windowTop || 0) + (windowBottom || 0);} }, onLoad: function onLoad() {this.getHotDetail();}, methods: { onKeywordChange: function onKeywordChange(keyword) {var _this = this;if (!keyword) return;clearTimeout(this.debounce);this.debounce = setTimeout(function () {_this.getSearchSuggest(keyword);}, 200);}, getSearchSuggest: function getSearchSuggest(keyword) {var _this2 = this;var timestamp = new Date().getTime();var params = { keywords: keyword, type: 'mobile', timestamp: timestamp };_api.default.getSearchSuggest(params).then(function (res) {var data = res.result.allMatch || [{ keyword: keyword }];_this2.searchWords = data.map(function (item) {return item.keyword;});}).catch(function (e) {console.error('获取搜索建议失败：', e);});}, onFocus: function onFocus() {this.showPlayList = false;}, onSearch: function onSearch(item) {this.keyword = item;this.search();}, getHotDetail: function getHotDetail() {var _this3 = this;_api.default.getHotDetail().then(function (res) {var data = res.data || [];_this3.hotWords = data.map(function (item) {return item.searchWord;});
-      }).catch(function (e) {
+//
+var _default = { data: function data() {return { showPlayList: false, keyword: '', data: [], hotWords: [], searchWords: [], offset: 0, limit: 30, total: 0, loading: false, debounce: undefined };}, computed: { excludeHeight: function excludeHeight() {var _uni$getSystemInfoSyn = uni.getSystemInfoSync(),windowTop = _uni$getSystemInfoSyn.windowTop,windowBottom = _uni$getSystemInfoSyn.windowBottom;return (windowTop || 0) + (windowBottom || 0);} }, onLoad: function onLoad() {this.getHotDetail();}, methods: { onKeywordChange: function onKeywordChange(keyword) {var _this = this;if (!keyword) return;clearTimeout(this.debounce);this.debounce = setTimeout(function () {_this.getSearchSuggest(keyword);}, 200);}, getSearchSuggest: function getSearchSuggest(keyword) {var _this2 = this;var timestamp = new Date().getTime();var params = { keywords: keyword, type: 'mobile', timestamp: timestamp };_api.default.getSearchSuggest(params).then(function (res) {var data = res.result.allMatch || [{ keyword: keyword }];_this2.searchWords = data.map(function (item) {return item.keyword;});}).catch(function (e) {console.error('获取搜索建议失败：', e);});}, onFocus: function onFocus() {this.showPlayList = false;}, onSearch: function onSearch(item) {this.keyword = item;this.search();}, getHotDetail: function getHotDetail() {var _this3 = this;_api.default.getHotDetail().then(function (res) {var data = res.data || [];_this3.hotWords = data.map(function (item) {return item.searchWord;});}).catch(function (e) {
         console.error('获取热搜列表失败：', e);
       });
     },
     loadNext: function loadNext() {
-      if (this.loading || this.offset * this.limit >= this.total) return;
+      if (this.loading || (this.offset + 1) * this.limit >= this.total) return;
       this.offset++;
       this.cloudSearch();
     },

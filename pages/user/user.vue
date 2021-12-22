@@ -8,7 +8,12 @@
       <view class="user-info view-container">
         <image :src="userInfo.avatarUrl" />
         <view class="user-name">
-          {{ userInfo.nickname }}
+          <text>{{ userInfo.nickname }}</text>
+          <image
+            v-if="vipImage"
+            mode="heightFix"
+            :src="vipImage"
+          />
         </view>
       </view>
       <view class="settings view-container">
@@ -34,11 +39,13 @@
 </template>
 
 <script>
-  import api from '@/api/login.js'
+  import api from './api.js'
+  import globalApi from '@/api/login.js'
   import { LOGIN_OUT, RESET_STATE, SET_TONE_QUALITY } from '@/store/mutations-types.js'
   export default {
     data () {
       return {
+        vipImage: undefined,
         options: {
           toneQuality: [
             { text: '流畅', value: 128000 },
@@ -56,6 +63,9 @@
         return this.$store.getters.toneQuality
       }
     },
+    onLoad () {
+      this.getVipInfo()
+    },
     methods: {
       handleToneQualityChange (e) {
         const value = e.detail.value
@@ -64,6 +74,14 @@
         const title = `已切换${option.text}(${value / 1000}kbps)音质`
         uni.showToast({ title })
       },
+      getVipInfo () {
+        api.getVipInfo().then(res => {
+          const data = res.data || {}
+          this.vipImage = data.redVipDynamicIconUrl2
+        }).catch(e => {
+          console.error('获取VIP信息失败：', e)
+        })
+      },
       logout () {
         uni.showModal({
           title: '提示',
@@ -71,7 +89,7 @@
           confirmColor: '#EA2000',
           success: res => {
             if (res.confirm) {
-              api.logout().finally(() => {
+              globalApi.logout().finally(() => {
                 // 移除用户信息
                 this.$store.commit(LOGIN_OUT)
                 // 移除cookie
@@ -126,8 +144,18 @@
     .user-name {
       margin-top: 4px;
       text-align: center;
-      font-size: 16px;
+      font-size: 20px;
+      font-weight: 600;
       color: black;
+      > image, > text {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      > image {
+        height: 16px;
+        width: 40px;
+        margin-left: 6px;
+      }
     }
   }
   .settings {

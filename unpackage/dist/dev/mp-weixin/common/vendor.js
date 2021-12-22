@@ -12681,6 +12681,25 @@ internalMixin(Vue);
 
 /***/ }),
 
+/***/ 303:
+/*!***************************************************************************************!*\
+  !*** C:/Users/SYN-ZJ-021/Documents/HBuilderProjects/xtmusic-uniapp/pages/user/api.js ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! @/request */ 14));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var apis = {
+  // 获取VIP信息
+  getVipInfo: function getVipInfo(data) {return (0, _request.default)('/vip/info', 'post', data);} };var _default =
+
+
+apis;exports.default = _default;
+
+/***/ }),
+
 /***/ 35:
 /*!**********************************************************************************!*\
   !*** C:/Users/SYN-ZJ-021/Documents/HBuilderProjects/xtmusic-uniapp/utils/md5.js ***!
@@ -13474,11 +13493,11 @@ apis;exports.default = _default;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var request = __webpack_require__(/*! ../../request/index.js */ 14);
+var request = __webpack_require__(/*! ../../request/index.js */ 14);
 
 var apis = {
   // 获取歌单曲目
-  getPlayListTrack: function getPlayListTrack(data) {return request('/playlist/track/all', 'post', _objectSpread({ limit: 100 }, data));} };
+  getPlayListTrack: function getPlayListTrack(data) {return request('/playlist/track/all', 'post', data);} };
 
 
 module.exports = apis;

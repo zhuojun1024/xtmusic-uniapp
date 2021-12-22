@@ -95,6 +95,9 @@ try {
   components = {
     playListTrack: function() {
       return Promise.all(/*! import() | components/play-list-track/play-list-track */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/play-list-track/play-list-track")]).then(__webpack_require__.bind(null, /*! @/components/play-list-track/play-list-track.vue */ 163))
+    },
+    playControl: function() {
+      return Promise.all(/*! import() | components/play-control/play-control */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/play-control/play-control")]).then(__webpack_require__.bind(null, /*! @/components/play-control/play-control.vue */ 170))
     }
   }
 } catch (e) {
@@ -164,6 +167,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
 var _api = _interopRequireDefault(__webpack_require__(/*! ./api */ 70));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
@@ -176,10 +183,28 @@ var _api = _interopRequireDefault(__webpack_require__(/*! ./api */ 70));function
 //
 //
 //
-var _default = { data: function data() {return { id: undefined, data: [], type: 'user' };}, onLoad: function onLoad(option) {this.id = option.id;this.type = option.type;uni.setNavigationBarTitle({ title: option.name });
+//
+//
+//
+//
+var _default = { data: function data() {return { id: undefined, data: [], type: 'user', offset: 0, limit: 30 };}, computed: { loadedData: function loadedData() {return this.data.slice(0, (this.offset + 1) * this.limit);}, excludeHeight: function excludeHeight() {var _uni$getSystemInfoSyn = uni.getSystemInfoSync(),windowTop = _uni$getSystemInfoSyn.windowTop,windowBottom = _uni$getSystemInfoSyn.windowBottom;
+      return (windowTop || 0) + (windowBottom || 0);
+    } },
+
+  onLoad: function onLoad(option) {
+    // 保存参数
+    this.id = option.id;
+    this.type = option.type;
+    uni.setNavigationBarTitle({ title: option.name });
+    // 请求歌单数据
     this.getPlayListTrack();
   },
   methods: {
+    onScrollToLower: function onScrollToLower() {
+      if ((this.offset + 1) * this.limit < this.data.length) {
+        this.offset++;
+      }
+    },
     getPlayListTrack: function getPlayListTrack() {var _this = this;
       var timestamp = new Date().getTime();
       var params = { id: this.id, timestamp: timestamp };

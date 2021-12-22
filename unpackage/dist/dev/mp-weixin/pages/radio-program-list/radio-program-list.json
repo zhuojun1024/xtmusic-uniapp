@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "电台节目列表",
   "usingComponents": {
-    "uni-icons": "/uni_modules/uni-icons/components/uni-icons/uni-icons"
+    "uni-icons": "/uni_modules/uni-icons/components/uni-icons/uni-icons",
+    "play-control": "/components/play-control/play-control"
   }
 }
