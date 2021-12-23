@@ -10,8 +10,8 @@
   vertical-align: middle;
 }
 .radio-list-item > view.data-v-5de8f97e:first-child {
-  width: 40px;
-  height: 40px;
+  width: 64px;
+  height: 64px;
 }
 .radio-list-item > view:first-child image.data-v-5de8f97e {
   width: 100%;

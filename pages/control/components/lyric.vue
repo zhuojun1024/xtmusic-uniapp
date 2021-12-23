@@ -16,7 +16,6 @@
         :key="index"
         :class="{ 'lyric-item': true, current: index === currentLrcIndex }"
         :style="{ color: rolling && index === scrollLrcIndex ? 'white' : undefined }"
-        @click="setCurrentTime(index)"
       >
         {{ item.text }}
       </view>
@@ -24,10 +23,17 @@
       <view
         v-show="rolling"
         class="scroll-time"
-        @click="setCurrentTime()"
       >
-        <view />
-        <text>{{ scrollTime }}</text>
+        <uni-icons
+          size="14"
+          color="rgba(255, 255, 255, 0.65)"
+          custom-prefix="iconfont"
+          class="uni-icons"
+          type="icon-play"
+          @click="setCurrentTime()"
+        />
+        <view class="ref-line" />
+        <text class="time">{{ scrollTime }}</text>
       </view>
     </scroll-view>
   </view>
@@ -76,6 +82,7 @@
     watch: {
       currentMusic (newVal) {
         if (newVal.id) {
+          this.$emit('change', undefined)
           this.getLyric()
         }
       },
@@ -225,7 +232,7 @@
     text-align: center;
     .lyric-item {
       min-height: 22px;
-      padding: 16px 24px;
+      padding: 16px 32px;
       font-size: 16px;
       &.current {
         color: white;
@@ -241,24 +248,23 @@
     }
     .scroll-time {
       position: fixed;
-      top: 40%;
-      right: 12px;
-      color: white;
-      > view, > text {
+      top: calc(40% - 22px);
+      color: rgba(255, 255, 255, 0.65);
+      text-align: center;
+      .uni-icons, .ref-line, .time {
         display: inline-block;
         vertical-align: middle;
       }
-      > view:first-child {
-        border-right: 9px solid rgba(255, 255, 255, 0.2);
-        border-top: 9px solid transparent;
-        border-bottom: 9px solid transparent;
-      }
-      > text {
+      .uni-icons {
         width: 32px;
-        background-color: rgba(255, 255, 255, 0.2);
-        padding: 0 6px 0 4px;
-        font-size: 12px;
-        line-height: 1.5;
+      }
+      .ref-line {
+        width: calc(100vw - 88px);
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .time {
+        font-size: 14px;
+        width: 56px;
       }
     }
   }

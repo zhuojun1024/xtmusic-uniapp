@@ -8,7 +8,8 @@ const getters = {
   bam: state => state.playControl.bam,
   windowTop: state => state.app.windowTop,
   windowBottom: state => state.app.windowBottom,
-  toneQuality: state => state.playControl.toneQuality
+  toneQuality: state => state.playControl.toneQuality,
+  playMode: state => state.playControl.playMode
 }
 
 export default getters

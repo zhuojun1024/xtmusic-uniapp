@@ -13,63 +13,83 @@
       class="uni-nav-bar"
       left-icon="left"
       color="white"
-      title="播放控制"
       backgroundColor="transparent"
       :border="false"
       @clickLeft="back"
-    />
-    <view class="tab">
-      <text
-        :class="{ current: current === 0 }"
-        @click="handleCurrentChange(0)"
-      >
-        歌曲
-      </text>
-      <text>|</text>
-      <text
-        :class="{ current: current === 1 }"
-        @click="handleCurrentChange(1)"
-      >
-        歌词
-      </text>
-    </view>
+    >
+      <view class="tab">
+         <text
+           :class="{ current: current === 0 }"
+           @click="handleCurrentChange(0)"
+         >
+           歌曲
+         </text>
+         <text class="divider" />
+         <text
+           :class="{ current: current === 1 }"
+           @click="handleCurrentChange(1)"
+         >
+           歌词
+         </text>
+       </view>
+    </uni-nav-bar>
     <swiper
       class="swiper-box"
       duration="300"
       :current="current"
-      :style="{ height: `calc(100vh - 40px - ${excludeHeight}px)` }"
+      :style="{ height: `calc(100vh - ${excludeHeight}px)` }"
       @change="e => handleCurrentChange(e.detail.current)"
     >
       <swiper-item class="swiper-item">
         <view class="control-content">
-          <view class="pic">
-            <image :src="picUrl" />
-          </view>
-          <view class="music-info">
-            <view>{{ currentMusic.name || '歌曲标题' }}</view>
-            <view>{{ currentMusic.ar || '歌手' }}</view>
+          <view class="cover-wrapper">
+            <view class="pic">
+              <image :src="picUrl" />
+            </view>
+            <view class="music-info">
+              <text-scroll
+                class="music-name"
+                :text="currentMusic.name || '歌曲标题'"
+              />
+              <view>{{ currentMusic.ar || '歌手' }}</view>
+            </view>
           </view>
           <view class="progress-bar">
-            <text>{{ currentTime || '00:00' }}</text>
             <slider
               class="slider-bar-wrapper"
-              block-size="16"
-              activeColor="#EA2000"
+              block-size="12"
+              activeColor="white"
+              backgroundColor="rgba(255, 255, 255, 0.35)"
               :value="precent"
               @changing="handleChanging"
               @change="handleChange"
             />
-            <text>{{ duration || '00:00' }}</text>
+            <view class="time">
+              <text>{{ currentTime || '00:00' }}</text>
+              <text>{{ duration || '00:00' }}</text>
+            </view>
           </view>
           <view class="play-control">
             <uni-icons
               class="uni-icons"
-              size="48"
+              size="24"
+              color="rgba(255, 255, 255, 0.5)"
+              custom-prefix="iconfont"
+              :type="playModeIcon"
+              @click="switchPlayMode"
+            >
+              播放模式
+            </uni-icons>
+            <uni-icons
+              class="uni-icons"
+              size="24"
               color="white"
               custom-prefix="iconfont"
-              type="icon-left-circle"
+              type="icon-previous"
               @click="playPrev"
-            />
+            >
+              上一首
+            </uni-icons>
             <uni-icons
               class="uni-icons"
               size="64"
@@ -77,37 +97,70 @@
               custom-prefix="iconfont"
               :type="paused ? 'icon-play-circle' : 'icon-pause-circle'"
               @click="playPause"
-            />
+            >
+              暂停/播放
+            </uni-icons>
             <uni-icons
               class="uni-icons"
-              size="48"
+              size="24"
               color="white"
               custom-prefix="iconfont"
-              type="icon-right-circle"
+              type="icon-next"
               @click="playNext"
-            />
+            >
+              下一首
+            </uni-icons>
+            <uni-icons
+              class="uni-icons"
+              size="24"
+              color="rgba(255, 255, 255, 0.5)"
+              custom-prefix="iconfont"
+              type="icon-playlist"
+              @click="visible = true"
+            >
+              播放列表
+            </uni-icons>
           </view>
         </view>
       </swiper-item>
       <swiper-item class="swiper-item">
-        <lyric :height="`calc(100vh - 40px - ${excludeHeight}px)`" />
+        <lyric :height="`calc(100vh - 44px - ${excludeHeight}px)`" />
       </swiper-item>
     </swiper>
+    <play-list
+      :visible="visible"
+      @change="v => visible = v"
+    />
   </view>
 </template>
 
 <script>
-  import { SET_CURRENT_TIME, PLAY_PAUSE, PLAY_PREV, PLAY_NEXT } from '@/store/mutations-types.js'
+  import {
+    SET_CURRENT_TIME,
+    PLAY_PAUSE,
+    PLAY_PREV,
+    PLAY_NEXT,
+    SET_PLAY_MODE,
+    PLAY_MODE_SEQUE,
+    PLAY_MODE_REPEAT_ONE,
+    PLAY_MODE_SHUFFLE
+  } from '@/store/mutations-types.js'
   import { formatTime } from '@/utils/util.js'
   import lyric from './components/lyric.vue'
   export default {
     components: { lyric },
     data () {
       return {
+        visible: false,
         current: 0,
         changing: false,
         changingValue: 0,
-        timer: undefined
+        timer: undefined,
+        playModeOptions: [
+          { name: '顺序播放', value: PLAY_MODE_SEQUE, icon: 'icon-repeat' },
+          { name: '单曲循环', value: PLAY_MODE_REPEAT_ONE, icon: 'icon-repeatOnce' },
+          { name: '随机播放', value: PLAY_MODE_SHUFFLE, icon: 'icon-shuffle' }
+        ]
       }
     },
     computed: {
@@ -142,6 +195,11 @@
       paused () {
         return this.$store.getters.paused
       },
+      playModeIcon () {
+        const playMode = this.$store.getters.playMode
+        const option = this.playModeOptions.find(item => item.value === playMode)
+        return option.icon
+      },
       excludeHeight () {
         const { windowTop, windowBottom } = uni.getSystemInfoSync()
         return (windowTop || 0) + (windowBottom || 0)
@@ -172,6 +230,21 @@
         // #ifndef H5
         uni.setKeepScreenOn({ keepScreenOn })
         // #endif
+      },
+      switchPlayMode () {
+        const playMode = this.$store.getters.playMode
+        const index = this.playModeOptions.findIndex(item => item.value === playMode)
+        let option
+        if (index < this.playModeOptions.length - 1) {
+          option = this.playModeOptions[index + 1]
+        } else {
+          option = this.playModeOptions[0]
+        }
+        this.$store.commit(SET_PLAY_MODE, option.value)
+        uni.showToast({
+          icon: 'none',
+          title: option.name
+        })
       },
       back () {
         uni.navigateBack({ delta: 1 })
@@ -208,15 +281,9 @@
 <style lang="scss" scoped>
 .control-wrapper {
   overflow-y: auto;
-  background-color: #666666;
+  background-color: black;
   position: relative;
   overflow: hidden;
-  .main-canvas {
-    width: 1px;
-    height: 1px;
-    position: fixed;
-    opacity: 0;
-  }
   .control-wrapper-bg {
     width: 100%;
     height: 100%;
@@ -227,34 +294,38 @@
     opacity: 0.8;
     background-repeat: no-repeat;
     background-size: cover;
+    background-color: #666666;
   }
   .uni-nav-bar {
     color: white;
     /deep/.uni-icons {
       color: white !important;
     }
-    /deep/.uni-nav-bar-text {
-      font-size: 16px;
-      font-weight: 600;
-    }
+    // /deep/.uni-nav-bar-text {
+    //   font-size: 16px;
+    //   font-weight: 600;
+    // }
     /deep/.uni-navbar__header-btns-right {
       width: 60px;
       padding-right: 0;
     }
-  }
-  .tab {
-    position: relative;
-    z-index: 2;
-    height: 40px;
-    // line-height: 48px;
-    font-size: 16px;
-    text-align: center;
-    color: rgba(255, 255, 255, 0.6);
-    text {
-      margin: 0 8px;
-    }
-    .current {
-      color: white;
+    .tab {
+      width: 100%;
+      font-size: 15px;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+      text {
+        margin: 0 6px;
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .current {
+        color: white;
+      }
+      .divider {
+        height: 8px;
+        border-right: 1px solid rgba(255, 255, 255, 0.6);
+      }
     }
   }
   .swiper-box {
@@ -266,59 +337,83 @@
     overflow-y: auto;
   }
   .control-content {
-    .pic {
-      width: 100vw;
-      height: calc(100vw - 24px);
-      padding: 24px;
-      padding-top: 0;
-      box-sizing: border-box;
-      image {
-        width: 100%;
-        height: 100%;
-        border-radius: 12px;
-        background-color: #999999;
+    .cover-wrapper {
+      // 减去导航栏、进度条、播放控制栏的高度和margin
+      $cover_height: calc(100vh - 212px - constant(safe-area-inset-bottom));
+      $cover_height: calc(100vh - 212px - env(safe-area-inset-bottom));
+      height: $cover_height;
+      .pic {
+        text-align: center;
+        image {
+          // 减去导航栏、进度条、播放控制栏、歌曲信息的高度和margin
+          $image_max_size: calc(100vh - 336px - constant(safe-area-inset-bottom));
+          $image_max_size: calc(100vh - 336px - env(safe-area-inset-bottom));
+          width: calc(100vw - 64px);
+          max-width: $image_max_size;
+          height: calc(100vw - 64px);
+          max-height: $image_max_size;
+          margin: 24px 0;
+          border-radius: 12px;
+          background-color: #999999;
+        }
       }
-    }
-    .music-info {
-      padding: 0 24px;
-      color: white;
-      > view:first-child {
-        font-size: 24px;
-      }
-      > view:last-child {
-        margin-top: 8px;
-        font-size: 14px;
+      .music-info {
+        padding: 24px 32px;
+        padding-top: 0;
+        color: white;
+        .music-name {
+          font-size: 24px;
+          font-weight: 600;
+          line-height: 24px;
+        }
+        > view {
+          color: rgba(255, 255, 255, 0.65);
+          margin-top: 12px;
+          font-size: 15px;
+          line-height: 15px;
+        }
       }
     }
     .progress-bar {
+      height: 40px;
       color: white;
-      padding: 12px 24px;
+      padding: 0 32px;
       box-sizing: border-box;
-      > text, > .slider-bar-wrapper {
-        display: inline-block;
-        vertical-align: middle;
+      .slider-bar-wrapper {
+        margin: 0;
       }
-      > text {
+      .time {
         font-size: 14px;
-        width: 40px;
-        &:last-child {
-          text-align: right;
+        text {
+          width: 50%;
+          display: inline-block;
+          // border: 1px solid red;
+          &:last-child {
+            text-align: right;
+          }
         }
-      }
-      > .slider-bar-wrapper {
-        width: calc(100% - 100px);
-        margin: 10px;
       }
     }
     .play-control {
-      width: 100%;
+      width: calc(100% - 64px);
       height: 72px;
+      line-height: 72px;
+      margin: 0 32px;
       text-align: center;
-      margin-top: 32px;
       .uni-icons {
-        width: 30%;
+        width: calc((100% - 80px) / 3);
+        height: 100%;
         display: inline-block;
         vertical-align: middle;
+        &:first-child {
+          text-align: left;
+        }
+        &:last-child {
+          text-align: right;
+        }
+        &:first-child, &:last-child {
+          width: 40px;
+        }
       }
     }
   }

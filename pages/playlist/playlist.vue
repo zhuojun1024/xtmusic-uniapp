@@ -144,8 +144,8 @@
     vertical-align: middle;
   }
   > view:first-child {
-    width: 40px;
-    height: 40px;
+    width: 64px;
+    height: 64px;
     image {
       width: 100%;
       height: 100%;

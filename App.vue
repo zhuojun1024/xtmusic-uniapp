@@ -8,7 +8,9 @@
     SET_PAUSED,
     PLAY_PREV,
     PLAY_NEXT,
-    SET_TONE_QUALITY
+    SET_TONE_QUALITY,
+    SET_PLAY_MODE,
+    ON_ENDED
   } from '@/store/mutations-types.js'
 	export default {
     data () {
@@ -42,9 +44,15 @@
 		},
     methods: {
       getSettings () {
+        // 音质
         const toneQuality = uni.getStorageSync('toneQuality')
         if (toneQuality) {
           this.$store.commit(SET_TONE_QUALITY, toneQuality)
+        }
+        // 播放模式
+        const playMode = uni.getStorageSync('playMode')
+        if (playMode) {
+          this.$store.commit(SET_PLAY_MODE, playMode)
         }
       },
       hasPermission () {
@@ -93,7 +101,8 @@
       },
       onEnded () {
         this.$store.commit(SET_PAUSED, this.bam.paused)
-        this.$store.dispatch(PLAY_NEXT)
+        // this.$store.dispatch(PLAY_NEXT)
+        this.$store.dispatch(ON_ENDED)
       },
       onTimeUpdate () {
         this.$store.commit(TIME_UPDATE, this.bam.currentTime)

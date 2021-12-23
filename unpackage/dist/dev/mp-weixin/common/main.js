@@ -132,6 +132,8 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);
 
 
 
+
+
 {
   data: function data() {
     return {
@@ -164,9 +166,15 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);
   },
   methods: {
     getSettings: function getSettings() {
+      // 音质
       var toneQuality = uni.getStorageSync('toneQuality');
       if (toneQuality) {
         this.$store.commit(_mutationsTypes.SET_TONE_QUALITY, toneQuality);
+      }
+      // 播放模式
+      var playMode = uni.getStorageSync('playMode');
+      if (playMode) {
+        this.$store.commit(_mutationsTypes.SET_PLAY_MODE, playMode);
       }
     },
     hasPermission: function hasPermission() {
@@ -215,7 +223,8 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);
     },
     onEnded: function onEnded() {
       this.$store.commit(_mutationsTypes.SET_PAUSED, this.bam.paused);
-      this.$store.dispatch(_mutationsTypes.PLAY_NEXT);
+      // this.$store.dispatch(PLAY_NEXT)
+      this.$store.dispatch(_mutationsTypes.ON_ENDED);
     },
     onTimeUpdate: function onTimeUpdate() {
       this.$store.commit(_mutationsTypes.TIME_UPDATE, this.bam.currentTime);

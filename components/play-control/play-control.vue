@@ -7,11 +7,19 @@
       :class="{ 'play-control-wrapper': true, 'safe-area': !isTabBar }"
       :style="{ bottom: excludeHeight + 'px' }"
     >
-      <view
-        class="progress-bar"
-        :style="{ width: precent + '%' }"
-      />
       <view>
+        <div class="wrapper left">
+          <div
+            class="circle_progress left_circle"
+            :style="{ transform: `rotate(${rotate.left}deg)` }"
+          />
+        </div>
+        <div class="wrapper right">
+          <div
+            class="circle_progress right_circle"
+            :style="{ transform: `rotate(${rotate.right}deg)` }"
+          />
+        </div>
         <image :src="coverImgUrl" />
       </view>
       <view @click="toControlPage">
@@ -28,17 +36,19 @@
       </view>
       <view>
         <uni-icons
-          size="32"
+          size="26"
           color="#515151"
           custom-prefix="iconfont"
+          class="uni-icons"
           :type="paused ? 'icon-play-circle' : 'icon-pause-circle'"
           @click="playPause"
         />
         <uni-icons
-          size="32"
+          size="24"
           color="#515151"
-          style="margin-left: 8px;"
-          type="list"
+          custom-prefix="iconfont"
+          class="uni-icons"
+          type="icon-playlist"
           @click="visible = true"
         />
       </view>
@@ -87,6 +97,15 @@
       coverImgUrl () {
         const al = this.currentMusic.al || {}
         return al.picUrl ? `${al.picUrl}?param=64y64` : ''
+      },
+      rotate () {
+        // left: 225 ~ 405, right: 225 ~ 405
+        const left =  225 + 180 * ((this.precent - 50) / 100 * 2)
+        const right = 225 + 180 * (this.precent / 100 * 2)
+        return {
+          left: left < 225 ? 225 : left,
+          right: right > 405 ? 405: right
+        }
       },
       excludeHeight () {
         const { windowBottom } = uni.getSystemInfoSync()
@@ -142,22 +161,55 @@
     box-sizing: border-box;
     vertical-align: middle;
     position: relative;
-    z-index: 2;
-    &:nth-child(2) {
-      width: 56px;
-      height: 56px;
-      margin-top: -16px;
+    &:nth-child(1) {
+      width: 64px;
+      height: 64px;
+      margin-top: -24px;
+      position: relative;
       image {
-        width: 100%;
-        height: 100%;
+        width: calc(100% - 4px);
+        height: calc(100% - 4px);
+        margin: 2px;
         border-radius: 100%;
         background-color: #efefef;
-        border: 2px solid rgba(0, 0, 0, 0.1);
-        box-sizing: border-box;
+      }
+      .wrapper {
+        width: 32px;
+        height: 64px;
+        position: absolute;
+        top: 0;
+        overflow: hidden;
+      }
+      .right {
+        right: 0;
+      }
+      .left {
+        left: 0;
+      }
+      .circle_progress {
+        width: 58px;
+        height: 58px;
+        border: 3px solid rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        transform: rotate(45deg);
+      }
+      .right_circle {
+        border-top: 3px solid #EA2000;
+        border-right: 3px solid #EA2000;
+        right: 0;
+        transform: rotate(45deg);
+      }
+      .left_circle {
+        border-bottom: 3px solid #EA2000;
+        border-left: 3px solid #EA2000;
+        left: 0;
+        transform: rotate(225deg);
       }
     }
-    &:nth-child(3) {
-      width: calc(100% - 136px);
+    &:nth-child(2) {
+      width: calc(100% - 144px);
       height: 40px;
       line-height: 20px;
       padding-left: 8px;
@@ -193,11 +245,18 @@
         }
       }
     }
-    &:nth-child(4) {
-      width: 80px;
-      * {
+    &:nth-child(3) {
+      width: 70px;
+      .uni-icons {
+        width: 50%;
         display: inline-block;
         vertical-align: middle;
+        &:first-child {
+          text-align: left;
+        }
+        &:last-child {
+          text-align: right;
+        }
       }
     }
   }

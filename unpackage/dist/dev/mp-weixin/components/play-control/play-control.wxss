@@ -28,55 +28,102 @@
   box-sizing: border-box;
   vertical-align: middle;
   position: relative;
-  z-index: 2;
 }
-.play-control-wrapper > view.data-v-2a4ecc04:nth-child(2) {
-  width: 56px;
-  height: 56px;
-  margin-top: -16px;
+.play-control-wrapper > view.data-v-2a4ecc04:nth-child(1) {
+  width: 64px;
+  height: 64px;
+  margin-top: -24px;
+  position: relative;
 }
-.play-control-wrapper > view:nth-child(2) image.data-v-2a4ecc04 {
-  width: 100%;
-  height: 100%;
+.play-control-wrapper > view:nth-child(1) image.data-v-2a4ecc04 {
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  margin: 2px;
   border-radius: 100%;
   background-color: #efefef;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
 }
-.play-control-wrapper > view.data-v-2a4ecc04:nth-child(3) {
-  width: calc(100% - 136px);
+.play-control-wrapper > view:nth-child(1) .wrapper.data-v-2a4ecc04 {
+  width: 32px;
+  height: 64px;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+}
+.play-control-wrapper > view:nth-child(1) .right.data-v-2a4ecc04 {
+  right: 0;
+}
+.play-control-wrapper > view:nth-child(1) .left.data-v-2a4ecc04 {
+  left: 0;
+}
+.play-control-wrapper > view:nth-child(1) .circle_progress.data-v-2a4ecc04 {
+  width: 58px;
+  height: 58px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.play-control-wrapper > view:nth-child(1) .right_circle.data-v-2a4ecc04 {
+  border-top: 3px solid #EA2000;
+  border-right: 3px solid #EA2000;
+  right: 0;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.play-control-wrapper > view:nth-child(1) .left_circle.data-v-2a4ecc04 {
+  border-bottom: 3px solid #EA2000;
+  border-left: 3px solid #EA2000;
+  left: 0;
+  -webkit-transform: rotate(225deg);
+          transform: rotate(225deg);
+}
+.play-control-wrapper > view.data-v-2a4ecc04:nth-child(2) {
+  width: calc(100% - 144px);
   height: 40px;
   line-height: 20px;
   padding-left: 8px;
   font-size: 14px;
 }
-.play-control-wrapper > view:nth-child(3) view.data-v-2a4ecc04 {
+.play-control-wrapper > view:nth-child(2) view.data-v-2a4ecc04 {
   height: 50%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.play-control-wrapper > view:nth-child(3) > view:first-child > text.data-v-2a4ecc04:nth-child(2), .play-control-wrapper > view:nth-child(3) > view:first-child > text.data-v-2a4ecc04:nth-child(3) {
+.play-control-wrapper > view:nth-child(2) > view:first-child > text.data-v-2a4ecc04:nth-child(2), .play-control-wrapper > view:nth-child(2) > view:first-child > text.data-v-2a4ecc04:nth-child(3) {
   font-size: 12px;
   color: #515151;
 }
-.play-control-wrapper > view:nth-child(3) > view:first-child > text.data-v-2a4ecc04:nth-child(2) {
+.play-control-wrapper > view:nth-child(2) > view:first-child > text.data-v-2a4ecc04:nth-child(2) {
   margin: 0 4px;
 }
-.play-control-wrapper > view:nth-child(3) > view.data-v-2a4ecc04:last-child {
+.play-control-wrapper > view:nth-child(2) > view.data-v-2a4ecc04:last-child {
   font-size: 12px;
   color: #515151;
 }
-.play-control-wrapper > view:nth-child(3) > view:last-child > text.data-v-2a4ecc04 {
+.play-control-wrapper > view:nth-child(2) > view:last-child > text.data-v-2a4ecc04 {
   display: inline-block;
 }
-.play-control-wrapper > view:nth-child(3) > view:last-child > text.data-v-2a4ecc04:nth-child(1), .play-control-wrapper > view:nth-child(3) > view:last-child > text.data-v-2a4ecc04:nth-child(3) {
+.play-control-wrapper > view:nth-child(2) > view:last-child > text.data-v-2a4ecc04:nth-child(1), .play-control-wrapper > view:nth-child(2) > view:last-child > text.data-v-2a4ecc04:nth-child(3) {
   min-width: 36px;
 }
-.play-control-wrapper > view:nth-child(3) > view:last-child > text.data-v-2a4ecc04:nth-child(2) {
+.play-control-wrapper > view:nth-child(2) > view:last-child > text.data-v-2a4ecc04:nth-child(2) {
   margin-right: 4px;
 }
-.play-control-wrapper > view.data-v-2a4ecc04:nth-child(4) {
-  width: 80px;
+.play-control-wrapper > view.data-v-2a4ecc04:nth-child(3) {
+  width: 70px;
+}
+.play-control-wrapper > view:nth-child(3) .uni-icons.data-v-2a4ecc04 {
+  width: 50%;
+  display: inline-block;
+  vertical-align: middle;
+}
+.play-control-wrapper > view:nth-child(3) .uni-icons.data-v-2a4ecc04:first-child {
+  text-align: left;
+}
+.play-control-wrapper > view:nth-child(3) .uni-icons.data-v-2a4ecc04:last-child {
+  text-align: right;
 }
 

@@ -5,7 +5,9 @@
   "navigationBarTextStyle": "white",
   "usingComponents": {
     "uni-nav-bar": "/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar",
+    "text-scroll": "/components/text-scroll/text-scroll",
     "uni-icons": "/uni_modules/uni-icons/components/uni-icons/uni-icons",
+    "play-list": "/components/play-list/play-list",
     "lyric": "/pages/control/components/lyric"
   }
 }

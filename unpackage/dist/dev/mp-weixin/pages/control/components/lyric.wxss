@@ -9,7 +9,7 @@
 }
 .lyric-wrapper .lyric .lyric-item.data-v-391a6611 {
   min-height: 22px;
-  padding: 16px 24px;
+  padding: 16px 32px;
   font-size: 16px;
 }
 .lyric-wrapper .lyric .lyric-item.current.data-v-391a6611 {
@@ -24,24 +24,23 @@
 }
 .lyric-wrapper .lyric .scroll-time.data-v-391a6611 {
   position: fixed;
-  top: 40%;
-  right: 12px;
-  color: white;
+  top: calc(40% - 22px);
+  color: rgba(255, 255, 255, 0.65);
+  text-align: center;
 }
-.lyric-wrapper .lyric .scroll-time > view.data-v-391a6611, .lyric-wrapper .lyric .scroll-time > text.data-v-391a6611 {
+.lyric-wrapper .lyric .scroll-time .uni-icons.data-v-391a6611, .lyric-wrapper .lyric .scroll-time .ref-line.data-v-391a6611, .lyric-wrapper .lyric .scroll-time .time.data-v-391a6611 {
   display: inline-block;
   vertical-align: middle;
 }
-.lyric-wrapper .lyric .scroll-time > view.data-v-391a6611:first-child {
-  border-right: 9px solid rgba(255, 255, 255, 0.2);
-  border-top: 9px solid transparent;
-  border-bottom: 9px solid transparent;
-}
-.lyric-wrapper .lyric .scroll-time > text.data-v-391a6611 {
+.lyric-wrapper .lyric .scroll-time .uni-icons.data-v-391a6611 {
   width: 32px;
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 0 6px 0 4px;
-  font-size: 12px;
-  line-height: 1.5;
+}
+.lyric-wrapper .lyric .scroll-time .ref-line.data-v-391a6611 {
+  width: calc(100vw - 88px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+.lyric-wrapper .lyric .scroll-time .time.data-v-391a6611 {
+  font-size: 14px;
+  width: 56px;
 }
 
