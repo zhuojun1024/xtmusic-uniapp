@@ -15,7 +15,10 @@ import {
   PLAY_MODE_SEQUE,
   PLAY_MODE_REPEAT_ONE,
   PLAY_MODE_SHUFFLE,
-  ON_ENDED
+  ON_ENDED,
+  SET_LIKE_LIST_IDS,
+  ADD_LIKE_LIST_ID,
+  DEL_LIKE_LIST_ID
 } from '../mutations-types.js'
 const app = {
   state: {
@@ -32,7 +35,8 @@ const app = {
     currentMusicList: [],
     shuffleMusicList: [],
     toneQuality: 128000,
-    playMode: PLAY_MODE_SEQUE
+    playMode: PLAY_MODE_SEQUE,
+    likeListIds: []
   },
   mutations: {
     [RESET_STATE]: state => {
@@ -94,6 +98,18 @@ const app = {
           return 0.5 - Math.random()
         })
       }
+    },
+    [SET_LIKE_LIST_IDS]: (state, value) => {
+      state.likeListIds = value
+    },
+    [ADD_LIKE_LIST_ID]: (state, value) => {
+      state.likeListIds.push(value)
+    },
+    [DEL_LIKE_LIST_ID]: (state, value) => {
+      const index = state.likeListIds.indexOf(value)
+      if (index !== -1) {
+        state.likeListIds.splice(index, 1)
+      }
     }
   },
   actions: {
@@ -103,6 +119,7 @@ const app = {
       const params = { id, timestamp: id }
       uni.showLoading({ title: '获取播放地址' })
       return api.getMusicUrl(params).then(res => {
+        uni.hideLoading()
         if (res.data && res.data.length) {
           const url = res.data[0].url
           if (!url) {
@@ -124,14 +141,13 @@ const app = {
           commit(SET_CURRENT_MUSIC, currentMusic)
         }
       }).catch(e => {
+        uni.hideLoading()
         uni.showToast({
           icon: 'error',
           title: '播放失败：' + e
         })
         console.log('播放失败：', e)
         return Promise.reject(e)
-      }).finally(() => {
-        uni.hideLoading()
       })
     },
     // 播放下一首

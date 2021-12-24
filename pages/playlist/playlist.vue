@@ -106,8 +106,9 @@
         })
       },
       toTrack (item) {
+        const isLikeList = `${this.userInfo.nickname}喜欢的音乐` === item.name
         uni.navigateTo({
-          url: `/pages/playlist-track/playlist-track?id=${item.id}&name=${item.name}&type=${this.type}`
+          url: `/pages/playlist-track/playlist-track?id=${item.id}&name=${item.name}&type=${this.type}&showLiked=${!isLikeList}`
         })
       },
       getPlayList () {
@@ -144,15 +145,15 @@
     vertical-align: middle;
   }
   > view:first-child {
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     image {
       width: 100%;
       height: 100%;
     }
   }
   > view:last-child {
-    width: calc(100% - 80px);
+    width: calc(100% - 96px);
     padding-left: 8px;
     font-size: 14px;
     > view {

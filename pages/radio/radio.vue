@@ -111,15 +111,15 @@
     vertical-align: middle;
   }
   > view:first-child {
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     image {
       width: 100%;
       height: 100%;
     }
   }
   > view:last-child {
-    width: calc(100% - 80px);
+    width: calc(100% - 96px);
     padding-left: 8px;
     font-size: 14px;
     > view {

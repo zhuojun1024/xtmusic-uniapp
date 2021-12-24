@@ -18,20 +18,20 @@
       @clickLeft="back"
     >
       <view class="tab">
-         <text
-           :class="{ current: current === 0 }"
-           @click="handleCurrentChange(0)"
-         >
-           歌曲
-         </text>
-         <text class="divider" />
-         <text
-           :class="{ current: current === 1 }"
-           @click="handleCurrentChange(1)"
-         >
-           歌词
-         </text>
-       </view>
+        <text
+          :class="{ current: current === 0 }"
+          @click="handleCurrentChange(0)"
+        >
+          歌曲
+        </text>
+        <text class="divider" />
+        <text
+          :class="{ current: current === 1 }"
+          @click="handleCurrentChange(1)"
+        >
+          歌词
+        </text>
+      </view>
     </uni-nav-bar>
     <swiper
       class="swiper-box"
@@ -47,11 +47,31 @@
               <image :src="picUrl" />
             </view>
             <view class="music-info">
-              <text-scroll
-                class="music-name"
-                :text="currentMusic.name || '歌曲标题'"
-              />
-              <view>{{ currentMusic.ar || '歌手' }}</view>
+              <view>
+                <text-scroll
+                  class="music-name"
+                  :text="currentMusic.name || '歌曲标题'"
+                />
+                <view class="singer-name">{{ currentMusic.ar || '歌手' }}</view>
+              </view>
+              <view>
+                <uni-icons
+                  v-if="likeListIds.includes(currentMusic.id)"
+                  type="heart-filled"
+                  size="32"
+                  color="#EA2000"
+                  class="uni-icons"
+                  @click="updateLike(false)"
+                />
+                <uni-icons
+                  v-else
+                  type="heart"
+                  size="32"
+                  color="rgba(255, 255, 255, 0.5)"
+                  class="uni-icons"
+                  @click="updateLike(true)"
+                />
+              </view>
             </view>
           </view>
           <view class="progress-bar">
@@ -143,10 +163,13 @@
     SET_PLAY_MODE,
     PLAY_MODE_SEQUE,
     PLAY_MODE_REPEAT_ONE,
-    PLAY_MODE_SHUFFLE
+    PLAY_MODE_SHUFFLE,
+    ADD_LIKE_LIST_ID,
+    DEL_LIKE_LIST_ID
   } from '@/store/mutations-types.js'
   import { formatTime } from '@/utils/util.js'
   import lyric from './components/lyric.vue'
+  import api from './api.js'
   export default {
     components: { lyric },
     data () {
@@ -203,6 +226,9 @@
       excludeHeight () {
         const { windowTop, windowBottom } = uni.getSystemInfoSync()
         return (windowTop || 0) + (windowBottom || 0)
+      },
+      likeListIds () {
+        return this.$store.getters.likeListIds
       }
     },
     watch: {
@@ -230,6 +256,24 @@
         // #ifndef H5
         uni.setKeepScreenOn({ keepScreenOn })
         // #endif
+      },
+      updateLike (like) {
+        const timestamp = new Date().getTime()
+        const params = {
+          id: this.currentMusic.id,
+          like,
+          timestamp
+        }
+        api.updateLike(params).then(res => {
+          const operation = like ? ADD_LIKE_LIST_ID : DEL_LIKE_LIST_ID
+          this.$store.commit(operation, this.currentMusic.id)
+        }).catch(e => {
+          uni.showToast({
+            icon: 'error',
+            title: '请求失败'
+          })
+          console.error('喜欢/取消喜欢音乐失败：', e)
+        })
       },
       switchPlayMode () {
         const playMode = this.$store.getters.playMode
@@ -346,8 +390,8 @@
         text-align: center;
         image {
           // 减去导航栏、进度条、播放控制栏、歌曲信息的高度和margin
-          $image_max_size: calc(100vh - 336px - constant(safe-area-inset-bottom));
-          $image_max_size: calc(100vh - 336px - env(safe-area-inset-bottom));
+          $image_max_size: calc(100vh - 346px - constant(safe-area-inset-bottom));
+          $image_max_size: calc(100vh - 346px - env(safe-area-inset-bottom));
           width: calc(100vw - 64px);
           max-width: $image_max_size;
           height: calc(100vw - 64px);
@@ -361,16 +405,28 @@
         padding: 24px 32px;
         padding-top: 0;
         color: white;
-        .music-name {
-          font-size: 24px;
-          font-weight: 600;
-          line-height: 24px;
-        }
         > view {
-          color: rgba(255, 255, 255, 0.65);
-          margin-top: 12px;
-          font-size: 15px;
-          line-height: 15px;
+          display: inline-block;
+          vertical-align: middle;
+          &:first-child {
+            width: calc(100% - 48px);
+            .music-name {
+              font-size: 24px;
+              font-weight: 600;
+              line-height: 24px;
+            }
+            .singer-name {
+              color: rgba(255, 255, 255, 0.65);
+              margin-top: 12px;
+              font-size: 15px;
+              line-height: 15px;
+            }
+          }
+          &:last-child {
+            width: 48px;
+            line-height: 1;
+            text-align: right;
+          }
         }
       }
     }

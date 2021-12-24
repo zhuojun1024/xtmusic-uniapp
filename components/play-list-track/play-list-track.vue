@@ -15,6 +15,13 @@
         <view>
           <view>{{ item.name }}</view>
           <view>
+            <uni-icons
+              v-if="showLiked && likeListIds.includes(item.id)"
+              type="heart-filled"
+              size="12"
+              color="#EA2000"
+              style="margin-right: 4px;"
+            />
             <text
               v-if="item.fee === 1"
               class="tag-vip"
@@ -95,6 +102,10 @@
         type: Boolean,
         default: false
       },
+      showLiked: {
+        type: Boolean,
+        default: true
+      },
       height: {
         type: String,
         default: ''
@@ -109,6 +120,9 @@
     computed: {
       currentMusic () {
         return this.$store.getters.currentMusic
+      },
+      likeListIds () {
+        return this.$store.getters.likeListIds
       }
     },
     watch: {

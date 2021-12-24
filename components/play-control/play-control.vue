@@ -36,7 +36,7 @@
       </view>
       <view>
         <uni-icons
-          size="26"
+          size="28"
           color="#515151"
           custom-prefix="iconfont"
           class="uni-icons"
@@ -96,7 +96,7 @@
       },
       coverImgUrl () {
         const al = this.currentMusic.al || {}
-        return al.picUrl ? `${al.picUrl}?param=64y64` : ''
+        return al.picUrl ? `${al.picUrl}?param=128y128` : ''
       },
       rotate () {
         // left: 225 ~ 405, right: 225 ~ 405

@@ -171,6 +171,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _api = _interopRequireDefault(__webpack_require__(/*! ./api */ 71));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
@@ -187,7 +188,8 @@ var _api = _interopRequireDefault(__webpack_require__(/*! ./api */ 71));function
 //
 //
 //
-var _default = { data: function data() {return { id: undefined, data: [], type: 'user', offset: 0, limit: 30 };}, computed: { loadedData: function loadedData() {return this.data.slice(0, (this.offset + 1) * this.limit);}, excludeHeight: function excludeHeight() {var _uni$getSystemInfoSyn = uni.getSystemInfoSync(),windowTop = _uni$getSystemInfoSyn.windowTop,windowBottom = _uni$getSystemInfoSyn.windowBottom;
+//
+var _default = { data: function data() {return { id: undefined, data: [], type: 'user', offset: 0, limit: 30, showLiked: true };}, computed: { loadedData: function loadedData() {return this.data.slice(0, (this.offset + 1) * this.limit);}, excludeHeight: function excludeHeight() {var _uni$getSystemInfoSyn = uni.getSystemInfoSync(),windowTop = _uni$getSystemInfoSyn.windowTop,windowBottom = _uni$getSystemInfoSyn.windowBottom;
       return (windowTop || 0) + (windowBottom || 0);
     } },
 
@@ -195,6 +197,7 @@ var _default = { data: function data() {return { id: undefined, data: [], type: 
     // 保存参数
     this.id = option.id;
     this.type = option.type;
+    this.showLiked = option.showLiked === 'true' ? true : false;
     uni.setNavigationBarTitle({ title: option.name });
     // 请求歌单数据
     this.getPlayListTrack();

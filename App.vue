@@ -10,7 +10,8 @@
     PLAY_NEXT,
     SET_TONE_QUALITY,
     SET_PLAY_MODE,
-    ON_ENDED
+    ON_ENDED,
+    SET_LIKE_LIST_IDS
   } from '@/store/mutations-types.js'
 	export default {
     data () {
@@ -61,7 +62,9 @@
         if (!cookie) {
           uni.reLaunch({ url: '/pages/login/login' })
         } else if (!this.userInfo.userId) {
-          this.getUserInfo()
+          this.getUserInfo().finally(() => {
+            this.getLikeList()
+          })
         } else {
           // 如果已经有登录信息和用户信息，但是在登录页，则跳到首页
           const currentPages = getCurrentPages()
@@ -115,10 +118,18 @@
         this.$store.dispatch(PLAY_NEXT)
       },
       getUserInfo () {
-        this.$store.dispatch(GET_USER_INFO).then(res => {
+        return this.$store.dispatch(GET_USER_INFO).then(res => {
           uni.switchTab({ url: '/pages/search/search' })
         }).catch(() => {
           uni.reLaunch({ url: '/pages/login/login' })
+        })
+      },
+      getLikeList () {
+        const params = { uid: this.userInfo.userId }
+        api.getLikeList(params).then(res => {
+          this.$store.commit(SET_LIKE_LIST_IDS, res.ids || [])
+        }).catch(e => {
+          console.error('获取用户喜欢id列表失败：', e)
         })
       }
     }

@@ -134,6 +134,7 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);
 
 
 
+
 {
   data: function data() {
     return {
@@ -177,13 +178,15 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);
         this.$store.commit(_mutationsTypes.SET_PLAY_MODE, playMode);
       }
     },
-    hasPermission: function hasPermission() {
+    hasPermission: function hasPermission() {var _this2 = this;
       // 判断登录状态
       var cookie = uni.getStorageSync('cookie');
       if (!cookie) {
         uni.reLaunch({ url: '/pages/login/login' });
       } else if (!this.userInfo.userId) {
-        this.getUserInfo();
+        this.getUserInfo().finally(function () {
+          _this2.getLikeList();
+        });
       } else {
         // 如果已经有登录信息和用户信息，但是在登录页，则跳到首页
         var currentPages = getCurrentPages();
@@ -237,10 +240,18 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);
       this.$store.dispatch(_mutationsTypes.PLAY_NEXT);
     },
     getUserInfo: function getUserInfo() {
-      this.$store.dispatch(_mutationsTypes.GET_USER_INFO).then(function (res) {
+      return this.$store.dispatch(_mutationsTypes.GET_USER_INFO).then(function (res) {
         uni.switchTab({ url: '/pages/search/search' });
       }).catch(function () {
         uni.reLaunch({ url: '/pages/login/login' });
+      });
+    },
+    getLikeList: function getLikeList() {var _this3 = this;
+      var params = { uid: this.userInfo.userId };
+      _music.default.getLikeList(params).then(function (res) {
+        _this3.$store.commit(_mutationsTypes.SET_LIKE_LIST_IDS, res.ids || []);
+      }).catch(function (e) {
+        console.error('获取用户喜欢id列表失败：', e);
       });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

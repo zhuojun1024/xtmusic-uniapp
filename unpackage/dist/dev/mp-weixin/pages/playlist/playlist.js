@@ -264,8 +264,9 @@ var _default = { data: function data() {return { type: 'user', keyword: undefine
       });
     },
     toTrack: function toTrack(item) {
+      var isLikeList = "".concat(this.userInfo.nickname, "\u559C\u6B22\u7684\u97F3\u4E50") === item.name;
       uni.navigateTo({
-        url: "/pages/playlist-track/playlist-track?id=".concat(item.id, "&name=").concat(item.name, "&type=").concat(this.type) });
+        url: "/pages/playlist-track/playlist-track?id=".concat(item.id, "&name=").concat(item.name, "&type=").concat(this.type, "&showLiked=").concat(!isLikeList) });
 
     },
     getPlayList: function getPlayList() {var _this2 = this;

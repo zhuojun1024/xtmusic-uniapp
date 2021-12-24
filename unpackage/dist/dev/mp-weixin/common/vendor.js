@@ -4823,7 +4823,7 @@ module.exports = JSON.parse("{\"uni-search-bar.cancel\":\"cancel\",\"uni-search-
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.PLAY_MODE_SHUFFLE = exports.PLAY_MODE_REPEAT_ONE = exports.PLAY_MODE_SEQUE = exports.SET_PLAY_MODE = exports.ON_ENDED = exports.SET_TONE_QUALITY = exports.RESET_STATE = exports.TIME_UPDATE = exports.PLAY_PREV = exports.PLAY_NEXT = exports.PLAY_PAUSE = exports.SET_PAUSED = exports.SET_DURATION = exports.SET_CURRENT_TIME = exports.SET_CURRENT_MUSIC_LIST = exports.SET_CURRENT_MUSIC = exports.LOGIN_OUT = exports.GET_USER_INFO = exports.SET_USER_INFO = void 0; // app
+Object.defineProperty(exports, "__esModule", { value: true });exports.PLAY_MODE_SHUFFLE = exports.PLAY_MODE_REPEAT_ONE = exports.PLAY_MODE_SEQUE = exports.SET_PLAY_MODE = exports.DEL_LIKE_LIST_ID = exports.ADD_LIKE_LIST_ID = exports.SET_LIKE_LIST_IDS = exports.ON_ENDED = exports.SET_TONE_QUALITY = exports.RESET_STATE = exports.TIME_UPDATE = exports.PLAY_PREV = exports.PLAY_NEXT = exports.PLAY_PAUSE = exports.SET_PAUSED = exports.SET_DURATION = exports.SET_CURRENT_TIME = exports.SET_CURRENT_MUSIC_LIST = exports.SET_CURRENT_MUSIC = exports.LOGIN_OUT = exports.GET_USER_INFO = exports.SET_USER_INFO = void 0; // app
 var SET_USER_INFO = 'SET_USER_INFO';exports.SET_USER_INFO = SET_USER_INFO;
 var GET_USER_INFO = 'GET_USER_INFO';exports.GET_USER_INFO = GET_USER_INFO;
 var LOGIN_OUT = 'LOGIN_OUT';
@@ -4840,9 +4840,12 @@ var PLAY_PREV = 'PLAY_PREV';exports.PLAY_PREV = PLAY_PREV;
 var TIME_UPDATE = 'TIME_UPDATE';exports.TIME_UPDATE = TIME_UPDATE;
 var RESET_STATE = 'RESET_STATE';exports.RESET_STATE = RESET_STATE;
 var SET_TONE_QUALITY = 'SET_TONE_QUALITY';exports.SET_TONE_QUALITY = SET_TONE_QUALITY;
-var ON_ENDED = 'ON_ENDED';
+var ON_ENDED = 'ON_ENDED';exports.ON_ENDED = ON_ENDED;
+var SET_LIKE_LIST_IDS = 'SET_LIKE_LIST_IDS';exports.SET_LIKE_LIST_IDS = SET_LIKE_LIST_IDS;
+var ADD_LIKE_LIST_ID = 'ADD_LIKE_LIST_ID';exports.ADD_LIKE_LIST_ID = ADD_LIKE_LIST_ID;
+var DEL_LIKE_LIST_ID = 'DEL_LIKE_LIST_ID';
 // play mode
-exports.ON_ENDED = ON_ENDED;var SET_PLAY_MODE = 'SET_PLAY_MODE';exports.SET_PLAY_MODE = SET_PLAY_MODE;
+exports.DEL_LIKE_LIST_ID = DEL_LIKE_LIST_ID;var SET_PLAY_MODE = 'SET_PLAY_MODE';exports.SET_PLAY_MODE = SET_PLAY_MODE;
 var PLAY_MODE_SEQUE = 'PLAY_MODE_SEQUE';exports.PLAY_MODE_SEQUE = PLAY_MODE_SEQUE;
 var PLAY_MODE_REPEAT_ONE = 'PLAY_MODE_REPEAT_ONE';exports.PLAY_MODE_REPEAT_ONE = PLAY_MODE_REPEAT_ONE;
 var PLAY_MODE_SHUFFLE = 'PLAY_MODE_SHUFFLE';exports.PLAY_MODE_SHUFFLE = PLAY_MODE_SHUFFLE;
@@ -4876,6 +4879,9 @@ var _mutationsTypes = __webpack_require__(/*! ../mutations-types.js */ 15);var _
 
 
 
+
+
+
 var app = {
   state: {
 
@@ -4891,7 +4897,8 @@ var app = {
     currentMusicList: [],
     shuffleMusicList: [],
     toneQuality: 128000,
-    playMode: _mutationsTypes.PLAY_MODE_SEQUE },
+    playMode: _mutationsTypes.PLAY_MODE_SEQUE,
+    likeListIds: [] },
 
   mutations: (_mutations = {}, _defineProperty(_mutations,
   _mutationsTypes.RESET_STATE, function (state) {
@@ -4953,6 +4960,18 @@ var app = {
         return 0.5 - Math.random();
       });
     }
+  }), _defineProperty(_mutations,
+  _mutationsTypes.SET_LIKE_LIST_IDS, function (state, value) {
+    state.likeListIds = value;
+  }), _defineProperty(_mutations,
+  _mutationsTypes.ADD_LIKE_LIST_ID, function (state, value) {
+    state.likeListIds.push(value);
+  }), _defineProperty(_mutations,
+  _mutationsTypes.DEL_LIKE_LIST_ID, function (state, value) {
+    var index = state.likeListIds.indexOf(value);
+    if (index !== -1) {
+      state.likeListIds.splice(index, 1);
+    }
   }), _mutations),
 
   actions: (_actions = {}, _defineProperty(_actions,
@@ -4962,6 +4981,7 @@ var app = {
     var params = { id: id, timestamp: id };
     uni.showLoading({ title: '获取播放地址' });
     return _music.default.getMusicUrl(params).then(function (res) {
+      uni.hideLoading();
       if (res.data && res.data.length) {
         var url = res.data[0].url;
         if (!url) {
@@ -4983,14 +5003,13 @@ var app = {
         commit(_mutationsTypes.SET_CURRENT_MUSIC, currentMusic);
       }
     }).catch(function (e) {
+      uni.hideLoading();
       uni.showToast({
         icon: 'error',
         title: '播放失败：' + e });
 
       console.log('播放失败：', e);
       return Promise.reject(e);
-    }).finally(function () {
-      uni.hideLoading();
     });
   }), _defineProperty(_actions,
 
@@ -5075,7 +5094,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   windowTop: function windowTop(state) {return state.app.windowTop;},
   windowBottom: function windowBottom(state) {return state.app.windowBottom;},
   toneQuality: function toneQuality(state) {return state.playControl.toneQuality;},
-  playMode: function playMode(state) {return state.playControl.playMode;} };var _default =
+  playMode: function playMode(state) {return state.playControl.playMode;},
+  likeListIds: function likeListIds(state) {return state.playControl.likeListIds;} };var _default =
 
 
 getters;exports.default = _default;
@@ -5107,7 +5127,167 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 199:
+/***/ 2:
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ 20:
+/*!**********************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
+  \**********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+function normalizeComponent (
+  scriptExports,
+  render,
+  staticRenderFns,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier, /* server only */
+  shadowMode, /* vue-cli only */
+  components, // fixed by xxxxxx auto components
+  renderjs // fixed by xxxxxx renderjs
+) {
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // fixed by xxxxxx auto components
+  if (components) {
+    if (!options.components) {
+      options.components = {}
+    }
+    var hasOwn = Object.prototype.hasOwnProperty
+    for (var name in components) {
+      if (hasOwn.call(components, name) && !hasOwn.call(options.components, name)) {
+        options.components[name] = components[name]
+      }
+    }
+  }
+  // fixed by xxxxxx renderjs
+  if (renderjs) {
+    (renderjs.beforeCreate || (renderjs.beforeCreate = [])).unshift(function() {
+      this[renderjs.__module] = this
+    });
+    (options.mixins || (options.mixins = [])).push(renderjs)
+  }
+
+  // render functions
+  if (render) {
+    options.render = render
+    options.staticRenderFns = staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = 'data-v-' + scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = shadowMode
+      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      : injectStyles
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      var originalRender = options.render
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return originalRender(h, context)
+      }
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    }
+  }
+
+  return {
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+
+/***/ 206:
 /*!*************************************************************************************************************************!*\
   !*** C:/Users/SYN-ZJ-021/Documents/HBuilderProjects/xtmusic-uniapp/uni_modules/uni-icons/components/uni-icons/icons.js ***!
   \*************************************************************************************************************************/
@@ -6230,167 +6410,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 2:
-/*!***********************************!*\
-  !*** (webpack)/buildin/global.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ 20:
-/*!**********************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
-  \**********************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-function normalizeComponent (
-  scriptExports,
-  render,
-  staticRenderFns,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier, /* server only */
-  shadowMode, /* vue-cli only */
-  components, // fixed by xxxxxx auto components
-  renderjs // fixed by xxxxxx renderjs
-) {
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // fixed by xxxxxx auto components
-  if (components) {
-    if (!options.components) {
-      options.components = {}
-    }
-    var hasOwn = Object.prototype.hasOwnProperty
-    for (var name in components) {
-      if (hasOwn.call(components, name) && !hasOwn.call(options.components, name)) {
-        options.components[name] = components[name]
-      }
-    }
-  }
-  // fixed by xxxxxx renderjs
-  if (renderjs) {
-    (renderjs.beforeCreate || (renderjs.beforeCreate = [])).unshift(function() {
-      this[renderjs.__module] = this
-    });
-    (options.mixins || (options.mixins = [])).push(renderjs)
-  }
-
-  // render functions
-  if (render) {
-    options.render = render
-    options.staticRenderFns = staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = 'data-v-' + scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
-      : injectStyles
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      var originalRender = options.render
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return originalRender(h, context)
-      }
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    }
-  }
-
-  return {
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-
-/***/ 207:
+/***/ 221:
 /*!******************************************************************************************!*\
   !*** C:/Users/SYN-ZJ-021/Documents/HBuilderProjects/xtmusic-uniapp/pages/control/api.js ***!
   \******************************************************************************************/
@@ -6401,14 +6421,16 @@ var request = __webpack_require__(/*! @/request/index.js */ 14);
 
 var apis = {
   // 获取歌词
-  getLyric: function getLyric(data) {return request('/lyric', 'post', data);} };
+  getLyric: function getLyric(data) {return request('/lyric', 'post', data);},
+  // 喜欢/取消喜欢音乐
+  updateLike: function updateLike(data) {return request('/like', 'post', data);} };
 
 
 module.exports = apis;
 
 /***/ }),
 
-/***/ 236:
+/***/ 250:
 /*!*************************************************************************************************************************!*\
   !*** C:/Users/SYN-ZJ-021/Documents/HBuilderProjects/xtmusic-uniapp/uni_modules/uni-popup/components/uni-popup/popup.js ***!
   \*************************************************************************************************************************/
@@ -6443,7 +6465,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 237:
+/***/ 251:
 /*!******************************************************************************************************************************!*\
   !*** C:/Users/SYN-ZJ-021/Documents/HBuilderProjects/xtmusic-uniapp/uni_modules/uni-popup/components/uni-popup/i18n/index.js ***!
   \******************************************************************************************************************************/
@@ -6451,9 +6473,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 238));
-var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 239));
-var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 240));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 252));
+var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 253));
+var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 254));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 {
   en: _en.default,
   'zh-Hans': _zhHans.default,
@@ -6461,7 +6483,7 @@ var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 2
 
 /***/ }),
 
-/***/ 238:
+/***/ 252:
 /*!*****************************************************************************************************************************!*\
   !*** C:/Users/SYN-ZJ-021/Documents/HBuilderProjects/xtmusic-uniapp/uni_modules/uni-popup/components/uni-popup/i18n/en.json ***!
   \*****************************************************************************************************************************/
@@ -6472,7 +6494,7 @@ module.exports = JSON.parse("{\"uni-popup.cancel\":\"cancel\",\"uni-popup.ok\":\
 
 /***/ }),
 
-/***/ 239:
+/***/ 253:
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/SYN-ZJ-021/Documents/HBuilderProjects/xtmusic-uniapp/uni_modules/uni-popup/components/uni-popup/i18n/zh-Hans.json ***!
   \**********************************************************************************************************************************/
@@ -6483,7 +6505,7 @@ module.exports = JSON.parse("{\"uni-popup.cancel\":\"取消\",\"uni-popup.ok\":\
 
 /***/ }),
 
-/***/ 240:
+/***/ 254:
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/SYN-ZJ-021/Documents/HBuilderProjects/xtmusic-uniapp/uni_modules/uni-popup/components/uni-popup/i18n/zh-Hant.json ***!
   \**********************************************************************************************************************************/
@@ -6494,7 +6516,7 @@ module.exports = JSON.parse("{\"uni-popup.cancel\":\"取消\",\"uni-popup.ok\":\
 
 /***/ }),
 
-/***/ 255:
+/***/ 262:
 /*!**************************************************************************************************************************************!*\
   !*** C:/Users/SYN-ZJ-021/Documents/HBuilderProjects/xtmusic-uniapp/uni_modules/uni-load-more/components/uni-load-more/i18n/index.js ***!
   \**************************************************************************************************************************************/
@@ -6502,9 +6524,9 @@ module.exports = JSON.parse("{\"uni-popup.cancel\":\"取消\",\"uni-popup.ok\":\
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 256));
-var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 257));
-var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 258));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 263));
+var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 264));
+var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 265));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 {
   en: _en.default,
   'zh-Hans': _zhHans.default,
@@ -6512,7 +6534,7 @@ var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 2
 
 /***/ }),
 
-/***/ 256:
+/***/ 263:
 /*!*************************************************************************************************************************************!*\
   !*** C:/Users/SYN-ZJ-021/Documents/HBuilderProjects/xtmusic-uniapp/uni_modules/uni-load-more/components/uni-load-more/i18n/en.json ***!
   \*************************************************************************************************************************************/
@@ -6523,7 +6545,7 @@ module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"Pull up to show mo
 
 /***/ }),
 
-/***/ 257:
+/***/ 264:
 /*!******************************************************************************************************************************************!*\
   !*** C:/Users/SYN-ZJ-021/Documents/HBuilderProjects/xtmusic-uniapp/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hans.json ***!
   \******************************************************************************************************************************************/
@@ -6534,7 +6556,7 @@ module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉显示更多
 
 /***/ }),
 
-/***/ 258:
+/***/ 265:
 /*!******************************************************************************************************************************************!*\
   !*** C:/Users/SYN-ZJ-021/Documents/HBuilderProjects/xtmusic-uniapp/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hant.json ***!
   \******************************************************************************************************************************************/
@@ -6545,7 +6567,7 @@ module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉顯示更多
 
 /***/ }),
 
-/***/ 273:
+/***/ 280:
 /*!*********************************************************************************************************************************************!*\
   !*** C:/Users/SYN-ZJ-021/Documents/HBuilderProjects/xtmusic-uniapp/uni_modules/uni-transition/components/uni-transition/createAnimation.js ***!
   \*********************************************************************************************************************************************/
@@ -13605,14 +13627,16 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 var _request = _interopRequireDefault(__webpack_require__(/*! @/request */ 14));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 
 var music = {
-  // 获取播放地址，限制192kbps码率
+  // 获取播放地址
   getMusicUrl: function getMusicUrl(data) {return (0, _request.default)('/song/url', 'post', _objectSpread({ br: _index.default.getters.toneQuality }, data));},
   // 搜索歌曲列表
   cloudSearch: function cloudSearch(data) {return (0, _request.default)('/cloudsearch', 'post', data);},
   // 获取用户歌单
   getPlayList: function getPlayList(data) {return (0, _request.default)('/user/playlist', 'post', data);},
   // 对歌单添加或删除歌曲
-  updatePlayListTracks: function updatePlayListTracks(data) {return (0, _request.default)('/playlist/tracks', 'post', data);} };var _default =
+  updatePlayListTracks: function updatePlayListTracks(data) {return (0, _request.default)('/playlist/tracks', 'post', data);},
+  // 获取用户喜欢的音乐id列表
+  getLikeList: function getLikeList(data) {return (0, _request.default)('/likelist', 'post', data);} };var _default =
 
 
 music;exports.default = _default;

@@ -63,9 +63,9 @@
 }
 .control-wrapper .control-content .cover-wrapper .pic image.data-v-0ec1947c {
   width: calc(100vw - 64px);
-  max-width: calc(100vh - 336px - env(safe-area-inset-bottom));
+  max-width: calc(100vh - 346px - env(safe-area-inset-bottom));
   height: calc(100vw - 64px);
-  max-height: calc(100vh - 336px - env(safe-area-inset-bottom));
+  max-height: calc(100vh - 346px - env(safe-area-inset-bottom));
   margin: 24px 0;
   border-radius: 12px;
   background-color: #999999;
@@ -75,16 +75,28 @@
   padding-top: 0;
   color: white;
 }
-.control-wrapper .control-content .cover-wrapper .music-info .music-name.data-v-0ec1947c {
+.control-wrapper .control-content .cover-wrapper .music-info > view.data-v-0ec1947c {
+  display: inline-block;
+  vertical-align: middle;
+}
+.control-wrapper .control-content .cover-wrapper .music-info > view.data-v-0ec1947c:first-child {
+  width: calc(100% - 48px);
+}
+.control-wrapper .control-content .cover-wrapper .music-info > view:first-child .music-name.data-v-0ec1947c {
   font-size: 24px;
   font-weight: 600;
   line-height: 24px;
 }
-.control-wrapper .control-content .cover-wrapper .music-info > view.data-v-0ec1947c {
+.control-wrapper .control-content .cover-wrapper .music-info > view:first-child .singer-name.data-v-0ec1947c {
   color: rgba(255, 255, 255, 0.65);
   margin-top: 12px;
   font-size: 15px;
   line-height: 15px;
+}
+.control-wrapper .control-content .cover-wrapper .music-info > view.data-v-0ec1947c:last-child {
+  width: 48px;
+  line-height: 1;
+  text-align: right;
 }
 .control-wrapper .control-content .progress-bar.data-v-0ec1947c {
   height: 40px;

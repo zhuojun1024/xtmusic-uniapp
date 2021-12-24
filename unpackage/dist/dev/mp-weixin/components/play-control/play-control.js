@@ -80,10 +80,10 @@ var components
 try {
   components = {
     uniIcons: function() {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 194))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 201))
     },
     playList: function() {
-      return __webpack_require__.e(/*! import() | components/play-list/play-list */ "components/play-list/play-list").then(__webpack_require__.bind(null, /*! @/components/play-list/play-list.vue */ 243))
+      return __webpack_require__.e(/*! import() | components/play-list/play-list */ "components/play-list/play-list").then(__webpack_require__.bind(null, /*! @/components/play-list/play-list.vue */ 209))
     }
   }
 } catch (e) {
@@ -275,7 +275,7 @@ var _util = __webpack_require__(/*! @/utils/util.js */ 78); //
 //
 //
 //
-var _default = { name: "play-control", props: { isTabBar: { type: Boolean, default: true } }, data: function data() {return { visible: false };}, computed: { currentMusic: function currentMusic() {return this.$store.getters.currentMusic;}, currentTime: function currentTime() {return (0, _util.formatTime)(this.$store.getters.currentTime);}, duration: function duration() {return (0, _util.formatTime)(this.$store.getters.duration);}, precent: function precent() {var currentTime = this.$store.getters.currentTime || 0;var duration = this.$store.getters.duration || 1;return currentTime / duration * 100;}, paused: function paused() {return this.$store.getters.paused;}, coverImgUrl: function coverImgUrl() {var al = this.currentMusic.al || {};return al.picUrl ? "".concat(al.picUrl, "?param=64y64") : '';}, rotate: function rotate() {// left: 225 ~ 405, right: 225 ~ 405
+var _default = { name: "play-control", props: { isTabBar: { type: Boolean, default: true } }, data: function data() {return { visible: false };}, computed: { currentMusic: function currentMusic() {return this.$store.getters.currentMusic;}, currentTime: function currentTime() {return (0, _util.formatTime)(this.$store.getters.currentTime);}, duration: function duration() {return (0, _util.formatTime)(this.$store.getters.duration);}, precent: function precent() {var currentTime = this.$store.getters.currentTime || 0;var duration = this.$store.getters.duration || 1;return currentTime / duration * 100;}, paused: function paused() {return this.$store.getters.paused;}, coverImgUrl: function coverImgUrl() {var al = this.currentMusic.al || {};return al.picUrl ? "".concat(al.picUrl, "?param=128y128") : '';}, rotate: function rotate() {// left: 225 ~ 405, right: 225 ~ 405
       var left = 225 + 180 * ((this.precent - 50) / 100 * 2);var right = 225 + 180 * (this.precent / 100 * 2);return { left: left < 225 ? 225 : left, right: right > 405 ? 405 : right };}, excludeHeight: function excludeHeight() {var _uni$getSystemInfoSyn = uni.getSystemInfoSync(),windowBottom = _uni$getSystemInfoSyn.windowBottom;return windowBottom || 0;} }, watch: { visible: function visible(newVal) {if (newVal) {uni.hideTabBar({ animation: true });} else {uni.showTabBar({ animation: true });}} }, methods: { toControlPage: function toControlPage() {uni.navigateTo({ url: '/pages/control/control' });
     },
     playPause: function playPause() {

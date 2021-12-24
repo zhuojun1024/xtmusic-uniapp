@@ -6,6 +6,7 @@
       :p-id="id"
       :show-add="type === 'search'"
       :show-del="type === 'user'"
+      :show-liked="showLiked"
       @refresh="getPlayListTrack"
       @scrolltolower="onScrollToLower"
     >
@@ -23,7 +24,8 @@
         data: [],
         type: 'user',
         offset: 0,
-        limit: 30
+        limit: 30,
+        showLiked: true
       }
     },
     computed: {
@@ -39,6 +41,7 @@
       // 保存参数
       this.id = option.id
       this.type = option.type
+      this.showLiked = option.showLiked === 'true' ? true : false
       uni.setNavigationBarTitle({ title: option.name })
       // 请求歌单数据
       this.getPlayListTrack()

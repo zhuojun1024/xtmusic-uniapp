@@ -9,7 +9,8 @@ const getters = {
   windowTop: state => state.app.windowTop,
   windowBottom: state => state.app.windowBottom,
   toneQuality: state => state.playControl.toneQuality,
-  playMode: state => state.playControl.playMode
+  playMode: state => state.playControl.playMode,
+  likeListIds: state => state.playControl.likeListIds
 }
 
 export default getters

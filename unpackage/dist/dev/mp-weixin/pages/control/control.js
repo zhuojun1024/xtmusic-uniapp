@@ -99,13 +99,13 @@ try {
       return __webpack_require__.e(/*! import() | uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar */ "uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar.vue */ 187))
     },
     textScroll: function() {
-      return __webpack_require__.e(/*! import() | components/text-scroll/text-scroll */ "components/text-scroll/text-scroll").then(__webpack_require__.bind(null, /*! @/components/text-scroll/text-scroll.vue */ 304))
+      return __webpack_require__.e(/*! import() | components/text-scroll/text-scroll */ "components/text-scroll/text-scroll").then(__webpack_require__.bind(null, /*! @/components/text-scroll/text-scroll.vue */ 194))
     },
     uniIcons: function() {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 194))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 201))
     },
     playList: function() {
-      return __webpack_require__.e(/*! import() | components/play-list/play-list */ "components/play-list/play-list").then(__webpack_require__.bind(null, /*! @/components/play-list/play-list.vue */ 243))
+      return __webpack_require__.e(/*! import() | components/play-list/play-list */ "components/play-list/play-list").then(__webpack_require__.bind(null, /*! @/components/play-list/play-list.vue */ 209))
     }
   }
 } catch (e) {
@@ -129,6 +129,8 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var g0 = _vm.likeListIds.includes(_vm.currentMusic.id)
+
   if (!_vm._isMounted) {
     _vm.e0 = function(e) {
       return _vm.handleCurrentChange(e.detail.current)
@@ -142,6 +144,15 @@ var render = function() {
       return (_vm.visible = v)
     }
   }
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        g0: g0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -312,6 +323,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);
 
 
@@ -322,7 +353,11 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);
 
 
 
-var _util = __webpack_require__(/*! @/utils/util.js */ 78); //
+
+
+var _util = __webpack_require__(/*! @/utils/util.js */ 78);
+
+var _api = _interopRequireDefault(__webpack_require__(/*! ./api.js */ 221));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
 //
@@ -458,11 +493,31 @@ var _util = __webpack_require__(/*! @/utils/util.js */ 78); //
 //
 //
 //
-var lyric = function lyric() {Promise.all(/*! require.ensure | pages/control/components/lyric */[__webpack_require__.e("common/vendor"), __webpack_require__.e("pages/control/components/lyric")]).then((function () {return resolve(__webpack_require__(/*! ./components/lyric.vue */ 202));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { lyric: lyric }, data: function data() {return { visible: false, current: 0, changing: false, changingValue: 0, timer: undefined, playModeOptions: [{ name: '顺序播放', value: _mutationsTypes.PLAY_MODE_SEQUE, icon: 'icon-repeat' }, { name: '单曲循环', value: _mutationsTypes.PLAY_MODE_REPEAT_ONE, icon: 'icon-repeatOnce' }, { name: '随机播放', value: _mutationsTypes.PLAY_MODE_SHUFFLE, icon: 'icon-shuffle' }] };}, computed: { currentMusic: function currentMusic() {return this.$store.getters.currentMusic;}, picUrl: function picUrl() {var al = this.currentMusic.al || {};return al.picUrl ? "".concat(al.picUrl, "?param=512y512") : '';}, picUrlBg: function picUrlBg() {var al = this.currentMusic.al || {};return al.picUrl ? "".concat(al.picUrl, "?param=1y1") : '';}, currentTime: function currentTime() {if (this.changing) {return (0, _util.formatTime)(this.$store.getters.duration * this.changingValue / 100);}return (0, _util.formatTime)(this.$store.getters.currentTime);}, duration: function duration() {return (0, _util.formatTime)(this.$store.getters.duration);}, precent: function precent() {if (this.changing) {return this.changingValue;}var currentTime = this.$store.getters.currentTime || 0;var duration = this.$store.getters.duration || 1;return currentTime / duration * 100;}, paused: function paused() {return this.$store.getters.paused;}, playModeIcon: function playModeIcon() {var playMode = this.$store.getters.playMode;var option = this.playModeOptions.find(function (item) {return item.value === playMode;});return option.icon;}, excludeHeight: function excludeHeight() {var _uni$getSystemInfoSyn = uni.getSystemInfoSync(),windowTop = _uni$getSystemInfoSyn.windowTop,windowBottom = _uni$getSystemInfoSyn.windowBottom;return (windowTop || 0) + (windowBottom || 0);} }, watch: { current: function current(newVal) {// 屏幕常亮判断
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var lyric = function lyric() {__webpack_require__.e(/*! require.ensure | pages/control/components/lyric */ "pages/control/components/lyric").then((function () {return resolve(__webpack_require__(/*! ./components/lyric.vue */ 216));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { lyric: lyric }, data: function data() {return { visible: false, current: 0, changing: false, changingValue: 0, timer: undefined, playModeOptions: [{ name: '顺序播放', value: _mutationsTypes.PLAY_MODE_SEQUE, icon: 'icon-repeat' }, { name: '单曲循环', value: _mutationsTypes.PLAY_MODE_REPEAT_ONE, icon: 'icon-repeatOnce' }, { name: '随机播放', value: _mutationsTypes.PLAY_MODE_SHUFFLE, icon: 'icon-shuffle' }] };}, computed: { currentMusic: function currentMusic() {return this.$store.getters.currentMusic;}, picUrl: function picUrl() {var al = this.currentMusic.al || {};return al.picUrl ? "".concat(al.picUrl, "?param=512y512") : '';}, picUrlBg: function picUrlBg() {var al = this.currentMusic.al || {};return al.picUrl ? "".concat(al.picUrl, "?param=1y1") : '';}, currentTime: function currentTime() {if (this.changing) {return (0, _util.formatTime)(this.$store.getters.duration * this.changingValue / 100);}return (0, _util.formatTime)(this.$store.getters.currentTime);}, duration: function duration() {return (0, _util.formatTime)(this.$store.getters.duration);}, precent: function precent() {if (this.changing) {return this.changingValue;}var currentTime = this.$store.getters.currentTime || 0;var duration = this.$store.getters.duration || 1;return currentTime / duration * 100;}, paused: function paused() {return this.$store.getters.paused;}, playModeIcon: function playModeIcon() {var playMode = this.$store.getters.playMode;var option = this.playModeOptions.find(function (item) {return item.value === playMode;});return option.icon;}, excludeHeight: function excludeHeight() {var _uni$getSystemInfoSyn = uni.getSystemInfoSync(),windowTop = _uni$getSystemInfoSyn.windowTop,windowBottom = _uni$getSystemInfoSyn.windowBottom;return (windowTop || 0) + (windowBottom || 0);}, likeListIds: function likeListIds() {return this.$store.getters.likeListIds;} }, watch: { current: function current(newVal) {// 屏幕常亮判断
       this.setKeepScreenOn(newVal === 1);} }, onShow: function onShow() {// 屏幕常亮
     if (this.current === 1) {this.setKeepScreenOn(true);}}, onHide: function onHide() {// 取消屏幕常亮
     this.setKeepScreenOn(false);}, onUnload: function onUnload() {// 取消屏幕常亮
-    this.setKeepScreenOn(false);}, methods: { setKeepScreenOn: function setKeepScreenOn(keepScreenOn) {uni.setKeepScreenOn({ keepScreenOn: keepScreenOn });}, switchPlayMode: function switchPlayMode() {var playMode = this.$store.getters.playMode;var index = this.playModeOptions.findIndex(function (item) {return item.value === playMode;});var option;if (index < this.playModeOptions.length - 1) {option = this.playModeOptions[index + 1];} else {option = this.playModeOptions[0];}this.$store.commit(_mutationsTypes.SET_PLAY_MODE, option.value);uni.showToast({ icon: 'none', title: option.name });}, back: function back() {uni.navigateBack({ delta: 1 });}, handleCurrentChange: function handleCurrentChange(current) {this.current = current;}, handleChanging: function handleChanging(e) {this.changingValue = e.detail.value;this.changing = true;}, showLyric: function showLyric() {uni.navigateTo({ url: '/pages/lyric/lyric' });}, handleChange: function handleChange(e) {var precent = e.detail.value;var duration = this.$store.getters.duration || 0;this.$store.commit(_mutationsTypes.SET_CURRENT_TIME, duration * precent / 100);this.changing = false;}, playPause: function playPause() {this.$store.commit(_mutationsTypes.PLAY_PAUSE);}, playPrev: function playPrev() {this.$store.dispatch(_mutationsTypes.PLAY_PREV);}, playNext: function playNext() {this.$store.dispatch(_mutationsTypes.PLAY_NEXT);} } };exports.default = _default;
+    this.setKeepScreenOn(false);}, methods: { setKeepScreenOn: function setKeepScreenOn(keepScreenOn) {uni.setKeepScreenOn({ keepScreenOn: keepScreenOn });}, updateLike: function updateLike(like) {var _this = this;var timestamp = new Date().getTime();var params = { id: this.currentMusic.id, like: like, timestamp: timestamp };_api.default.updateLike(params).then(function (res) {var operation = like ? _mutationsTypes.ADD_LIKE_LIST_ID : _mutationsTypes.DEL_LIKE_LIST_ID;_this.$store.commit(operation, _this.currentMusic.id);}).catch(function (e) {uni.showToast({ icon: 'error', title: '请求失败' });console.error('喜欢/取消喜欢音乐失败：', e);});}, switchPlayMode: function switchPlayMode() {var playMode = this.$store.getters.playMode;var index = this.playModeOptions.findIndex(function (item) {return item.value === playMode;});var option;if (index < this.playModeOptions.length - 1) {option = this.playModeOptions[index + 1];} else {option = this.playModeOptions[0];}this.$store.commit(_mutationsTypes.SET_PLAY_MODE, option.value);uni.showToast({ icon: 'none', title: option.name });}, back: function back() {uni.navigateBack({ delta: 1 });}, handleCurrentChange: function handleCurrentChange(current) {this.current = current;}, handleChanging: function handleChanging(e) {this.changingValue = e.detail.value;this.changing = true;}, showLyric: function showLyric() {uni.navigateTo({ url: '/pages/lyric/lyric' });}, handleChange: function handleChange(e) {var precent = e.detail.value;var duration = this.$store.getters.duration || 0;this.$store.commit(_mutationsTypes.SET_CURRENT_TIME, duration * precent / 100);this.changing = false;}, playPause: function playPause() {this.$store.commit(_mutationsTypes.PLAY_PAUSE);}, playPrev: function playPrev() {this.$store.dispatch(_mutationsTypes.PLAY_PREV);}, playNext: function playNext() {this.$store.dispatch(_mutationsTypes.PLAY_NEXT);} } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

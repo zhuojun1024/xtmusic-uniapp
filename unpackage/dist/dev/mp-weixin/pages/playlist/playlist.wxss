@@ -10,15 +10,15 @@
   vertical-align: middle;
 }
 .playlist-item > view.data-v-8204ba74:first-child {
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
 }
 .playlist-item > view:first-child image.data-v-8204ba74 {
   width: 100%;
   height: 100%;
 }
 .playlist-item > view.data-v-8204ba74:last-child {
-  width: calc(100% - 80px);
+  width: calc(100% - 96px);
   padding-left: 8px;
   font-size: 14px;
 }

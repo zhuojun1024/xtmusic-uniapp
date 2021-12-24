@@ -80,16 +80,16 @@ var components
 try {
   components = {
     uniIcons: function() {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 194))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 201))
     },
     playListTrackAdd: function() {
-      return __webpack_require__.e(/*! import() | components/play-list-track-add/play-list-track-add */ "components/play-list-track-add/play-list-track-add").then(__webpack_require__.bind(null, /*! @/components/play-list-track-add/play-list-track-add.vue */ 217))
+      return __webpack_require__.e(/*! import() | components/play-list-track-add/play-list-track-add */ "components/play-list-track-add/play-list-track-add").then(__webpack_require__.bind(null, /*! @/components/play-list-track-add/play-list-track-add.vue */ 231))
     },
     uniPopup: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-popup/components/uni-popup/uni-popup */ "uni_modules/uni-popup/components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-popup/components/uni-popup/uni-popup.vue */ 224))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-popup/components/uni-popup/uni-popup */ "uni_modules/uni-popup/components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-popup/components/uni-popup/uni-popup.vue */ 238))
     },
     uniPopupDialog: function() {
-      return Promise.all(/*! import() | uni_modules/uni-popup/components/uni-popup-dialog/uni-popup-dialog */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-popup/components/uni-popup-dialog/uni-popup-dialog")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-popup/components/uni-popup-dialog/uni-popup-dialog.vue */ 231))
+      return Promise.all(/*! import() | uni_modules/uni-popup/components/uni-popup-dialog/uni-popup-dialog */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-popup/components/uni-popup-dialog/uni-popup-dialog")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-popup/components/uni-popup-dialog/uni-popup-dialog.vue */ 245))
     }
   }
 } catch (e) {
@@ -113,11 +113,30 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.data, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var g0 = _vm.likeListIds.includes(item.id)
+    return {
+      $orig: $orig,
+      g0: g0
+    }
+  })
+
   if (!_vm._isMounted) {
     _vm.e0 = function(v) {
       return (_vm.visible = v)
     }
   }
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -152,6 +171,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
 
 
 
@@ -303,7 +329,14 @@ var _mutationsTypes = __webpack_require__(/*! @/store/mutations-types.js */ 15);
 //
 //
 //
-var _default2 = { name: "play-list-track", props: { data: { type: Array, default: function _default() {return [];} }, pId: { type: String, default: undefined }, showAdd: { type: Boolean, default: false }, showDel: { type: Boolean, default: false }, height: { type: String, default: '' } }, data: function data() {return { selectedMusicId: undefined, visible: false };}, computed: { currentMusic: function currentMusic() {return this.$store.getters.currentMusic;} }, watch: { visible: function visible(newVal) {if (newVal) {uni.hideTabBar({ animation: true });} else {uni.showTabBar({ animation: true });}} }, methods: { copyrighted: function copyrighted(music) {if (music.st === -200 || music.noCopyrightRcmd) {uni.showToast({ icon: 'error', title: '该音乐无版权' });return false;}return true;}, popupClose: function popupClose() {this.$refs.popup.close();}, popupConfirm: function popupConfirm() {var _this = this;this.$refs.popup.close();var timestamp = new Date().getTime();var params = { op: 'del', pid: this.pId, tracks: String(this.selectedMusicId), timestamp: timestamp };uni.showLoading({ title: '删除中' });_music.default.updatePlayListTracks(params).then(function (res) {uni.showToast({ icon: 'success', title: '操作成功' });_this.$emit('refresh');}).catch(function (e) {uni.showToast({ icon: 'error', title: '删除失败：' + e });console.error('删除失败：', e);}).finally(function () {
+//
+//
+//
+//
+//
+//
+//
+var _default2 = { name: "play-list-track", props: { data: { type: Array, default: function _default() {return [];} }, pId: { type: String, default: undefined }, showAdd: { type: Boolean, default: false }, showDel: { type: Boolean, default: false }, showLiked: { type: Boolean, default: true }, height: { type: String, default: '' } }, data: function data() {return { selectedMusicId: undefined, visible: false };}, computed: { currentMusic: function currentMusic() {return this.$store.getters.currentMusic;}, likeListIds: function likeListIds() {return this.$store.getters.likeListIds;} }, watch: { visible: function visible(newVal) {if (newVal) {uni.hideTabBar({ animation: true });} else {uni.showTabBar({ animation: true });}} }, methods: { copyrighted: function copyrighted(music) {if (music.st === -200 || music.noCopyrightRcmd) {uni.showToast({ icon: 'error', title: '该音乐无版权' });return false;}return true;}, popupClose: function popupClose() {this.$refs.popup.close();}, popupConfirm: function popupConfirm() {var _this = this;this.$refs.popup.close();var timestamp = new Date().getTime();var params = { op: 'del', pid: this.pId, tracks: String(this.selectedMusicId), timestamp: timestamp };uni.showLoading({ title: '删除中' });_music.default.updatePlayListTracks(params).then(function (res) {uni.showToast({ icon: 'success', title: '操作成功' });_this.$emit('refresh');}).catch(function (e) {uni.showToast({ icon: 'error', title: '删除失败：' + e });console.error('删除失败：', e);}).finally(function () {
         uni.hideLoading();
       });
     },
