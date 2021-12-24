@@ -258,6 +258,7 @@
         // #endif
       },
       updateLike (like) {
+        if (!this.currentMusic.id) return
         const timestamp = new Date().getTime()
         const params = {
           id: this.currentMusic.id,
