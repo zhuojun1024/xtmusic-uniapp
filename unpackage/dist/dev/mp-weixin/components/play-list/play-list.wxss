@@ -27,7 +27,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: calc(100% - 32px);
+  width: calc(100% - 40px);
 }
 .popup-wrapper .popup-content scroll-view .play-list-item > view:first-child text.data-v-56ec38b4:last-child {
   color: #999999;

@@ -1,7 +1,7 @@
 <template>
   <div class="tip">
     <div class="inner" :class="{'move': scroll}" :style="styleName">
-      <text class="tip-inder">{{text}} {{scroll ? text : '' }}</text>
+      <text class="tip-inder">{{text}} {{scroll ? text + '&nbsp;' : '' }}</text>
     </div>
   </div>
 </template>
@@ -57,8 +57,8 @@
     0% {
       transform: translateX(0);
     }
-    
-    10% {
+
+    15% {
       transform: translateX(0);
     }
 

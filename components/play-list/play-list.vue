@@ -128,7 +128,7 @@
           overflow: hidden;
           text-overflow:ellipsis;
           white-space: nowrap;
-          width: calc(100% - 32px);
+          width: calc(100% - 40px);
           text:last-child {
             color: #999999;
             margin-left: 6px;

@@ -153,12 +153,15 @@
     }
   }
   > view:last-child {
-    width: calc(100% - 96px);
+    width: calc(100% - 80px);
     padding-left: 8px;
     font-size: 14px;
     > view {
       height: 24px;
       line-height: 24px;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
     }
     > view:last-child {
       color: #999999;
