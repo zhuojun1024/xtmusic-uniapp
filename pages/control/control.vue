@@ -3,7 +3,7 @@
     class="control-wrapper"
     :style="{
       height: `calc(100vh - ${excludeHeight}px)`,
-      backgroundColor: current === 0 ? '#555555' : '#000000'
+      backgroundColor: currentMusic.id && current === 1 ? '#000000' : '#555555'
     }"
   >
     <view
