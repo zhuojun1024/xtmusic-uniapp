@@ -6,6 +6,8 @@
   background-color: black;
   position: relative;
   overflow: hidden;
+  background-color: #555555;
+  transition: background-color 0.3s;
 }
 .control-wrapper .control-wrapper-bg.data-v-0ec1947c {
   width: 100%;
@@ -17,7 +19,6 @@
   opacity: 0.8;
   background-repeat: no-repeat;
   background-size: cover;
-  background-color: #666666;
 }
 .control-wrapper .uni-nav-bar.data-v-0ec1947c {
   color: white;

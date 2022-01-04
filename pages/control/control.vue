@@ -1,7 +1,10 @@
 <template>
   <view
     class="control-wrapper"
-    :style="{ height: `calc(100vh - ${excludeHeight}px)` }"
+    :style="{
+      height: `calc(100vh - ${excludeHeight}px)`,
+      backgroundColor: current === 0 ? '#555555' : '#000000'
+    }"
   >
     <view
       class="control-wrapper-bg"
@@ -329,6 +332,8 @@
   background-color: black;
   position: relative;
   overflow: hidden;
+  background-color: #555555;
+  transition: background-color 0.3s;
   .control-wrapper-bg {
     width: 100%;
     height: 100%;
@@ -339,7 +344,6 @@
     opacity: 0.8;
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: #666666;
   }
   .uni-nav-bar {
     color: white;

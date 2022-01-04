@@ -64,5 +64,11 @@
         },
         "usingComponents" : true,
         "requiredBackgroundModes" : [ "audio" ]
+    },
+    "h5" : {
+        "router" : {
+            "base" : "./",
+            "mode" : "history"
+        }
     }
 }
