@@ -124,6 +124,7 @@
         padding: 0 12px;
         border-bottom: 1px solid #efefef;
         > view:first-child {
+          float: left;
           display: inline-block;
           overflow: hidden;
           text-overflow:ellipsis;

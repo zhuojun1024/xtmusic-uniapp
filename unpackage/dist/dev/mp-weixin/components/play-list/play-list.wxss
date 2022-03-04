@@ -23,6 +23,7 @@
   border-bottom: 1px solid #efefef;
 }
 .popup-wrapper .popup-content scroll-view .play-list-item > view.data-v-56ec38b4:first-child {
+  float: left;
   display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;
