@@ -304,9 +304,6 @@
         this.changingValue = e.detail.value
         this.changing = true
       },
-      showLyric () {
-        uni.navigateTo({ url: '/pages/lyric/lyric' })
-      },
       handleChange (e) {
         const precent = e.detail.value
         const duration = this.$store.getters.duration || 0

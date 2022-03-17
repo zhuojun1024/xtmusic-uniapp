@@ -20,6 +20,18 @@ import {
   ADD_LIKE_LIST_ID,
   DEL_LIKE_LIST_ID
 } from '../mutations-types.js'
+
+// 洗牌算法
+function shuffle (arr) {
+  for (let i = 0; i < arr.length; i++) {
+    const x = Math.floor(Math.random() * (arr.length - i)) + i
+    const t = arr[i]
+    arr[i] = arr[x]
+    arr[x] = t
+  }
+	return arr
+}
+
 const app = {
   state: {
     // #ifdef H5
@@ -56,9 +68,7 @@ const app = {
       // 如果是随机播放模式，生成随机列表
       if (state.playMode === PLAY_MODE_SHUFFLE) {
         const playList = JSON.parse(JSON.stringify(state.currentMusicList))
-        state.shuffleMusicList = playList.sort(() => {
-          return 0.5 - Math.random()
-        })
+        state.shuffleMusicList = shuffle(playList)
       }
     },
     // 设置当前播放进度（秒）
@@ -80,31 +90,35 @@ const app = {
         bam.paused ? bam.play() : bam.pause()
       }
     },
+    // 设置当前播放进度时间
     [SET_CURRENT_TIME]: (state, value) => {
       state.bam.seek(value)
       state.currentTime = value
     },
+    // 设置音质
     [SET_TONE_QUALITY]: (state, value) => {
       state.toneQuality = value
       uni.setStorageSync('toneQuality', value)
     },
+    // 设置播放模式
     [SET_PLAY_MODE]: (state, value) => {
       state.playMode = value
       uni.setStorageSync('playMode', value)
       // 如果是随机播放模式，生成随机列表
       if (state.playMode === PLAY_MODE_SHUFFLE) {
         const playList = JSON.parse(JSON.stringify(state.currentMusicList))
-        state.shuffleMusicList = playList.sort(() => {
-          return 0.5 - Math.random()
-        })
+        state.shuffleMusicList = shuffle(playList)
       }
     },
+    // 设置喜欢列表ID集合
     [SET_LIKE_LIST_IDS]: (state, value) => {
       state.likeListIds = value
     },
+    // 添加喜欢
     [ADD_LIKE_LIST_ID]: (state, value) => {
       state.likeListIds.push(value)
     },
+    // 移除喜欢
     [DEL_LIKE_LIST_ID]: (state, value) => {
       const index = state.likeListIds.indexOf(value)
       if (index !== -1) {
@@ -113,6 +127,7 @@ const app = {
     }
   },
   actions: {
+    // 播放音乐
     [SET_CURRENT_MUSIC] ({ commit, state }, currentMusic) {
       const id = currentMusic.id
       if (id === state.currentMusic.id && state.playMode !== PLAY_MODE_REPEAT_ONE) return

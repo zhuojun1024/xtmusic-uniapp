@@ -947,7 +947,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_NAME":"xtmusic-uniapp","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"xtmusic-uniapp","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -2092,9 +2092,9 @@ uni$1;exports.default = _default;
 /***/ }),
 
 /***/ 10:
-/*!*********************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/store/index.js ***!
-  \*********************************************************/
+/*!*******************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/store/index.js ***!
+  \*******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2120,9 +2120,9 @@ store;exports.default = _default;
 /***/ }),
 
 /***/ 105:
-/*!**************************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/pages/radio-program-list/api.js ***!
-  \**************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/pages/radio-program-list/api.js ***!
+  \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4187,9 +4187,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 116:
-/*!*************************************************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-forms/components/uni-forms/validate.js ***!
-  \*************************************************************************************************/
+/*!***********************************************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-forms/components/uni-forms/validate.js ***!
+  \***********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4684,9 +4684,9 @@ SchemaValidator;exports.default = _default;
 /***/ }),
 
 /***/ 12:
-/*!***************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/store/modules/app.js ***!
-  \***************************************************************/
+/*!*************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/store/modules/app.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4732,9 +4732,9 @@ app;exports.default = _default;
 /***/ }),
 
 /***/ 13:
-/*!*******************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/api/login.js ***!
-  \*******************************************************/
+/*!*****************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/api/login.js ***!
+  \*****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4755,9 +4755,9 @@ login;exports.default = _default;
 /***/ }),
 
 /***/ 138:
-/*!*************************************************************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-search-bar/components/uni-search-bar/i18n/index.js ***!
-  \*************************************************************************************************************/
+/*!***********************************************************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-search-bar/components/uni-search-bar/i18n/index.js ***!
+  \***********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4773,9 +4773,9 @@ var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 1
 /***/ }),
 
 /***/ 139:
-/*!************************************************************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-search-bar/components/uni-search-bar/i18n/en.json ***!
-  \************************************************************************************************************/
+/*!**********************************************************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-search-bar/components/uni-search-bar/i18n/en.json ***!
+  \**********************************************************************************************************************************/
 /*! exports provided: uni-search-bar.cancel, uni-search-bar.placeholder, default */
 /***/ (function(module) {
 
@@ -4784,9 +4784,9 @@ module.exports = JSON.parse("{\"uni-search-bar.cancel\":\"cancel\",\"uni-search-
 /***/ }),
 
 /***/ 14:
-/*!***********************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/request/index.js ***!
-  \***********************************************************/
+/*!*********************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/request/index.js ***!
+  \*********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4835,9 +4835,9 @@ module.exports = request;
 /***/ }),
 
 /***/ 140:
-/*!*****************************************************************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-search-bar/components/uni-search-bar/i18n/zh-Hans.json ***!
-  \*****************************************************************************************************************/
+/*!***************************************************************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-search-bar/components/uni-search-bar/i18n/zh-Hans.json ***!
+  \***************************************************************************************************************************************/
 /*! exports provided: uni-search-bar.cancel, uni-search-bar.placeholder, default */
 /***/ (function(module) {
 
@@ -4846,9 +4846,9 @@ module.exports = JSON.parse("{\"uni-search-bar.cancel\":\"cancel\",\"uni-search-
 /***/ }),
 
 /***/ 141:
-/*!*****************************************************************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-search-bar/components/uni-search-bar/i18n/zh-Hant.json ***!
-  \*****************************************************************************************************************/
+/*!***************************************************************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-search-bar/components/uni-search-bar/i18n/zh-Hant.json ***!
+  \***************************************************************************************************************************************/
 /*! exports provided: uni-search-bar.cancel, uni-search-bar.placeholder, default */
 /***/ (function(module) {
 
@@ -4857,46 +4857,47 @@ module.exports = JSON.parse("{\"uni-search-bar.cancel\":\"cancel\",\"uni-search-
 /***/ }),
 
 /***/ 15:
-/*!*******************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/store/mutations-types.js ***!
-  \*******************************************************************/
+/*!*****************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/store/mutations-types.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.PLAY_MODE_SHUFFLE = exports.PLAY_MODE_REPEAT_ONE = exports.PLAY_MODE_SEQUE = exports.SET_PLAY_MODE = exports.DEL_LIKE_LIST_ID = exports.ADD_LIKE_LIST_ID = exports.SET_LIKE_LIST_IDS = exports.ON_ENDED = exports.SET_TONE_QUALITY = exports.RESET_STATE = exports.TIME_UPDATE = exports.PLAY_PREV = exports.PLAY_NEXT = exports.PLAY_PAUSE = exports.SET_PAUSED = exports.SET_DURATION = exports.SET_CURRENT_TIME = exports.SET_CURRENT_MUSIC_LIST = exports.SET_CURRENT_MUSIC = exports.LOGIN_OUT = exports.GET_USER_INFO = exports.SET_USER_INFO = void 0; // app
-var SET_USER_INFO = 'SET_USER_INFO';exports.SET_USER_INFO = SET_USER_INFO;
-var GET_USER_INFO = 'GET_USER_INFO';exports.GET_USER_INFO = GET_USER_INFO;
-var LOGIN_OUT = 'LOGIN_OUT';
+var SET_USER_INFO = 'SET_USER_INFO'; // 设置用户信息
+exports.SET_USER_INFO = SET_USER_INFO;var GET_USER_INFO = 'GET_USER_INFO'; // 获取用户信息
+exports.GET_USER_INFO = GET_USER_INFO;var LOGIN_OUT = 'LOGIN_OUT'; // 注销登陆
 
 // play control
-exports.LOGIN_OUT = LOGIN_OUT;var SET_CURRENT_MUSIC = 'SET_CURRENT_MUSIC';exports.SET_CURRENT_MUSIC = SET_CURRENT_MUSIC;
-var SET_CURRENT_MUSIC_LIST = 'SET_CURRENT_MUSIC_LIST';exports.SET_CURRENT_MUSIC_LIST = SET_CURRENT_MUSIC_LIST;
-var SET_CURRENT_TIME = 'SET_CURRENT_TIME';exports.SET_CURRENT_TIME = SET_CURRENT_TIME;
-var SET_DURATION = 'SET_DURATION';exports.SET_DURATION = SET_DURATION;
-var SET_PAUSED = 'SET_PAUSED';exports.SET_PAUSED = SET_PAUSED;
-var PLAY_PAUSE = 'PLAY_PAUSE';exports.PLAY_PAUSE = PLAY_PAUSE;
-var PLAY_NEXT = 'PLAY_NEXT';exports.PLAY_NEXT = PLAY_NEXT;
-var PLAY_PREV = 'PLAY_PREV';exports.PLAY_PREV = PLAY_PREV;
-var TIME_UPDATE = 'TIME_UPDATE';exports.TIME_UPDATE = TIME_UPDATE;
-var RESET_STATE = 'RESET_STATE';exports.RESET_STATE = RESET_STATE;
-var SET_TONE_QUALITY = 'SET_TONE_QUALITY';exports.SET_TONE_QUALITY = SET_TONE_QUALITY;
-var ON_ENDED = 'ON_ENDED';exports.ON_ENDED = ON_ENDED;
-var SET_LIKE_LIST_IDS = 'SET_LIKE_LIST_IDS';exports.SET_LIKE_LIST_IDS = SET_LIKE_LIST_IDS;
-var ADD_LIKE_LIST_ID = 'ADD_LIKE_LIST_ID';exports.ADD_LIKE_LIST_ID = ADD_LIKE_LIST_ID;
-var DEL_LIKE_LIST_ID = 'DEL_LIKE_LIST_ID';
+exports.LOGIN_OUT = LOGIN_OUT;var SET_CURRENT_MUSIC = 'SET_CURRENT_MUSIC'; // 设置当前播放音乐
+exports.SET_CURRENT_MUSIC = SET_CURRENT_MUSIC;var SET_CURRENT_MUSIC_LIST = 'SET_CURRENT_MUSIC_LIST'; // 设置当前音乐播放列表
+exports.SET_CURRENT_MUSIC_LIST = SET_CURRENT_MUSIC_LIST;var SET_CURRENT_TIME = 'SET_CURRENT_TIME'; // 设置当前音乐播放进度时间
+exports.SET_CURRENT_TIME = SET_CURRENT_TIME;var SET_DURATION = 'SET_DURATION'; // 设置当前播放音乐总时长
+exports.SET_DURATION = SET_DURATION;var SET_PAUSED = 'SET_PAUSED'; // 设置暂停状态
+exports.SET_PAUSED = SET_PAUSED;var PLAY_PAUSE = 'PLAY_PAUSE'; // 切换播放、暂停状态
+exports.PLAY_PAUSE = PLAY_PAUSE;var PLAY_NEXT = 'PLAY_NEXT'; // 播放上一首
+exports.PLAY_NEXT = PLAY_NEXT;var PLAY_PREV = 'PLAY_PREV'; // 播放下一首
+exports.PLAY_PREV = PLAY_PREV;var TIME_UPDATE = 'TIME_UPDATE'; // 音乐时长信息更新
+exports.TIME_UPDATE = TIME_UPDATE;var RESET_STATE = 'RESET_STATE'; // 重置播放器状态
+exports.RESET_STATE = RESET_STATE;var SET_TONE_QUALITY = 'SET_TONE_QUALITY'; // 设置播放音质
+exports.SET_TONE_QUALITY = SET_TONE_QUALITY;var ON_ENDED = 'ON_ENDED'; // 播放结束标志
+exports.ON_ENDED = ON_ENDED;var SET_LIKE_LIST_IDS = 'SET_LIKE_LIST_IDS'; // 设置喜欢列表ID集合
+exports.SET_LIKE_LIST_IDS = SET_LIKE_LIST_IDS;var ADD_LIKE_LIST_ID = 'ADD_LIKE_LIST_ID'; // 添加喜欢
+exports.ADD_LIKE_LIST_ID = ADD_LIKE_LIST_ID;var DEL_LIKE_LIST_ID = 'DEL_LIKE_LIST_ID'; // 移除喜欢
 // play mode
-exports.DEL_LIKE_LIST_ID = DEL_LIKE_LIST_ID;var SET_PLAY_MODE = 'SET_PLAY_MODE';exports.SET_PLAY_MODE = SET_PLAY_MODE;
-var PLAY_MODE_SEQUE = 'PLAY_MODE_SEQUE';exports.PLAY_MODE_SEQUE = PLAY_MODE_SEQUE;
-var PLAY_MODE_REPEAT_ONE = 'PLAY_MODE_REPEAT_ONE';exports.PLAY_MODE_REPEAT_ONE = PLAY_MODE_REPEAT_ONE;
-var PLAY_MODE_SHUFFLE = 'PLAY_MODE_SHUFFLE';exports.PLAY_MODE_SHUFFLE = PLAY_MODE_SHUFFLE;
+exports.DEL_LIKE_LIST_ID = DEL_LIKE_LIST_ID;var SET_PLAY_MODE = 'SET_PLAY_MODE'; // 设置播放模式
+exports.SET_PLAY_MODE = SET_PLAY_MODE;var PLAY_MODE_SEQUE = 'PLAY_MODE_SEQUE'; // 顺序播放
+exports.PLAY_MODE_SEQUE = PLAY_MODE_SEQUE;var PLAY_MODE_REPEAT_ONE = 'PLAY_MODE_REPEAT_ONE'; // 单曲循环
+exports.PLAY_MODE_REPEAT_ONE = PLAY_MODE_REPEAT_ONE;var PLAY_MODE_SHUFFLE = 'PLAY_MODE_SHUFFLE'; // 随机播放
+exports.PLAY_MODE_SHUFFLE = PLAY_MODE_SHUFFLE;
 
 /***/ }),
 
 /***/ 16:
-/*!***********************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/store/modules/playControl.js ***!
-  \***********************************************************************/
+/*!*********************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/store/modules/playControl.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4922,6 +4923,18 @@ var _mutationsTypes = __webpack_require__(/*! ../mutations-types.js */ 15);var _
 
 
 
+
+
+// 洗牌算法
+function shuffle(arr) {
+  for (var i = 0; i < arr.length; i++) {
+    var x = Math.floor(Math.random() * (arr.length - i)) + i;
+    var t = arr[i];
+    arr[i] = arr[x];
+    arr[x] = t;
+  }
+  return arr;
+}
 
 var app = {
   state: {
@@ -4959,9 +4972,7 @@ var app = {
     // 如果是随机播放模式，生成随机列表
     if (state.playMode === _mutationsTypes.PLAY_MODE_SHUFFLE) {
       var playList = JSON.parse(JSON.stringify(state.currentMusicList));
-      state.shuffleMusicList = playList.sort(function () {
-        return 0.5 - Math.random();
-      });
+      state.shuffleMusicList = shuffle(playList);
     }
   }), _defineProperty(_mutations,
 
@@ -4983,31 +4994,35 @@ var app = {
       bam.paused ? bam.play() : bam.pause();
     }
   }), _defineProperty(_mutations,
+
   _mutationsTypes.SET_CURRENT_TIME, function (state, value) {
     state.bam.seek(value);
     state.currentTime = value;
   }), _defineProperty(_mutations,
+
   _mutationsTypes.SET_TONE_QUALITY, function (state, value) {
     state.toneQuality = value;
     uni.setStorageSync('toneQuality', value);
   }), _defineProperty(_mutations,
+
   _mutationsTypes.SET_PLAY_MODE, function (state, value) {
     state.playMode = value;
     uni.setStorageSync('playMode', value);
     // 如果是随机播放模式，生成随机列表
     if (state.playMode === _mutationsTypes.PLAY_MODE_SHUFFLE) {
       var playList = JSON.parse(JSON.stringify(state.currentMusicList));
-      state.shuffleMusicList = playList.sort(function () {
-        return 0.5 - Math.random();
-      });
+      state.shuffleMusicList = shuffle(playList);
     }
   }), _defineProperty(_mutations,
+
   _mutationsTypes.SET_LIKE_LIST_IDS, function (state, value) {
     state.likeListIds = value;
   }), _defineProperty(_mutations,
+
   _mutationsTypes.ADD_LIKE_LIST_ID, function (state, value) {
     state.likeListIds.push(value);
   }), _defineProperty(_mutations,
+
   _mutationsTypes.DEL_LIKE_LIST_ID, function (state, value) {
     var index = state.likeListIds.indexOf(value);
     if (index !== -1) {
@@ -5016,6 +5031,7 @@ var app = {
   }), _mutations),
 
   actions: (_actions = {}, _defineProperty(_actions,
+
   _mutationsTypes.SET_CURRENT_MUSIC, function (_ref, currentMusic) {var commit = _ref.commit,state = _ref.state;
     var id = currentMusic.id;
     if (id === state.currentMusic.id && state.playMode !== _mutationsTypes.PLAY_MODE_REPEAT_ONE) return;
@@ -5117,9 +5133,9 @@ app;exports.default = _default;
 /***/ }),
 
 /***/ 17:
-/*!***********************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/store/getters.js ***!
-  \***********************************************************/
+/*!*********************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/store/getters.js ***!
+  \*********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5157,9 +5173,9 @@ getters;exports.default = _default;
 /***/ }),
 
 /***/ 185:
-/*!*********************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/pages.json?{"type":"stat"} ***!
-  \*********************************************************************/
+/*!*******************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/pages.json?{"type":"stat"} ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5329,9 +5345,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 207:
-/*!**********************************************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-icons/components/uni-icons/icons.js ***!
-  \**********************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-icons/components/uni-icons/icons.js ***!
+  \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6452,9 +6468,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 250:
-/*!**********************************************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-popup/components/uni-popup/popup.js ***!
-  \**********************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-popup/components/uni-popup/popup.js ***!
+  \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6487,9 +6503,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 251:
-/*!***************************************************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-popup/components/uni-popup/i18n/index.js ***!
-  \***************************************************************************************************/
+/*!*************************************************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-popup/components/uni-popup/i18n/index.js ***!
+  \*************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6505,9 +6521,9 @@ var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 2
 /***/ }),
 
 /***/ 252:
-/*!**************************************************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-popup/components/uni-popup/i18n/en.json ***!
-  \**************************************************************************************************/
+/*!************************************************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-popup/components/uni-popup/i18n/en.json ***!
+  \************************************************************************************************************************/
 /*! exports provided: uni-popup.cancel, uni-popup.ok, uni-popup.placeholder, uni-popup.title, uni-popup.shareTitle, default */
 /***/ (function(module) {
 
@@ -6516,9 +6532,9 @@ module.exports = JSON.parse("{\"uni-popup.cancel\":\"cancel\",\"uni-popup.ok\":\
 /***/ }),
 
 /***/ 253:
-/*!*******************************************************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-popup/components/uni-popup/i18n/zh-Hans.json ***!
-  \*******************************************************************************************************/
+/*!*****************************************************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-popup/components/uni-popup/i18n/zh-Hans.json ***!
+  \*****************************************************************************************************************************/
 /*! exports provided: uni-popup.cancel, uni-popup.ok, uni-popup.placeholder, uni-popup.title, uni-popup.shareTitle, default */
 /***/ (function(module) {
 
@@ -6527,9 +6543,9 @@ module.exports = JSON.parse("{\"uni-popup.cancel\":\"取消\",\"uni-popup.ok\":\
 /***/ }),
 
 /***/ 254:
-/*!*******************************************************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-popup/components/uni-popup/i18n/zh-Hant.json ***!
-  \*******************************************************************************************************/
+/*!*****************************************************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-popup/components/uni-popup/i18n/zh-Hant.json ***!
+  \*****************************************************************************************************************************/
 /*! exports provided: uni-popup.cancel, uni-popup.ok, uni-popup.placeholder, uni-popup.title, uni-popup.shareTitle, default */
 /***/ (function(module) {
 
@@ -6538,9 +6554,9 @@ module.exports = JSON.parse("{\"uni-popup.cancel\":\"取消\",\"uni-popup.ok\":\
 /***/ }),
 
 /***/ 262:
-/*!***********************************************************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-load-more/components/uni-load-more/i18n/index.js ***!
-  \***********************************************************************************************************/
+/*!*********************************************************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-load-more/components/uni-load-more/i18n/index.js ***!
+  \*********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6556,9 +6572,9 @@ var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 2
 /***/ }),
 
 /***/ 263:
-/*!**********************************************************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-load-more/components/uni-load-more/i18n/en.json ***!
-  \**********************************************************************************************************/
+/*!********************************************************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-load-more/components/uni-load-more/i18n/en.json ***!
+  \********************************************************************************************************************************/
 /*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
 /***/ (function(module) {
 
@@ -6567,9 +6583,9 @@ module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"Pull up to show mo
 /***/ }),
 
 /***/ 264:
-/*!***************************************************************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hans.json ***!
-  \***************************************************************************************************************/
+/*!*************************************************************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hans.json ***!
+  \*************************************************************************************************************************************/
 /*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
 /***/ (function(module) {
 
@@ -6578,9 +6594,9 @@ module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉显示更多
 /***/ }),
 
 /***/ 265:
-/*!***************************************************************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hant.json ***!
-  \***************************************************************************************************************/
+/*!*************************************************************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hant.json ***!
+  \*************************************************************************************************************************************/
 /*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
 /***/ (function(module) {
 
@@ -6589,9 +6605,9 @@ module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉顯示更多
 /***/ }),
 
 /***/ 280:
-/*!******************************************************************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-transition/components/uni-transition/createAnimation.js ***!
-  \******************************************************************************************************************/
+/*!****************************************************************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/uni_modules/uni-transition/components/uni-transition/createAnimation.js ***!
+  \****************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12255,7 +12271,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_NAME":"xtmusic-uniapp","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"xtmusic-uniapp","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -12276,14 +12292,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_NAME":"xtmusic-uniapp","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"xtmusic-uniapp","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_NAME":"xtmusic-uniapp","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"xtmusic-uniapp","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -12369,7 +12385,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_NAME":"xtmusic-uniapp","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"xtmusic-uniapp","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -12781,9 +12797,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 35:
-/*!*******************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/utils/md5.js ***!
-  \*******************************************************/
+/*!*****************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/utils/md5.js ***!
+  \*****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13053,9 +13069,9 @@ function binl2b64(binarray) {
 /***/ }),
 
 /***/ 36:
-/*!*************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/pages/login/api.js ***!
-  \*************************************************************/
+/*!***********************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/pages/login/api.js ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13535,9 +13551,9 @@ function resolveLocaleChain(locale) {
 /***/ }),
 
 /***/ 45:
-/*!**************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/pages/search/api.js ***!
-  \**************************************************************/
+/*!************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/pages/search/api.js ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13556,9 +13572,9 @@ apis;exports.default = _default;
 /***/ }),
 
 /***/ 5:
-/*!*****************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/pages.json ***!
-  \*****************************************************/
+/*!***************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/pages.json ***!
+  \***************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -13567,9 +13583,9 @@ apis;exports.default = _default;
 /***/ }),
 
 /***/ 54:
-/*!************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/pages/user/api.js ***!
-  \************************************************************/
+/*!**********************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/pages/user/api.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13586,9 +13602,9 @@ apis;exports.default = _default;
 /***/ }),
 
 /***/ 71:
-/*!**********************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/pages/playlist-track/api.js ***!
-  \**********************************************************************/
+/*!********************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/pages/playlist-track/api.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13604,9 +13620,9 @@ module.exports = apis;
 /***/ }),
 
 /***/ 78:
-/*!********************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/utils/util.js ***!
-  \********************************************************/
+/*!******************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/utils/util.js ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13621,9 +13637,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.formatTime
 /***/ }),
 
 /***/ 79:
-/*!***************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/pages/control/api.js ***!
-  \***************************************************************/
+/*!*************************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/pages/control/api.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13641,9 +13657,9 @@ module.exports = apis;
 /***/ }),
 
 /***/ 88:
-/*!*************************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/pages/cloud/api.js ***!
-  \*************************************************************/
+/*!***********************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/pages/cloud/api.js ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13660,9 +13676,9 @@ apis;exports.default = _default;
 /***/ }),
 
 /***/ 9:
-/*!*******************************************************!*\
-  !*** D:/HBuilderXProject/xtmusic-uniapp/api/music.js ***!
-  \*******************************************************/
+/*!*****************************************************************************!*\
+  !*** /Users/zhuojun/Documents/HBuilderXProject/xtmusic-uniapp/api/music.js ***!
+  \*****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
