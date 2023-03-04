@@ -225,19 +225,23 @@
 
 <style lang="scss" scoped>
 .lyric-wrapper {
+  ::-webkit-scrollbar {
+    width:0;
+  }
   .lyric {
     position: relative;
     box-sizing: border-box;
-    color: rgba(255, 255, 255, 0.4);
+    color: white;
     text-align: center;
     .lyric-item {
       min-height: 22px;
       padding: 16px 32px;
+      opacity: 0.4;
       font-size: 16px;
+      // transition: opacity .3s, font-size .3s; // 有性能问题
       &.current {
-        color: white;
+        opacity: 1;
         font-size: 20px;
-        // transition: font-size .2s;
       }
     }
     .lyric-placeholder-top {

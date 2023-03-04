@@ -4,7 +4,6 @@
       <uni-search-bar
         v-model="keyword"
         placeholder="搜索歌曲"
-        :focus="!showPlayList"
         @confirm="search"
         @focus="onFocus"
         @input="onKeywordChange"

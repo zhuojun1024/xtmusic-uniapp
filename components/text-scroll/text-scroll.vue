@@ -1,14 +1,14 @@
 <template>
-  <div class="tip">
-    <div class="inner" :class="{'move': scroll}" :style="styleName">
+  <view class="tip">
+    <view class="inner" :class="{'move': scroll}" :style="styleName">
       <text class="tip-inder">{{text}} {{scroll ? text + '&nbsp;' : '' }}</text>
-    </div>
-  </div>
+    </view>
+  </view>
 </template>
 
 <script>
   export default {
-    name:"text-scroll",
+    name: 'text-scroll',
     props: {
       text: {
         type: String,
@@ -17,7 +17,7 @@
     },
     data() {
       return {
-        styleName: "animation-duration: 6s",
+        styleName: '',
         scroll: false,
         tipWidth: 0
       }
@@ -32,9 +32,12 @@
     },
     methods: {
       textScroll() {
+        // 清除滚动状态
+        this.styleName = ''
+        this.scroll = false
         // 等待节点挂载后再执行,热门线路tip滚动实现
         this.$nextTick(() => {
-          let query = wx.createSelectorQuery().in(this)
+          let query = uni.createSelectorQuery().in(this)
           query.select('.tip').boundingClientRect(data => {
             this.tipWidth = data.width
           }).exec()
