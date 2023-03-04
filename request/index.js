@@ -2,6 +2,11 @@
 const subDomain = '/api' // 子域名
 const API_BASE_URL = 'https://www.i4896.com' // 主域名
 
+// 不需要判断状态码的接口
+const whiteList = [
+  '/login/qr/check'
+]
+
 const request = (url, method, data) => {
   let _url = API_BASE_URL + subDomain + url
   if (data && data.timestamp) {
@@ -21,7 +26,7 @@ const request = (url, method, data) => {
       },
       success (request) {
         const { code, status, msg, message } = request.data
-        if (code === 200 || status === 200) {
+        if (whiteList.includes(url) || code === 200 || status === 200) {
           resolve(request.data)
         } else {
           reject(msg || message)

@@ -53,8 +53,11 @@
       </uni-forms-item>
     </uni-forms>
     <view class="login-type-button">
-      <text @click="toggleLoginType">
+<!--      <text @click="toggleLoginType">
         {{ loginType === 'password' ? '验证码登录' : '密码登录' }}
+      </text> -->
+      <text @click="registerAnonimous">
+        游客登录
       </text>
     </view>
     <button
@@ -63,6 +66,12 @@
       @click="login"
     >
       登录
+    </button>
+    <button
+      class="login-button"
+      @click="toQrCodeLogin"
+    >
+      二维码登录
     </button>
 	</view>
 </template>
@@ -118,6 +127,21 @@
       clearInterval(this.timer)
     },
     methods: {
+      registerAnonimous () {
+        const timestamp = new Date().getTime() // 清除缓存
+        uni.showLoading({ title: '游客登录中...' })
+        api.registerAnonimous({ timestamp }).then(res => {
+          uni.setStorageSync('cookie', res.cookie)
+          this.getUserInfo()
+        }).catch(e => {
+          uni.showToast({ icon: 'error', title: '游客登录失败：' + e })
+        }).finally(() => {
+          uni.hideLoading()
+        })
+      },
+      toQrCodeLogin () {
+        uni.navigateTo({ url: '/pages/login-qr/login-qr' })
+      },
       toggleLoginType () {
         this.loginType = this.loginType === 'password' ? 'captcha' : 'password'
       },
@@ -222,6 +246,9 @@
   .login-type-button {
     text-align: right;
     color: #666666;
+    text {
+      margin-left: 8px;
+    }
   }
   .login-button {
     margin-top: 12px;

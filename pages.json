@@ -13,6 +13,11 @@
       "navigationBarTitleText": "登录"
     }
   }, {
+    "path": "pages/login-qr/login-qr",
+    "style": {
+      "navigationBarTitleText": "二维码登录"
+    }
+  }, {
     "path": "pages/search/search",
     "style": {
       "navigationBarTitleText": "歌曲"

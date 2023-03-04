@@ -8,7 +8,7 @@
       <view class="user-info view-container">
         <image :src="userInfo.avatarUrl" />
         <view class="user-name">
-          <text>{{ userInfo.nickname }}</text>
+          <text>{{ userInfo.nickname || '用户名' }}</text>
           <image
             v-if="vipImage"
             mode="heightFix"
