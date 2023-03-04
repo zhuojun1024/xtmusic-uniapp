@@ -17,3 +17,13 @@
 
 ### 接口
 使用 [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi) 私有部署
+
+### 微信小程序效果预览
+![image](https://github.com/zhuojun1024/xtmusic-uniapp/raw/master/assets/001.jpg)
+![image](https://github.com/zhuojun1024/xtmusic-uniapp/raw/master/assets/002.jpg)
+![image](https://github.com/zhuojun1024/xtmusic-uniapp/raw/master/assets/003.jpg)
+![image](https://github.com/zhuojun1024/xtmusic-uniapp/raw/master/assets/004.png)
+![image](https://github.com/zhuojun1024/xtmusic-uniapp/raw/master/assets/005.jpg)
+![image](https://github.com/zhuojun1024/xtmusic-uniapp/raw/master/assets/006.jpg)
+![image](https://github.com/zhuojun1024/xtmusic-uniapp/raw/master/assets/007.png)
+![image](https://github.com/zhuojun1024/xtmusic-uniapp/raw/master/assets/008.jpg)
